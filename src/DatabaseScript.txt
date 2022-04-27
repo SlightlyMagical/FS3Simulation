@@ -1,0 +1,22 @@
+-- SQL Server Database script
+
+USE master
+GO
+-- Drop database if existing
+DROP DATABASE FS3SimulationDatabase
+GO
+-- Create database
+CREATE DATABASE FS3SimulationDatabase
+GO
+
+USE FS3SimulationDatabase
+GO
+
+-- Create user table
+CREATE TABLE [User] (
+    UserID int IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(20) NOT NULL,
+    [Password] NVARCHAR(100) NOT NULL, -- Check size of hashed password
+    UserType int NOT NULL
+)
+GO
