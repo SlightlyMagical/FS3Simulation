@@ -1,0 +1,10 @@
+.root{
+    -fx-font-size: 12pt;
+    -fx-font-family: System;
+    -fx-base: #3e5d71;
+    -fx-background: white;
+}
+
+.Button{
+    -fx-cursor: hand;
+}

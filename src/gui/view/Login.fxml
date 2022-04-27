@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox alignment="CENTER" prefHeight="500.0" prefWidth="700.0" spacing="10.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LoginController">
+   <children>
+      <TextField fx:id="txtUsername" maxWidth="200.0" promptText="Brugernavn" />
+      <PasswordField fx:id="txtPassword" maxWidth="200.0" promptText="Kodeord" />
+      <Button mnemonicParsing="false" onAction="#handleLogin" text="Login">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</VBox>
