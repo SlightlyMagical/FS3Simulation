@@ -1,6 +1,6 @@
+import gui.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import gui.SceneManager;
 
 public class main extends Application {
     public static void main(String[] args) {
@@ -8,7 +8,7 @@ public class main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         SceneManager.setPrimaryStage(primaryStage);
         SceneManager.showLoginScene();
     }
