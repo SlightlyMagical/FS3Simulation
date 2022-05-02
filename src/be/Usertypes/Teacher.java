@@ -1,14 +1,14 @@
 package be.Usertypes;
 
 public class Teacher extends User{
-    private final String school;
+    private final int schoolID;
 
-    public Teacher(int id, String name, String school) {
-        super(id, name);
-        this.school = school;
+    public Teacher(int id, String firstName, String lastName, int schoolID, int userType) {
+        super(id, userType, firstName, lastName);
+        this.schoolID = schoolID;
     }
 
-    public String getSchool() {
-        return school;
+    public int getSchoolID() {
+        return schoolID;
     }
 }

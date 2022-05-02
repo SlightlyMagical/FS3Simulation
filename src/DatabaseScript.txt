@@ -17,6 +17,9 @@ CREATE TABLE [User] (
     UserID int IDENTITY(1,1) PRIMARY KEY,
     Username NVARCHAR(20) NOT NULL,
     [Password] NVARCHAR(100) NOT NULL, -- Check size of hashed password
-    UserType int NOT NULL
+    UserType int NOT NULL,
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    SchoolID int NOT NULL -- FK to school table
 )
 GO

@@ -1,9 +1,9 @@
-package dal;
+package bll;
 
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-public interface IDALManager {
+public interface IBLLManager {
 
     User login(String username, String password) throws SQLServerException;
 }
