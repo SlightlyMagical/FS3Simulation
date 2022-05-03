@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import gui.SceneManager;
 import gui.model.DialogHandler;
 import gui.model.Messages;
 import gui.model.ModelManager;
@@ -38,7 +39,7 @@ public class LoginController {
                 DialogHandler.informationAlert(Messages.INVALID_LOGIN);
             else{
                 switch (user.getId()){
-                    case 1 -> System.out.println("admin login");
+                    case 1 -> SceneManager.showStudentScene();
                     case 2 -> System.out.println("teacher login");
                     case 3 -> System.out.println("Student login");
                 }

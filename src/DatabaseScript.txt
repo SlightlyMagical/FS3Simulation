@@ -13,7 +13,7 @@ USE FS3SimulationDatabase
 GO
 
 -- Create user table
-CREATE TABLE [User] (
+CREATE TABLE [Users] (
     UserID int IDENTITY(1,1) PRIMARY KEY,
     Username NVARCHAR(20) NOT NULL,
     [Password] NVARCHAR(100) NOT NULL, -- Check size of hashed password
@@ -23,3 +23,59 @@ CREATE TABLE [User] (
     SchoolID int NOT NULL -- FK to school table
 )
 GO
+
+-- Create category reference tables
+CREATE TABLE GeneralInfo (
+    InfoID int PRIMARY KEY,
+    InfoName NVARCHAR(50) NOT NULL,
+    InfoDescription NVARCHAR(MAX) NOT NULL
+)
+GO
+
+CREATE TABLE HealthCondition (
+    ConditionID int PRIMARY KEY,
+    ConditionName NVARCHAR(50) NOT NULL
+)
+GO
+
+CREATE TABLE FunctionalAbility (
+    AbilityID int PRIMARY KEY,
+    AbilityName NVARCHAR(50) NOT NULL
+)
+GO
+
+-- Create citizen table
+CREATE TABLE Citizen (
+    CitizenID int IDENTITY(1,1) PRIMARY KEY,
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+)
+
+-- Create Citizen to category table
+CREATE TABLE CitizenInfo (
+    CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
+    InfoID int FOREIGN KEY REFERENCES GeneralInfo(InfoID),
+    CONSTRAINT PK_CitizenInfo PRIMARY KEY (CitizenID, InfoID)
+)
+GO
+
+CREATE TABLE CitizenCondition (
+    CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
+    ConditionID int FOREIGN KEY REFERENCES HealthCondition(ConditionID),
+    CONSTRAINT PK_CitizenCondition PRIMARY KEY (CitizenID, ConditionID)
+)
+GO
+
+CREATE TABLE CitizenAbility (
+    CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
+    AbilityID int FOREIGN KEY REFERENCES FunctionalAbility(AbilityID),
+    CONSTRAINT PK_CitizenAbility PRIMARY KEY (CitizenID, AbilityID)
+)
+GO
+
+
+-- Test data
+INSERT INTO Users (Username, [Password], UserType, FirstName, LastName, SchoolID)
+VALUES ('user', 'pass', 1, 'firstname', 'lastname', 1)
+GO
+
