@@ -9,7 +9,7 @@ public class FunctionalAbility {
     private int expectedLevel;
     private String professionalNote;
     private String taskExecution;
-    private String executionImportance;
+    private boolean executionLimitation;
     private String citizenGoal;
 
 

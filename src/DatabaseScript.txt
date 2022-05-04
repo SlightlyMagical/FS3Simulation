@@ -55,6 +55,7 @@ CREATE TABLE Citizen (
 CREATE TABLE CitizenInfo (
     CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
     InfoID int FOREIGN KEY REFERENCES GeneralInfo(InfoID),
+    InfoText NVARCHAR(MAX) NOT NULL,
     CONSTRAINT PK_CitizenInfo PRIMARY KEY (CitizenID, InfoID)
 )
 GO
@@ -62,6 +63,10 @@ GO
 CREATE TABLE CitizenCondition (
     CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
     ConditionID int FOREIGN KEY REFERENCES HealthCondition(ConditionID),
+    ConditionStatus int NOT NULL,
+    ConditionNote NVARCHAR(MAX) NOT NULL,
+    ConditionAssessment NVARCHAR(MAX),
+    ConditionExpection NVARCHAR(20),
     CONSTRAINT PK_CitizenCondition PRIMARY KEY (CitizenID, ConditionID)
 )
 GO
@@ -69,7 +74,21 @@ GO
 CREATE TABLE CitizenAbility (
     CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
     AbilityID int FOREIGN KEY REFERENCES FunctionalAbility(AbilityID),
+    CurrentLevel int NOT NULL,
+    ExpectedLevel int NOT NULL,
+    AbilityNote NVARCHAR(MAX) NOT NULL,
+    CitizenExecution int NOT NULL,
+    CitizenLimitation BIT NOT NULL,
+    CitizenGoal NVARCHAR(MAX) NOT NULL,
     CONSTRAINT PK_CitizenAbility PRIMARY KEY (CitizenID, AbilityID)
+)
+GO
+
+-- Create Student to citizen table
+CREATE TABLE StudentCitizen(
+    UserID int FOREIGN KEY REFERENCES Users(UserID),
+    CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
+    CONSTRAINT PK_StudentCitizen PRIMARY KEY (UserID, CitizenID)
 )
 GO
 
