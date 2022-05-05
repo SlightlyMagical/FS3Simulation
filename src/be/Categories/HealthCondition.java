@@ -9,8 +9,9 @@ public class HealthCondition {
     private String expectedLevel;
     private Status status;
 
-    public HealthCondition(String name) {
+    public HealthCondition(String name, String professionalNote) {
         this.name = name;
+        this.professionalNote = professionalNote;
     }
 
 

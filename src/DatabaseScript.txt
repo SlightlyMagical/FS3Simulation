@@ -66,7 +66,7 @@ CREATE TABLE CitizenCondition (
     ConditionStatus int NOT NULL,
     ConditionNote NVARCHAR(MAX) NOT NULL,
     ConditionAssessment NVARCHAR(MAX),
-    ConditionExpection NVARCHAR(20),
+    ConditionExpectation NVARCHAR(20),
     CONSTRAINT PK_CitizenCondition PRIMARY KEY (CitizenID, ConditionID)
 )
 GO

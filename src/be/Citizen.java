@@ -7,15 +7,20 @@ import be.Categories.HealthCondition;
 import java.util.HashMap;
 
 public class Citizen {
+    private final int id;
     private final String firstName;
     private final String lastName;
-    private HashMap<String, GeneralInfo> generalInfo;
-    private HashMap<String, HealthCondition> healthConditions;
-    private HashMap<String, FunctionalAbility> functionalAbilities;
+    private final HashMap<String, GeneralInfo> generalInfo;
+    private final HashMap<String, HealthCondition> healthConditions;
+    private final HashMap<String, FunctionalAbility> functionalAbilities;
 
-    public Citizen(String firstName, String lastName) {
+    public Citizen(int id, String firstName, String lastName) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.generalInfo = new HashMap<>();
+        this.healthConditions = new HashMap<>();
+        this.functionalAbilities = new HashMap<>();
     }
 
     public String getFirstName() {
@@ -34,23 +39,27 @@ public class Citizen {
         return generalInfo;
     }
 
-    public void setGeneralInfo(HashMap<String, GeneralInfo> generalInfo) {
-        this.generalInfo = generalInfo;
+    public void addGeneralInfo(GeneralInfo generalInfo) {
+        this.generalInfo.put(generalInfo.getName(), generalInfo);
     }
 
     public HashMap<String, HealthCondition> getHealthConditions() {
         return healthConditions;
     }
 
-    public void setHealthConditions(HashMap<String, HealthCondition> healthConditions) {
-        this.healthConditions = healthConditions;
+    public void addHealthCondition(HealthCondition healthCondition) {
+        this.healthConditions.put(healthCondition.getName(), healthCondition);
     }
 
     public HashMap<String, FunctionalAbility> getFunctionalAbilities() {
         return functionalAbilities;
     }
 
-    public void setFunctionalAbilities(HashMap<String, FunctionalAbility> functionalAbilities) {
-        this.functionalAbilities = functionalAbilities;
+    public void addFunctionalAbility(FunctionalAbility functionalAbility) {
+        this.functionalAbilities.put(functionalAbility.getName(), functionalAbility);
+    }
+
+    public int getId() {
+        return id;
     }
 }

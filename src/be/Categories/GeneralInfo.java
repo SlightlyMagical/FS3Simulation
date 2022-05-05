@@ -2,16 +2,10 @@ package be.Categories;
 
 public class GeneralInfo {
     private final String name;
-    private final String description;
     private String text;
 
-    public GeneralInfo(String name, String description) {
+    public GeneralInfo(String name) {
         this.name = name;
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public String getName() {

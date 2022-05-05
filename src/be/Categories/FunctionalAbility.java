@@ -13,7 +13,18 @@ public class FunctionalAbility {
     private String citizenGoal;
 
 
-    public FunctionalAbility(String name) {
+    public FunctionalAbility(String name, Status status, int currentLevel, int expectedLevel, String professionalNote, String taskExecution, boolean executionLimitation, String citizenGoal) {
         this.name = name;
+        this.status = status;
+        this.currentLevel = currentLevel;
+        this.expectedLevel = expectedLevel;
+        this.professionalNote = professionalNote;
+        this.taskExecution = taskExecution;
+        this.executionLimitation = executionLimitation;
+        this.citizenGoal = citizenGoal;
+    }
+
+    public String getName() {
+        return name;
     }
 }
