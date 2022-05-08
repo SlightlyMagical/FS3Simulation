@@ -23,6 +23,10 @@ public class Citizen {
         this.functionalAbilities = new HashMap<>();
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -59,7 +63,4 @@ public class Citizen {
         this.functionalAbilities.put(functionalAbility.getName(), functionalAbility);
     }
 
-    public int getId() {
-        return id;
-    }
 }

@@ -11,9 +11,13 @@ import javafx.collections.FXCollections;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CitizenDAO implements ICitizenDAO{
+
     DBConnector dbConnector;
 
     public CitizenDAO() throws IOException {
@@ -129,4 +133,25 @@ public class CitizenDAO implements ICitizenDAO{
         }
         return citizens;
     }
+
+    @Override
+    public void updatePatientGeneralInfo(Citizen selectedPatient) {
+        for (Map.Entry<String, GeneralInfo> entry : selectedPatient.getGeneralInfo().entrySet()) {
+            String key = entry.getKey();
+            GeneralInfo value = entry.getValue();
+            try (Connection connection = dbConnector.getConnection()) {
+                String sql = "INSERT INTO CitizenInfo (CitizenID, InfoID, InfoText) VALUES (?, ?, ?);";
+                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, selectedPatient.getId());
+                ps.setInt(2, value.getID());
+                ps.setString(3, value.getText());
+                int affectedRows = ps.executeUpdate();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+        }
+
+        }
+
 }

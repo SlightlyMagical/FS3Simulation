@@ -1,6 +1,7 @@
 package dal.dao;
 
 import be.Citizen;
+
 import be.Usertypes.User;
 
 import java.util.List;
@@ -15,5 +16,6 @@ public interface ICitizenDAO {
 
     List<Citizen> getFunctionalAbilities(List<Citizen> citizens);
 
+    void updatePatientGeneralInfo(Citizen selectedPatient);
 
 }
