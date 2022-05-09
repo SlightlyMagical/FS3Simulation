@@ -22,12 +22,12 @@ public class BLLManager implements IBLLManager{
     }
 
     @Override
-    public ArrayList<Citizen> getAllPatients(int schoolID) {
-        return dalManager.getAllPatients(schoolID);
+    public ArrayList<Citizen> getAllCitizens(int userID) {
+        return dalManager.getAllCitizens(userID);
     }
 
     @Override
-    public void updatePatientGeneralInfo(Citizen selectedPatient) {
+    public void updateCitizenGeneralInfo(Citizen selectedPatient) {
         dalManager.updatePatientGeneralInfo(selectedPatient);
     }
 }

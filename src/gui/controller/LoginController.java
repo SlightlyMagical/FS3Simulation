@@ -38,14 +38,16 @@ public class LoginController {
             if (user == null)
                 DialogHandler.informationAlert(Messages.INVALID_LOGIN);
             else{
-                switch (user.getId()){
-                    case 1 -> SceneManager.showStudentScene();
+                switch (user.getUserType()){
+                    case 1 -> System.out.println("admin login");
                     case 2 -> System.out.println("teacher login");
-                    case 3 -> System.out.println("Student login");
+                    case 3 -> {
+                        ModelManager.getInstance().getCitizenModel().getCitizensFromDatabase();
+                        SceneManager.showStudentScene();
+                    }
                 }
             }
-        } catch (SQLServerException throwables) {
-
+        } catch (SQLServerException | IOException ignored) {
         }
 
 

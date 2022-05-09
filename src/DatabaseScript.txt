@@ -28,7 +28,6 @@ GO
 CREATE TABLE GeneralInfo (
     InfoID int PRIMARY KEY,
     InfoName NVARCHAR(50) NOT NULL,
-    InfoDescription NVARCHAR(MAX) NOT NULL
 )
 GO
 
@@ -95,6 +94,9 @@ GO
 
 -- Test data
 INSERT INTO Users (Username, [Password], UserType, FirstName, LastName, SchoolID)
-VALUES ('user', 'pass', 1, 'firstname', 'lastname', 1)
+VALUES ('admin', 'pass', 1, 'firstname', 'lastname', 1)
+GO
+INSERT INTO Users (Username, [Password], UserType, FirstName, LastName, SchoolID)
+VALUES ('student', 'pass', 3, 'firstname', 'lastname', 1)
 GO
 

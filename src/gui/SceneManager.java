@@ -1,7 +1,5 @@
 package gui;
 
-import be.Citizen;
-import gui.controller.CitizenController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,6 +9,8 @@ import java.io.IOException;
 
 public class SceneManager {
     private static Stage primaryStage;
+    private static double height;
+    private static double width;
 
     public static void setPrimaryStage(Stage stage){
         primaryStage = stage;
@@ -26,7 +26,6 @@ public class SceneManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void showStudentScene(){ //Student parameter?
@@ -40,18 +39,21 @@ public class SceneManager {
         }
     }
 
-    public static void showCitizenOverview(Citizen selectedItem){ //Student parameter?
+
+    public static void showCitizenOverview(){
         try{
-            Parent root;
-            FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("view/CitizenOverview.fxml"));
-            root = fxmlLoader.load();
-            fxmlLoader.<CitizenController>getController().setCitizen(selectedItem);
+            Parent root = FXMLLoader.load(SceneManager.class.getResource("view/CitizenOverview.fxml"));
             primaryStage.setScene(new Scene(root));
             root.requestFocus();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void logout(){
+        showLoginScene();
+        //Clear the user data in models
     }
 
 }

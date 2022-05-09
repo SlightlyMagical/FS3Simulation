@@ -5,9 +5,11 @@ import java.io.IOException;
 public class ModelManager {
     private static ModelManager instance;
     private final UserModel userModel;
+    private final CitizenModel citizenModel;
 
     public ModelManager() throws IOException {
-        userModel = new UserModel();
+        this.userModel = new UserModel();
+        this.citizenModel = new CitizenModel();
     }
 
     public static ModelManager getInstance() throws IOException {
@@ -18,5 +20,9 @@ public class ModelManager {
 
     public UserModel getUserModel() {
         return userModel;
+    }
+
+    public CitizenModel getCitizenModel() {
+        return citizenModel;
     }
 }

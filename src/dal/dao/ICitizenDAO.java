@@ -4,17 +4,18 @@ import be.Citizen;
 
 import be.Usertypes.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ICitizenDAO {
 
-    List<Citizen> getCitizens(User user);
+    ArrayList<Citizen> getCitizens(int userID);
 
-    List<Citizen> getGeneralInfo(List<Citizen> citizens);
+    ArrayList<Citizen> getGeneralInfo(ArrayList<Citizen> citizens);
 
-    List<Citizen> getHealthConditions(List<Citizen> citizens);
+    ArrayList<Citizen> getHealthConditions(ArrayList<Citizen> citizens);
 
-    List<Citizen> getFunctionalAbilities(List<Citizen> citizens);
+    ArrayList<Citizen> getFunctionalAbilities(ArrayList<Citizen> citizens);
 
     void updatePatientGeneralInfo(Citizen selectedPatient);
 

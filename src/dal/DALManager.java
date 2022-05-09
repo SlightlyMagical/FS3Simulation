@@ -24,6 +24,15 @@ public class DALManager implements IDALManager{
         return userDAO.checkLogin(username, password);
     }
 
+    @Override
+    public ArrayList<Citizen> getAllCitizens(int userID) {
+        ArrayList<Citizen> citizens = citizenDAO.getCitizens(userID);
+        citizens = citizenDAO.getGeneralInfo(citizens);
+        citizens = citizenDAO.getHealthConditions(citizens);
+        citizens = citizenDAO.getFunctionalAbilities(citizens);
+        return citizens;
+    }
+
 
     @Override
     public void updatePatientGeneralInfo(Citizen selectedPatient) {

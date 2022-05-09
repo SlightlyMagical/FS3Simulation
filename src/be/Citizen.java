@@ -10,7 +10,7 @@ public class Citizen {
     private final int id;
     private final String firstName;
     private final String lastName;
-    private final HashMap<String, GeneralInfo> generalInfo;
+    private HashMap<String, GeneralInfo> generalInfo;
     private final HashMap<String, HealthCondition> healthConditions;
     private final HashMap<String, FunctionalAbility> functionalAbilities;
 
@@ -18,7 +18,6 @@ public class Citizen {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.generalInfo = new HashMap<>();
         this.healthConditions = new HashMap<>();
         this.functionalAbilities = new HashMap<>();
     }
@@ -43,8 +42,8 @@ public class Citizen {
         return generalInfo;
     }
 
-    public void addGeneralInfo(GeneralInfo generalInfo) {
-        this.generalInfo.put(generalInfo.getName(), generalInfo);
+    public void setGeneralInfo(HashMap<String, GeneralInfo> generalInfoHashMap) {
+        this.generalInfo = generalInfoHashMap;
     }
 
     public HashMap<String, HealthCondition> getHealthConditions() {

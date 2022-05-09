@@ -11,8 +11,8 @@ public interface IBLLManager {
 
     User login(String username, String password) throws SQLServerException;
 
-    ArrayList<Citizen> getAllPatients(int schoolID);
+    ArrayList<Citizen> getAllCitizens(int userID);
 
-    void updatePatientGeneralInfo(Citizen selectedPatient);
+    void updateCitizenGeneralInfo(Citizen selectedPatient);
 
 }

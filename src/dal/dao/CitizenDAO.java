@@ -3,6 +3,7 @@ package dal.dao;
 import be.Categories.FunctionalAbility;
 import be.Categories.GeneralInfo;
 import be.Categories.HealthCondition;
+import be.Categories.TemplateMaps;
 import be.Citizen;
 import be.Usertypes.User;
 import be.enums.Status;
@@ -26,12 +27,12 @@ public class CitizenDAO implements ICitizenDAO{
 
 
     @Override
-    public List<Citizen> getCitizens(User user) {
-        List<Citizen> citizens = FXCollections.observableArrayList();
+    public ArrayList<Citizen> getCitizens(int userID) {
+        ArrayList<Citizen> citizens = new ArrayList<>();
         try(Connection connection = dbConnector.getConnection()){
-            String sql1 = "SELECT * FROM StudentCitizen LEFT JOIN Citizen ON StudentCitizen.CitizenID = Citizen.CitizenID WHERE StudentID = (?);";
+            String sql1 = "SELECT * FROM StudentCitizen LEFT JOIN Citizen ON StudentCitizen.CitizenID = Citizen.CitizenID WHERE UserID = (?);";
             PreparedStatement ps1 = connection.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
-            ps1.setInt(1, user.getId());
+            ps1.setInt(1, userID);
             ResultSet rs = ps1.executeQuery();
 
             while (rs.next()){
@@ -49,9 +50,10 @@ public class CitizenDAO implements ICitizenDAO{
     }
 
     @Override
-    public List<Citizen> getGeneralInfo(List<Citizen> citizens) {
+    public ArrayList<Citizen> getGeneralInfo(ArrayList<Citizen> citizens) {
         try (Connection connection = dbConnector.getConnection()) {
             for (Citizen c : citizens) {
+                HashMap<String, GeneralInfo> generalInfo = TemplateMaps.getGeneralInfoHashMap();
                 String sql = "SELECT * FROM CitizenInfo LEFT JOIN GeneralInfo ON CitizenInfo.InfoID = GeneralInfo.InfoID WHERE CitizenID = (?);";
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, c.getId());
@@ -60,10 +62,9 @@ public class CitizenDAO implements ICitizenDAO{
                 while (rs.next()) {
                     String name = rs.getString("InfoName");
                     String infoText = rs.getString("InfoText");
-                    GeneralInfo generalInfo = new GeneralInfo(name);
-                    generalInfo.setText(infoText);
-                    c.addGeneralInfo(generalInfo);
+                    generalInfo.get(name).setText(infoText);
                 }
+                c.setGeneralInfo(generalInfo);
             }
 
         } catch (SQLException throwables) {
@@ -74,11 +75,12 @@ public class CitizenDAO implements ICitizenDAO{
 
 
     @Override
-    public List<Citizen> getHealthConditions(List<Citizen> citizens) {
+    public ArrayList<Citizen> getHealthConditions(ArrayList<Citizen> citizens) {
         try (Connection connection = dbConnector.getConnection()) {
             for (Citizen c : citizens) {
                 String sql = "SELECT * FROM CitizenCondition LEFT JOIN HealthCondition ON CitizenCondition.ConditionID = HealthCondition.ConditionID WHERE CitizenID = (?);";
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, c.getId());
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
@@ -108,11 +110,12 @@ public class CitizenDAO implements ICitizenDAO{
     }
 
     @Override
-    public List<Citizen> getFunctionalAbilities(List<Citizen> citizens) {
+    public ArrayList<Citizen> getFunctionalAbilities(ArrayList<Citizen> citizens) {
         try (Connection connection = dbConnector.getConnection()) {
             for (Citizen c : citizens) {
                 String sql = "SELECT * FROM CitizenAbility LEFT JOIN FunctionalAbility ON CitizenAbility.AbilityID = FunctionalAbility.AbilityID WHERE CitizenID = (?);";
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, c.getId());
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
