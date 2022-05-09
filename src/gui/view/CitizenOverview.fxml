@@ -344,18 +344,18 @@
                      <children>
                         <Accordion minWidth="250.0" prefWidth="400.0">
                           <panes>
-                            <TitledPane fx:id="healthCat1" animated="false" text="Funktionsniveau" />
-                            <TitledPane fx:id="healthCat2" animated="false" text="Bevægeapparat" />
-                            <TitledPane fx:id="healthCat3" animated="false" text="Ernæring" />
-                              <TitledPane fx:id="healthCat4" animated="false" layoutX="10.0" layoutY="80.0" text="Hud og slimhinder" />
-                              <TitledPane fx:id="healthCat5" animated="false" layoutX="10.0" layoutY="551.0" text="Kommunikation" />
-                              <TitledPane fx:id="healthCat6" animated="false" layoutX="10.0" layoutY="551.0" text="Psykosociale forhold" />
-                              <TitledPane fx:id="healthCat7" animated="false" layoutX="10.0" layoutY="185.0" text="Respiration og cirkulation" />
-                              <TitledPane fx:id="healthCat8" animated="false" layoutX="10.0" layoutY="551.0" text="Seksualitet" />
-                              <TitledPane fx:id="healthCat9" animated="false" layoutX="10.0" layoutY="551.0" text="Smerter og sanseindtryk" />
-                              <TitledPane fx:id="healthCat10" animated="false" layoutX="10.0" layoutY="551.0" text="Søvn og hvile" />
-                              <TitledPane fx:id="healthCat11" animated="false" layoutX="10.0" layoutY="551.0" text="Viden og udvikling" />
-                              <TitledPane fx:id="healthCat12" animated="false" layoutX="10.0" layoutY="551.0" text="Udskillelse af affaldsstoffer" />
+                            <TitledPane fx:id="healthCat1" animated="false" text="1. Funktionsniveau" />
+                            <TitledPane fx:id="healthCat2" animated="false" text="2. Bevægeapparat" />
+                            <TitledPane fx:id="healthCat3" animated="false" text="3. Ernæring" />
+                              <TitledPane fx:id="healthCat4" animated="false" layoutX="10.0" layoutY="80.0" text="4. Hud og slimhinder" />
+                              <TitledPane fx:id="healthCat5" animated="false" layoutX="10.0" layoutY="551.0" text="5. Kommunikation" />
+                              <TitledPane fx:id="healthCat6" animated="false" layoutX="10.0" layoutY="551.0" text="6. Psykosociale forhold" />
+                              <TitledPane fx:id="healthCat7" animated="false" layoutX="10.0" layoutY="185.0" text="7. Respiration og cirkulation" />
+                              <TitledPane fx:id="healthCat8" animated="false" layoutX="10.0" layoutY="551.0" text="8. Seksualitet" />
+                              <TitledPane fx:id="healthCat9" animated="false" layoutX="10.0" layoutY="551.0" text="9. Smerter og sanseindtryk" />
+                              <TitledPane fx:id="healthCat10" animated="false" layoutX="10.0" layoutY="551.0" text="10. Søvn og hvile" />
+                              <TitledPane fx:id="healthCat11" animated="false" layoutX="10.0" layoutY="551.0" text="11. Viden og udvikling" />
+                              <TitledPane fx:id="healthCat12" animated="false" layoutX="10.0" layoutY="551.0" text="12. Udskillelse af affaldsstoffer" />
                           </panes>
                         </Accordion>
                         <BorderPane fx:id="healthRightSide" prefWidth="1500.0">

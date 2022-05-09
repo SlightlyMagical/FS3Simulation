@@ -6,7 +6,6 @@ import be.Categories.HealthCondition;
 import be.Categories.TemplateMaps;
 import be.Citizen;
 import be.enums.Status;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.DBConnector;
 
 import java.io.IOException;
@@ -22,7 +21,6 @@ public class CitizenDAO implements ICitizenDAO{
     public CitizenDAO() throws IOException {
         dbConnector = new DBConnector();
     }
-
 
     @Override
     public ArrayList<Citizen> getCitizens(int userID) {
@@ -71,7 +69,6 @@ public class CitizenDAO implements ICitizenDAO{
         return citizens;
     }
 
-
     @Override
     public ArrayList<Citizen> getHealthConditions(ArrayList<Citizen> citizens) {
         try (Connection connection = dbConnector.getConnection()) {
@@ -82,16 +79,22 @@ public class CitizenDAO implements ICitizenDAO{
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
+                    int id = rs.getInt("ConditionID");
+                    int catID = rs.getInt("ConditionCatID");
                     String name = rs.getString("ConditionName");
                     int status = rs.getInt("ConditionStatus");
                     String conditionNote = rs.getString("ConditionNote");
                     String conditionAssessment = rs.getString("ConditionAssessment");
                     String conditionExpectation = rs.getString("ConditionExpectation");
-                    HealthCondition healthCondition = new HealthCondition(name, conditionNote);
+                    HealthCondition healthCondition = new HealthCondition(id, catID, name);
                     switch (status) {
                         case 1 -> healthCondition.setStatus(Status.ACTIVE);
                         case 2 -> healthCondition.setStatus(Status.POTENTIAL);
+                        case 3 -> healthCondition.setStatus(Status.NOT_RELEVANT);
                     }
+                    if (conditionNote != null)
+                        healthCondition.setProfessionalNote(conditionNote);
+
                     if (conditionAssessment != null)
                         healthCondition.setCurrentAssessment(conditionAssessment);
 
@@ -145,7 +148,7 @@ public class CitizenDAO implements ICitizenDAO{
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        
+
         for (Map.Entry<String, GeneralInfo> entry : selectedPatient.getGeneralInfo().entrySet()) {
             String key = entry.getKey();
             GeneralInfo value = entry.getValue();

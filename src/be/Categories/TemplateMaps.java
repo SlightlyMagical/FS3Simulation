@@ -116,6 +116,49 @@ public class TemplateMaps {
     public static HashMap<String, HealthCondition> getHealthConditionHashMap(){
         HashMap<String, HealthCondition> healthConditionHashMap = new HashMap<>();
 
+        HealthCondition healthCondition1 = new HealthCondition(1, 1, "Problemer med personlig pleje");
+        healthConditionHashMap.put(healthCondition1.getName(), healthCondition1);
+
+        HealthCondition healthCondition2 = new HealthCondition(2, 1, "Problemer med daglige aktiviteter");
+        healthConditionHashMap.put(healthCondition2.getName(), healthCondition2);
+
+        HealthCondition healthCondition3 = new HealthCondition(3, 2, "Problemer med mobilitet og bevægelse");
+        healthConditionHashMap.put(healthCondition3.getName(), healthCondition3);
+
+        HealthCondition healthCondition4 = new HealthCondition(4, 3, "Problemer med væskeindtag");
+        healthConditionHashMap.put(healthCondition4.getName(), healthCondition4);
+
+        HealthCondition healthCondition5 = new HealthCondition(5, 3, "Problemer med fødeindtag");
+        healthConditionHashMap.put(healthCondition5.getName(), healthCondition5);
+
+        HealthCondition healthCondition6 = new HealthCondition(6, 3, "Uhensigtsmæssig vægtændring");
+        healthConditionHashMap.put(healthCondition6.getName(), healthCondition6);
+
+        HealthCondition healthCondition7 = new HealthCondition(7, 3, "Problemer med overvægt");
+        healthConditionHashMap.put(healthCondition7.getName(), healthCondition7);
+
+        HealthCondition healthCondition8 = new HealthCondition(8, 3, "Problemer med undervægt");
+        healthConditionHashMap.put(healthCondition8.getName(), healthCondition8);
+
+        HealthCondition healthCondition9 = new HealthCondition(9, 4, "Problemer med kirurgisk sår");
+        healthConditionHashMap.put(healthCondition9.getName(), healthCondition9);
+
+
+        
+
+
+
+
+        HealthCondition healthCondition = new HealthCondition(1, 1, "");
+        healthConditionHashMap.put(healthCondition.getName(), healthCondition);
+
+
+
+
+
+
+
+
 
         return healthConditionHashMap;
     }

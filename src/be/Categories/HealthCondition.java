@@ -3,15 +3,18 @@ package be.Categories;
 import be.enums.Status;
 
 public class HealthCondition {
+    private final int id;
+    private final int catID;
     private final String name;
     private String professionalNote;
     private String currentAssessment;
     private String expectedLevel;
     private Status status;
 
-    public HealthCondition(String name, String professionalNote) {
+    public HealthCondition(int id, int catID, String name) {
+        this.id = id;
+        this.catID = catID;
         this.name = name;
-        this.professionalNote = professionalNote;
     }
 
 
@@ -49,5 +52,9 @@ public class HealthCondition {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
     }
 }
