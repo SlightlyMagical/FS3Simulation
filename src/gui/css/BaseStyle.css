@@ -9,3 +9,12 @@
     -fx-cursor: hand;
 }
 
+.HeaderText {
+    -fx-font-size: 16pt;
+    -fx-font-weight: bold;
+}
+
+.SubHeaderText{
+    -fx-font-weight: bold;
+}
+

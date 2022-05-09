@@ -8,10 +8,12 @@ import gui.model.DialogHandler;
 import gui.model.Messages;
 import gui.model.ModelManager;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.InputMethodEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,7 +48,9 @@ public class CitizenController implements Initializable {
     private CitizenModel citizenModel;
     private Citizen currentCitizen;
 
-    private boolean savedChanges = false;
+    private boolean infoUnsavedChanges = false;
+    private boolean healthUnsavedChanges = false;
+    private boolean abilityUnsavedChanges = false;
 
     public CitizenController() {
     }
@@ -63,19 +67,26 @@ public class CitizenController implements Initializable {
         setUpGeneralInfo();
     }
 
+    private boolean checkIfSaved(){
+        if (infoUnsavedChanges || healthUnsavedChanges || abilityUnsavedChanges)
+            return DialogHandler.confirmationAlert(Messages.UNSAVED_CHANGES);
 
-    public void goBack(ActionEvent actionEvent) {
-        if(!savedChanges){
-            if( DialogHandler.confirmationAlert(Messages.UNSAVED_CHANGES)){
-                SceneManager.showStudentScene();
-            }
-        }else{
-            SceneManager.showStudentScene();
-        }
+        return true;
     }
 
+    private void addTextFormatter(TextArea textArea){
+        textArea.setTextFormatter(new TextFormatter<String>(change -> {
+            infoUnsavedChanges = true;
+            return change ;
+        }));
+    }
 
-    public void onSave(ActionEvent actionEvent) {
+    public void goBack(ActionEvent actionEvent) {
+        if (checkIfSaved())
+            SceneManager.showStudentScene();
+    }
+
+    public void saveGeneralInfo(ActionEvent actionEvent) {
         HashMap<String, GeneralInfo> generalInfoHashMap = currentCitizen.getGeneralInfo();
 
         //Get specific info from hashmap (Motivation, Mestring ...)
@@ -136,7 +147,7 @@ public class CitizenController implements Initializable {
 
         citizenModel.updatePatientGeneralInfo(currentCitizen);
 
-        savedChanges = true;
+        infoUnsavedChanges = false;
     }
 
     public void setUpGeneralInfo(){
@@ -145,10 +156,12 @@ public class CitizenController implements Initializable {
         // Mestring
         tipMestring.setText(generalInfoHashMap.get("Mestring").getDescription());
         textMestring.setText(generalInfoHashMap.get("Mestring").getText());
+        addTextFormatter(textMestring);
 
         // Motivation
         tipMotivation.setText(generalInfoHashMap.get("Motivation").getDescription());
         textMotivation.setText(generalInfoHashMap.get("Motivation").getText());
+        addTextFormatter(textMotivation);
 
         // Ressourcer
         tipRessourcer.setText(generalInfoHashMap.get("Ressourcer").getDescription());
@@ -157,40 +170,61 @@ public class CitizenController implements Initializable {
         // Roller
         tipRoller.setText(generalInfoHashMap.get("Roller").getDescription());
         textRoller.setText(generalInfoHashMap.get("Roller").getText());
+        addTextFormatter(textRoller);
 
         // Vaner
         tipVaner.setText(generalInfoHashMap.get("Vaner").getDescription());
         textVaner.setText(generalInfoHashMap.get("Vaner").getText());
+        addTextFormatter(textVaner);
 
         // Job
         tipJob.setText(generalInfoHashMap.get("Uddannelse og job").getDescription());
         textJob.setText(generalInfoHashMap.get("Uddannelse og job").getText());
+        addTextFormatter(textJob);
 
         // Livshistorie
         tipLiv.setText(generalInfoHashMap.get("Livshistorie").getDescription());
         textLiv.setText(generalInfoHashMap.get("Livshistorie").getText());
+        addTextFormatter(textLiv);
 
         // Helbredsoplysninger
         tipHelbred.setText(generalInfoHashMap.get("Helbredsoplysninger").getDescription());
         textHelbred.setText(generalInfoHashMap.get("Helbredsoplysninger").getText());
+        addTextFormatter(textHelbred);
 
         // Hjælpemidler
         tipHjaelp.setText(generalInfoHashMap.get("Hjælpemidler").getDescription());
         textHjaelp.setText(generalInfoHashMap.get("Hjælpemidler").getText());
+        addTextFormatter(textHjaelp);
 
         // Boligens indretning
         tipBolig.setText(generalInfoHashMap.get("Boligens indretning").getDescription());
         textBolig.setText(generalInfoHashMap.get("Boligens indretning").getText());
+        addTextFormatter(textBolig);
 
         // Netværk
         tipNetvaerk.setText(generalInfoHashMap.get("Netværk").getDescription());
         textNetvaerk.setText(generalInfoHashMap.get("Netværk").getText());
-    }
-
-    public void handleTabChange(Event event) {
+        addTextFormatter(textNetvaerk);
     }
 
     public void handleLogout(ActionEvent actionEvent) {
-        SceneManager.logout();
+        if (checkIfSaved())
+            SceneManager.logout();
+    }
+
+    public void saveHealthCondition(ActionEvent actionEvent) {
+    }
+
+    public void onHealthSaveAsSelection(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void healthUnsavedChanged() {
+        healthUnsavedChanges = true;
+    }
+
+    public void infoUnsavedChanges(InputMethodEvent inputMethodEvent) {
+        infoUnsavedChanges = true;
     }
 }
