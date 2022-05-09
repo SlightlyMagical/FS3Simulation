@@ -243,6 +243,31 @@
                                     <VBox layoutX="10.0" layoutY="10.0" minWidth="400.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                                        <children>
                                           <Label styleClass="HeaderText" text="Omgivelsesfaktorer" />
+                                          <VBox layoutX="40.0" layoutY="160.0" spacing="5.0">
+                                             <children>
+                                                <HBox>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <children>
+                                                      <Label prefWidth="2000.0" text="Netværk" />
+                                                      <Label text="?">
+                                                         <tooltip>
+                                                            <Tooltip fx:id="tipNetvaerk" text="Empty Tooltip" />
+                                                         </tooltip>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <TextArea fx:id="textNetvaerk" minHeight="100.0" prefHeight="100.0">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </TextArea>
+                                             </children>
+                                          </VBox>
                                           <VBox spacing="5.0">
                                              <children>
                                                 <HBox>
@@ -295,31 +320,6 @@
                                              <VBox.margin>
                                                 <Insets />
                                              </VBox.margin>
-                                          </VBox>
-                                          <VBox layoutX="40.0" layoutY="160.0" spacing="5.0">
-                                             <children>
-                                                <HBox>
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                   <children>
-                                                      <Label prefWidth="2000.0" text="Netværk" />
-                                                      <Label text="?">
-                                                         <tooltip>
-                                                            <Tooltip fx:id="tipNetvaerk" text="Empty Tooltip" />
-                                                         </tooltip>
-                                                         <HBox.margin>
-                                                            <Insets />
-                                                         </HBox.margin>
-                                                      </Label>
-                                                   </children>
-                                                </HBox>
-                                                <TextArea fx:id="textNetvaerk" minHeight="100.0" prefHeight="100.0">
-                                                   <VBox.margin>
-                                                      <Insets />
-                                                   </VBox.margin>
-                                                </TextArea>
-                                             </children>
                                           </VBox>
                                        </children>
                                        <padding>

@@ -156,6 +156,8 @@ public class CitizenController implements Initializable {
         citizenModel.updatePatientGeneralInfo(currentCitizen);
 
         infoUnsavedChanges = false;
+
+        DialogHandler.informationAlert(Messages.SAVE_SUCCESSFUL);
     }
 
     public void setUpGeneralInfo(){

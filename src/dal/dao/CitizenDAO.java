@@ -5,16 +5,14 @@ import be.Categories.GeneralInfo;
 import be.Categories.HealthCondition;
 import be.Categories.TemplateMaps;
 import be.Citizen;
-import be.Usertypes.User;
 import be.enums.Status;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.DBConnector;
-import javafx.collections.FXCollections;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class CitizenDAO implements ICitizenDAO{
@@ -139,22 +137,28 @@ public class CitizenDAO implements ICitizenDAO{
 
     @Override
     public void updatePatientGeneralInfo(Citizen selectedPatient) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String sql = "DELETE FROM CitizenInfo WHERE CitizenID = (?);";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, selectedPatient.getId());
+            ps.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        
         for (Map.Entry<String, GeneralInfo> entry : selectedPatient.getGeneralInfo().entrySet()) {
             String key = entry.getKey();
             GeneralInfo value = entry.getValue();
             try (Connection connection = dbConnector.getConnection()) {
-                String sql = "INSERT INTO CitizenInfo (CitizenID, InfoID, InfoText) VALUES (?, ?, ?);";
-                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ps.setInt(1, selectedPatient.getId());
-                ps.setInt(2, value.getID());
-                ps.setString(3, value.getText());
-                int affectedRows = ps.executeUpdate();
+                String sql2 = "INSERT INTO CitizenInfo (CitizenID, InfoID, InfoText) VALUES (?, ?, ?);";
+                PreparedStatement ps2 = connection.prepareStatement(sql2);
+                ps2.setInt(1, selectedPatient.getId());
+                ps2.setInt(2, value.getID());
+                ps2.setString(3, value.getText());
+                ps2.executeUpdate();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-
         }
-
-        }
-
+    }
 }
