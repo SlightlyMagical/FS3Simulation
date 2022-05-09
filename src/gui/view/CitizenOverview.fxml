@@ -360,7 +360,7 @@
                         </Accordion>
                         <BorderPane fx:id="healthRightSide" prefWidth="1500.0">
                            <top>
-                              <HBox fx:id="healthTopBox" disable="true" spacing="20.0" BorderPane.alignment="CENTER">
+                              <HBox fx:id="healthTopBox" spacing="20.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <VBox prefWidth="300.0">
                                        <children>
@@ -401,7 +401,7 @@
                                           <HBox alignment="CENTER_LEFT" spacing="20.0">
                                              <children>
                                                 <Label text="Forventet niveau:" />
-                                                <ComboBox fx:id="cbHealthExpectedLevel" onAction="#healthUnsavedChanged" promptText="Vælg forventet niveau" />
+                                                <ComboBox fx:id="cbHealthExpectedLevel" promptText="Vælg forventet niveau" />
                                              </children>
                                              <VBox.margin>
                                                 <Insets top="20.0" />

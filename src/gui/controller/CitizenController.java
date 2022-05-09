@@ -8,12 +8,9 @@ import gui.model.DialogHandler;
 import gui.model.Messages;
 import gui.model.ModelManager;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.control.Tooltip;
-import javafx.scene.input.InputMethodEvent;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -44,6 +41,15 @@ public class CitizenController implements Initializable {
     public TextArea textBolig;
     public Tooltip tipNetvaerk;
     public TextArea textNetvaerk;
+    public ComboBox<String> cbHealthSaveAs;
+    public VBox healthPotentialBox;
+    public VBox healthExtendedBox;
+    public Button healthSaveButton;
+    public Label lblHealthCategory;
+    public Label lblHealthSubCategory;
+    public TextArea txtHealthProfNote;
+    public TextArea txtHealthCurrentAssessment;
+    public ComboBox<String> cbHealthExpectedLevel;
 
     private CitizenModel citizenModel;
     private Citizen currentCitizen;
@@ -65,6 +71,8 @@ public class CitizenController implements Initializable {
             e.printStackTrace();
         }
         setUpGeneralInfo();
+        cbHealthSaveAs.getItems().addAll("Aktivt", "Potentielt");
+        cbHealthExpectedLevel.getItems().addAll("Mindskes", "Forbliver uændret", "Forsvinder");
     }
 
     private boolean checkIfSaved(){
@@ -214,17 +222,35 @@ public class CitizenController implements Initializable {
     }
 
     public void saveHealthCondition(ActionEvent actionEvent) {
+        resetHealthFields();
+        healthUnsavedChanges = false;
     }
 
     public void onHealthSaveAsSelection(ActionEvent actionEvent) {
+        healthSaveButton.setDisable(false);
+        int index = cbHealthSaveAs.getSelectionModel().getSelectedIndex();
+        switch (index){
+            case 0 -> {
+                healthPotentialBox.setDisable(false);
+                healthExtendedBox.setDisable(false);
+            }
+            case 1 -> {
+                healthPotentialBox.setDisable(false);
+                healthExtendedBox.setDisable(true);
+            }
+        }
     }
 
-    @FXML
-    private void healthUnsavedChanged() {
-        healthUnsavedChanges = true;
+    private void resetHealthFields(){
+        cbHealthSaveAs.getSelectionModel().clearSelection();
+        cbHealthExpectedLevel.getSelectionModel().clearSelection();
+        healthSaveButton.setDisable(true);
+        healthPotentialBox.setDisable(true);
+        healthExtendedBox.setDisable(true);
+        lblHealthCategory.setText("");
+        lblHealthSubCategory.setText("");
+        txtHealthProfNote.clear();
+        txtHealthCurrentAssessment.clear();
     }
 
-    public void infoUnsavedChanges(InputMethodEvent inputMethodEvent) {
-        infoUnsavedChanges = true;
-    }
 }
