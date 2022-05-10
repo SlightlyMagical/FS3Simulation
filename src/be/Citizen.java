@@ -3,6 +3,7 @@ package be;
 import be.Categories.FunctionalAbility;
 import be.Categories.GeneralInfo;
 import be.Categories.HealthCondition;
+import be.Categories.InfoTemplates;
 
 import java.util.HashMap;
 
@@ -18,7 +19,7 @@ public class Citizen {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.healthConditions = new HashMap<>();
+        this.healthConditions = InfoTemplates.getHealthConditionHashMap();
         this.functionalAbilities = new HashMap<>();
     }
 

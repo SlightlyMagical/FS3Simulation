@@ -3,7 +3,7 @@ package dal.dao;
 import be.Categories.FunctionalAbility;
 import be.Categories.GeneralInfo;
 import be.Categories.HealthCondition;
-import be.Categories.TemplateMaps;
+import be.Categories.InfoTemplates;
 import be.Citizen;
 import be.enums.Status;
 import dal.DBConnector;
@@ -49,7 +49,7 @@ public class CitizenDAO implements ICitizenDAO{
     public ArrayList<Citizen> getGeneralInfo(ArrayList<Citizen> citizens) {
         try (Connection connection = dbConnector.getConnection()) {
             for (Citizen c : citizens) {
-                HashMap<String, GeneralInfo> generalInfo = TemplateMaps.getGeneralInfoHashMap();
+                HashMap<String, GeneralInfo> generalInfo = InfoTemplates.getGeneralInfoHashMap();
                 String sql = "SELECT * FROM CitizenInfo LEFT JOIN GeneralInfo ON CitizenInfo.InfoID = GeneralInfo.InfoID WHERE CitizenID = (?);";
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, c.getId());
@@ -163,5 +163,40 @@ public class CitizenDAO implements ICitizenDAO{
                 throwables.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public boolean saveHealthCondition(HealthCondition healthCondition, int citizenID) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String sql = "DELETE FROM CitizenCondition WHERE CitizenID = (?) AND ConditionID = (?);";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, citizenID);
+            ps.setInt(2, healthCondition.getId());
+            ps.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        try (Connection connection = dbConnector.getConnection()) {
+            String sql2 = "INSERT INTO CitizenCondition (CitizenID, ConditionID, ConditionStatus, ConditionNote, ConditionAssessment, ConditionExpectation) VALUES (?, ?, ?, ?, ?, ?);";
+            PreparedStatement ps2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+            ps2.setInt(1, citizenID);
+            ps2.setInt(2, healthCondition.getId());
+            switch (healthCondition.getStatus()){
+                case ACTIVE -> ps2.setInt(3, 1);
+                case POTENTIAL -> ps2.setInt(3, 2);
+                case NOT_RELEVANT -> ps2.setInt(3, 3);
+            }
+            ps2.setString(4, healthCondition.getProfessionalNote());
+            ps2.setString(5, healthCondition.getCurrentAssessment());
+            ps2.setString(6, healthCondition.getExpectedLevel());
+
+            int affectedRows = ps2.executeUpdate();
+            if (affectedRows == 1)
+                return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 }

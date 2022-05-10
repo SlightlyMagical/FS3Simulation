@@ -1,5 +1,6 @@
 package dal;
 
+import be.Categories.HealthCondition;
 import be.Citizen;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -37,5 +38,10 @@ public class DALManager implements IDALManager{
     @Override
     public void updatePatientGeneralInfo(Citizen selectedPatient) {
         citizenDAO.updatePatientGeneralInfo(selectedPatient);
+    }
+
+    @Override
+    public boolean saveHealthCondition(HealthCondition healthCondition, int citizenID) {
+        return citizenDAO.saveHealthCondition(healthCondition, citizenID);
     }
 }

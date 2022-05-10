@@ -1,5 +1,6 @@
 package gui.model;
 
+import be.Categories.HealthCondition;
 import be.Citizen;
 import bll.BLLManager;
 import bll.IBLLManager;
@@ -9,9 +10,9 @@ import javafx.collections.ObservableList;
 import java.io.IOException;
 
 public class CitizenModel {
-    IBLLManager bllManager;
-
     private ObservableList<Citizen> citizens;
+
+    IBLLManager bllManager;
     private Citizen currentCitizen;
 
     public CitizenModel() throws IOException {
@@ -36,6 +37,14 @@ public class CitizenModel {
 
     public void getCitizensFromDatabase() throws IOException {
         citizens.addAll(bllManager.getAllCitizens(ModelManager.getInstance().getUserModel().currentUser.getId()));
+    }
+
+    public boolean saveHealthCondition(HealthCondition healthCondition) {
+        if (bllManager.saveHealthCondition(healthCondition, currentCitizen.getId())){
+            currentCitizen.addHealthCondition(healthCondition);
+            return true;
+        }
+        return false;
     }
 }
 

@@ -1,5 +1,6 @@
 package dal.dao;
 
+import be.Categories.HealthCondition;
 import be.Citizen;
 
 import be.Usertypes.User;
@@ -19,4 +20,5 @@ public interface ICitizenDAO {
 
     void updatePatientGeneralInfo(Citizen selectedPatient);
 
+    boolean saveHealthCondition(HealthCondition healthCondition, int citizenID);
 }

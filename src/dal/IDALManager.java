@@ -1,5 +1,6 @@
 package dal;
 
+import be.Categories.HealthCondition;
 import be.Citizen;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -12,4 +13,6 @@ public interface IDALManager {
     ArrayList<Citizen> getAllCitizens(int userID);
 
     void updatePatientGeneralInfo(Citizen selectedPatient);
+
+    boolean saveHealthCondition(HealthCondition healthCondition, int citizenID);
 }

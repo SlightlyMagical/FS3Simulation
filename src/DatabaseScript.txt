@@ -20,7 +20,7 @@ CREATE TABLE [Users] (
     UserType int NOT NULL,
     FirstName NVARCHAR(50) NOT NULL,
     LastName NVARCHAR(50) NOT NULL,
-    SchoolID int NOT NULL -- FK to school table
+    SchoolID int -- FK to school table
 )
 GO
 
@@ -33,6 +33,7 @@ GO
 
 CREATE TABLE HealthCondition (
     ConditionID int PRIMARY KEY,
+    ConditionCatID int NOT NULL,
     ConditionName NVARCHAR(50) NOT NULL
 )
 GO
@@ -54,7 +55,7 @@ CREATE TABLE Citizen (
 CREATE TABLE CitizenInfo (
     CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
     InfoID int FOREIGN KEY REFERENCES GeneralInfo(InfoID),
-    InfoText NVARCHAR(MAX) NOT NULL,
+    InfoText NVARCHAR(MAX),
     CONSTRAINT PK_CitizenInfo PRIMARY KEY (CitizenID, InfoID)
 )
 GO
@@ -63,7 +64,7 @@ CREATE TABLE CitizenCondition (
     CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
     ConditionID int FOREIGN KEY REFERENCES HealthCondition(ConditionID),
     ConditionStatus int NOT NULL,
-    ConditionNote NVARCHAR(MAX) NOT NULL,
+    ConditionNote NVARCHAR(MAX),
     ConditionAssessment NVARCHAR(MAX),
     ConditionExpectation NVARCHAR(20),
     CONSTRAINT PK_CitizenCondition PRIMARY KEY (CitizenID, ConditionID)
@@ -92,11 +93,40 @@ CREATE TABLE StudentCitizen(
 GO
 
 
--- Test data
+-- Test Users
 INSERT INTO Users (Username, [Password], UserType, FirstName, LastName, SchoolID)
-VALUES ('admin', 'pass', 1, 'firstname', 'lastname', 1)
+VALUES ('admin', 'pass', 1, 'firstname', 'lastname', null)
+GO
+INSERT INTO Users (Username, [Password], UserType, FirstName, LastName, SchoolID)
+VALUES ('teacher', 'pass', 2, 'firstname', 'lastname', 1)
 GO
 INSERT INTO Users (Username, [Password], UserType, FirstName, LastName, SchoolID)
 VALUES ('student', 'pass', 3, 'firstname', 'lastname', 1)
 GO
 
+-- Test Citizen
+INSERT INTO Citizen (FirstName, LastName)
+VALUES ('Peter', 'Hansen')
+GO
+INSERT INTO StudentCitizen (UserID, CitizenID)
+VALUES (3, 1)
+GO
+
+-- Citizen care info tables
+INSERT INTO GeneralInfo (InfoID, InfoName)
+VALUES (1, 'Mestring'),
+(2, 'Motivation'),
+(3, 'Ressourcer'),
+(4, 'Roller'),
+(5, 'Vaner'),
+(6, 'Uddannelse og job'),
+(7, 'Livshistorie'),
+(8, 'Netværk'),
+(9, 'Helbredsoplysninger'),
+(10, 'Hjælpemidler'),
+(11, 'Boligens indretning')
+GO
+
+INSERT INTO HealthCondition (ConditionID, ConditionCatID, ConditionName)
+VALUES
+(1, 1, 'Problemer med personlig pleje')

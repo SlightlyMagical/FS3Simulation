@@ -342,30 +342,65 @@
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Accordion minWidth="250.0" prefWidth="400.0">
+                        <Accordion minWidth="350.0" prefWidth="400.0">
                           <panes>
-                            <TitledPane fx:id="healthCat1" animated="false" text="1. Funktionsniveau" />
-                            <TitledPane fx:id="healthCat2" animated="false" text="2. Bevægeapparat" />
-                            <TitledPane fx:id="healthCat3" animated="false" text="3. Ernæring" />
-                              <TitledPane fx:id="healthCat4" animated="false" layoutX="10.0" layoutY="80.0" text="4. Hud og slimhinder" />
-                              <TitledPane fx:id="healthCat5" animated="false" layoutX="10.0" layoutY="551.0" text="5. Kommunikation" />
-                              <TitledPane fx:id="healthCat6" animated="false" layoutX="10.0" layoutY="551.0" text="6. Psykosociale forhold" />
-                              <TitledPane fx:id="healthCat7" animated="false" layoutX="10.0" layoutY="185.0" text="7. Respiration og cirkulation" />
-                              <TitledPane fx:id="healthCat8" animated="false" layoutX="10.0" layoutY="551.0" text="8. Seksualitet" />
-                              <TitledPane fx:id="healthCat9" animated="false" layoutX="10.0" layoutY="551.0" text="9. Smerter og sanseindtryk" />
-                              <TitledPane fx:id="healthCat10" animated="false" layoutX="10.0" layoutY="551.0" text="10. Søvn og hvile" />
-                              <TitledPane fx:id="healthCat11" animated="false" layoutX="10.0" layoutY="551.0" text="11. Viden og udvikling" />
-                              <TitledPane fx:id="healthCat12" animated="false" layoutX="10.0" layoutY="551.0" text="12. Udskillelse af affaldsstoffer" />
+                            <TitledPane text="1. Funktionsniveau">
+                                 <content>
+                                    <VBox fx:id="healthCat1" prefHeight="200.0" prefWidth="100.0" />
+                                 </content></TitledPane>
+                            <TitledPane text="2. Bevægeapparat">
+                                 <content>
+                                    <VBox fx:id="healthCat2" prefHeight="200.0" prefWidth="100.0" />
+                                 </content></TitledPane>
+                            <TitledPane text="3. Ernæring">
+                                 <content>
+                                    <VBox fx:id="healthCat3" prefHeight="200.0" prefWidth="100.0" />
+                                 </content></TitledPane>
+                              <TitledPane layoutX="10.0" layoutY="80.0" text="4. Hud og slimhinder">
+                                 <content>
+                                    <VBox fx:id="healthCat4" prefHeight="200.0" prefWidth="100.0" />
+                                 </content></TitledPane>
+                              <TitledPane layoutX="10.0" layoutY="551.0" text="5. Kommunikation">
+                                 <content>
+                                    <VBox fx:id="healthCat5" prefHeight="200.0" prefWidth="100.0" />
+                                 </content></TitledPane>
+                              <TitledPane layoutX="10.0" layoutY="551.0" text="6. Psykosociale forhold">
+                                 <content>
+                                    <VBox fx:id="healthCat6" prefHeight="200.0" prefWidth="100.0" />
+                                 </content></TitledPane>
+                              <TitledPane layoutX="10.0" layoutY="185.0" text="7. Respiration og cirkulation">
+                                 <content>
+                                    <VBox fx:id="healthCat7" prefHeight="200.0" prefWidth="100.0" />
+                                 </content></TitledPane>
+                              <TitledPane layoutX="10.0" layoutY="551.0" text="8. Seksualitet">
+                                 <content>
+                                    <VBox fx:id="healthCat8" prefHeight="200.0" prefWidth="100.0" />
+                                 </content></TitledPane>
+                              <TitledPane layoutX="10.0" layoutY="551.0" text="9. Smerter og sanseindtryk">
+                                 <content>
+                                    <VBox fx:id="healthCat9" prefHeight="200.0" prefWidth="100.0" />
+                                 </content></TitledPane>
+                              <TitledPane layoutX="10.0" layoutY="551.0" text="10. Søvn og hvile">
+                                 <content>
+                                    <VBox fx:id="healthCat10" prefHeight="200.0" prefWidth="100.0" />
+                                 </content></TitledPane>
+                              <TitledPane layoutX="10.0" layoutY="551.0" text="11. Viden og udvikling">
+                                 <content>
+                                    <VBox fx:id="healthCat11" prefHeight="200.0" prefWidth="100.0" />
+                                 </content></TitledPane>
+                              <TitledPane layoutX="10.0" layoutY="551.0" text="12. Udskillelse af affaldsstoffer">
+                                 <content>
+                                    <VBox fx:id="healthCat12" prefHeight="200.0" prefWidth="100.0" />
+                                 </content></TitledPane>
                           </panes>
                         </Accordion>
-                        <BorderPane fx:id="healthRightSide" prefWidth="1500.0">
+                        <BorderPane prefWidth="1500.0">
                            <top>
                               <HBox fx:id="healthTopBox" spacing="20.0" BorderPane.alignment="CENTER">
                                  <children>
                                     <VBox prefWidth="300.0">
                                        <children>
-                                          <Label fx:id="lblHealthCategory" styleClass="HeaderText" text="Kategori" />
-                                          <Label fx:id="lblHealthSubCategory" styleClass="SubHeaderText" text="Underkategori" />
+                                          <Label fx:id="lblHealthCategory" styleClass="SubHeaderText" text="Kategori" wrapText="true" />
                                        </children>
                                     </VBox>
                                     <ComboBox fx:id="cbHealthSaveAs" onAction="#onHealthSaveAsSelection" prefWidth="150.0" promptText="Gem som..." />
@@ -411,7 +446,7 @@
                                     </VBox>
                                  </children>
                                  <BorderPane.margin>
-                                    <Insets left="50.0" />
+                                    <Insets />
                                  </BorderPane.margin>
                               </VBox>
                            </center>

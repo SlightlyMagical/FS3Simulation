@@ -1,5 +1,6 @@
 package bll;
 
+import be.Categories.HealthCondition;
 import be.Citizen;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -29,5 +30,10 @@ public class BLLManager implements IBLLManager{
     @Override
     public void updateCitizenGeneralInfo(Citizen selectedPatient) {
         dalManager.updatePatientGeneralInfo(selectedPatient);
+    }
+
+    @Override
+    public boolean saveHealthCondition(HealthCondition healthCondition, int citizenID) {
+        return dalManager.saveHealthCondition(healthCondition, citizenID);
     }
 }

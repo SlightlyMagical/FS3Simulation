@@ -57,4 +57,8 @@ public class HealthCondition {
     public int getId() {
         return id;
     }
+
+    public int getCatID() {
+        return catID;
+    }
 }
