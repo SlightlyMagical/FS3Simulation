@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="700.0" prefWidth="1200.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CitizenController">
+<BorderPane prefHeight="700.0" prefWidth="1200.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CitizenController">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
@@ -346,51 +346,51 @@
                           <panes>
                             <TitledPane text="1. Funktionsniveau">
                                  <content>
-                                    <VBox fx:id="healthCat1" prefHeight="200.0" prefWidth="100.0" />
+                                    <VBox fx:id="healthCat1" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                                  </content></TitledPane>
                             <TitledPane text="2. Bevægeapparat">
                                  <content>
-                                    <VBox fx:id="healthCat2" prefHeight="200.0" prefWidth="100.0" />
+                                    <VBox fx:id="healthCat2" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                                  </content></TitledPane>
                             <TitledPane text="3. Ernæring">
                                  <content>
-                                    <VBox fx:id="healthCat3" prefHeight="200.0" prefWidth="100.0" />
+                                    <VBox fx:id="healthCat3" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                                  </content></TitledPane>
                               <TitledPane layoutX="10.0" layoutY="80.0" text="4. Hud og slimhinder">
                                  <content>
-                                    <VBox fx:id="healthCat4" prefHeight="200.0" prefWidth="100.0" />
+                                    <VBox fx:id="healthCat4" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                                  </content></TitledPane>
                               <TitledPane layoutX="10.0" layoutY="551.0" text="5. Kommunikation">
                                  <content>
-                                    <VBox fx:id="healthCat5" prefHeight="200.0" prefWidth="100.0" />
+                                    <VBox fx:id="healthCat5" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                                  </content></TitledPane>
                               <TitledPane layoutX="10.0" layoutY="551.0" text="6. Psykosociale forhold">
                                  <content>
-                                    <VBox fx:id="healthCat6" prefHeight="200.0" prefWidth="100.0" />
+                                    <VBox fx:id="healthCat6" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                                  </content></TitledPane>
                               <TitledPane layoutX="10.0" layoutY="185.0" text="7. Respiration og cirkulation">
                                  <content>
-                                    <VBox fx:id="healthCat7" prefHeight="200.0" prefWidth="100.0" />
+                                    <VBox fx:id="healthCat7" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                                  </content></TitledPane>
                               <TitledPane layoutX="10.0" layoutY="551.0" text="8. Seksualitet">
                                  <content>
-                                    <VBox fx:id="healthCat8" prefHeight="200.0" prefWidth="100.0" />
+                                    <VBox fx:id="healthCat8" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                                  </content></TitledPane>
                               <TitledPane layoutX="10.0" layoutY="551.0" text="9. Smerter og sanseindtryk">
                                  <content>
-                                    <VBox fx:id="healthCat9" prefHeight="200.0" prefWidth="100.0" />
+                                    <VBox fx:id="healthCat9" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                                  </content></TitledPane>
                               <TitledPane layoutX="10.0" layoutY="551.0" text="10. Søvn og hvile">
                                  <content>
-                                    <VBox fx:id="healthCat10" prefHeight="200.0" prefWidth="100.0" />
+                                    <VBox fx:id="healthCat10" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                                  </content></TitledPane>
                               <TitledPane layoutX="10.0" layoutY="551.0" text="11. Viden og udvikling">
                                  <content>
-                                    <VBox fx:id="healthCat11" prefHeight="200.0" prefWidth="100.0" />
+                                    <VBox fx:id="healthCat11" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                                  </content></TitledPane>
                               <TitledPane layoutX="10.0" layoutY="551.0" text="12. Udskillelse af affaldsstoffer">
                                  <content>
-                                    <VBox fx:id="healthCat12" prefHeight="200.0" prefWidth="100.0" />
+                                    <VBox fx:id="healthCat12" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                                  </content></TitledPane>
                           </panes>
                         </Accordion>
@@ -416,7 +416,7 @@
                                     <VBox fx:id="healthPotentialBox" disable="true">
                                        <children>
                                           <Label text="Fagligt notat:" />
-                                          <TextArea fx:id="txtHealthProfNote" maxHeight="100.0" maxWidth="600.0" minHeight="100.0">
+                                          <TextArea fx:id="txtHealthProfNote" maxHeight="100.0" maxWidth="600.0" minHeight="100.0" wrapText="true">
                                              <VBox.margin>
                                                 <Insets />
                                              </VBox.margin>
@@ -432,11 +432,11 @@
                                        </VBox.margin>
                                        <children>
                                           <Label text="Nuværende vurdering:" />
-                                          <TextArea fx:id="txtHealthCurrentAssessment" maxHeight="100.0" maxWidth="600.0" minHeight="100.0" />
+                                          <TextArea fx:id="txtHealthCurrentAssessment" maxHeight="100.0" maxWidth="600.0" minHeight="100.0" wrapText="true" />
                                           <HBox alignment="CENTER_LEFT" spacing="20.0">
                                              <children>
                                                 <Label text="Forventet niveau:" />
-                                                <ComboBox fx:id="cbHealthExpectedLevel" promptText="Vælg forventet niveau" />
+                                                <ComboBox fx:id="cbHealthExpectedLevel" onAction="#onHealthExpectedChanged" promptText="Vælg forventet niveau" />
                                              </children>
                                              <VBox.margin>
                                                 <Insets top="20.0" />

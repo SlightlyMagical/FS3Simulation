@@ -3,7 +3,6 @@ package gui.controller;
 import be.Categories.GeneralInfo;
 import be.Categories.HealthCondition;
 import be.Categories.InfoTemplates;
-import be.Citizen;
 import be.enums.Status;
 import gui.SceneManager;
 import gui.model.CitizenModel;
@@ -66,6 +65,8 @@ public class CitizenController implements Initializable {
     public VBox healthCat11;
     public VBox healthCat12;
 
+    private Label lastLabel;
+
     private CitizenModel citizenModel;
     private HealthCondition selectedHealthCondition;
 
@@ -92,12 +93,24 @@ public class CitizenController implements Initializable {
     }
 
     private void setUpHealthConditions() {
+        healthTextFormatter(txtHealthProfNote);
+        healthTextFormatter(txtHealthCurrentAssessment);
          for (HealthCondition h : InfoTemplates.getHealthConditionArrayList()){
              HealthCondition value = citizenModel.getCurrentCitizen().getHealthConditions().get(h.getName());
              if (value.getStatus() != Status.NOT_RELEVANT){
                 Label label = new Label(value.getName());
                 label.setOnMouseClicked(event -> {
+                    if (healthUnsavedChanges)
+                        if (!DialogHandler.confirmationAlert(Messages.UNSAVED_CHANGES))
+                            return;
+
+                    resetHealthFields();
+                    if (lastLabel != null)
+                        lastLabel.setStyle("-fx-font-weight: normal");
+                    lastLabel = label;
+                    label.setStyle("-fx-font-weight: bold");
                     showConditionDetails(value);
+                    healthUnsavedChanges = false;
                 });
                 switch (value.getCatID()) {
                     case 1 -> healthCat1.getChildren().add(label);
@@ -141,9 +154,16 @@ public class CitizenController implements Initializable {
         return true;
     }
 
-    private void addTextFormatter(TextArea textArea){
+    private void infoTextFormatter(TextArea textArea){
         textArea.setTextFormatter(new TextFormatter<String>(change -> {
             infoUnsavedChanges = true;
+            return change ;
+        }));
+    }
+
+    private void healthTextFormatter(TextArea textArea){
+        textArea.setTextFormatter(new TextFormatter<String>(change -> {
+            healthUnsavedChanges = true;
             return change ;
         }));
     }
@@ -225,12 +245,12 @@ public class CitizenController implements Initializable {
         // Mestring
         tipMestring.setText(generalInfoHashMap.get("Mestring").getDescription());
         textMestring.setText(generalInfoHashMap.get("Mestring").getText());
-        addTextFormatter(textMestring);
+        infoTextFormatter(textMestring);
 
         // Motivation
         tipMotivation.setText(generalInfoHashMap.get("Motivation").getDescription());
         textMotivation.setText(generalInfoHashMap.get("Motivation").getText());
-        addTextFormatter(textMotivation);
+        infoTextFormatter(textMotivation);
 
         // Ressourcer
         tipRessourcer.setText(generalInfoHashMap.get("Ressourcer").getDescription());
@@ -239,42 +259,42 @@ public class CitizenController implements Initializable {
         // Roller
         tipRoller.setText(generalInfoHashMap.get("Roller").getDescription());
         textRoller.setText(generalInfoHashMap.get("Roller").getText());
-        addTextFormatter(textRoller);
+        infoTextFormatter(textRoller);
 
         // Vaner
         tipVaner.setText(generalInfoHashMap.get("Vaner").getDescription());
         textVaner.setText(generalInfoHashMap.get("Vaner").getText());
-        addTextFormatter(textVaner);
+        infoTextFormatter(textVaner);
 
         // Job
         tipJob.setText(generalInfoHashMap.get("Uddannelse og job").getDescription());
         textJob.setText(generalInfoHashMap.get("Uddannelse og job").getText());
-        addTextFormatter(textJob);
+        infoTextFormatter(textJob);
 
         // Livshistorie
         tipLiv.setText(generalInfoHashMap.get("Livshistorie").getDescription());
         textLiv.setText(generalInfoHashMap.get("Livshistorie").getText());
-        addTextFormatter(textLiv);
+        infoTextFormatter(textLiv);
 
         // Helbredsoplysninger
         tipHelbred.setText(generalInfoHashMap.get("Helbredsoplysninger").getDescription());
         textHelbred.setText(generalInfoHashMap.get("Helbredsoplysninger").getText());
-        addTextFormatter(textHelbred);
+        infoTextFormatter(textHelbred);
 
         // Hjælpemidler
         tipHjaelp.setText(generalInfoHashMap.get("Hjælpemidler").getDescription());
         textHjaelp.setText(generalInfoHashMap.get("Hjælpemidler").getText());
-        addTextFormatter(textHjaelp);
+        infoTextFormatter(textHjaelp);
 
         // Boligens indretning
         tipBolig.setText(generalInfoHashMap.get("Boligens indretning").getDescription());
         textBolig.setText(generalInfoHashMap.get("Boligens indretning").getText());
-        addTextFormatter(textBolig);
+        infoTextFormatter(textBolig);
 
         // Netværk
         tipNetvaerk.setText(generalInfoHashMap.get("Netværk").getDescription());
         textNetvaerk.setText(generalInfoHashMap.get("Netværk").getText());
-        addTextFormatter(textNetvaerk);
+        infoTextFormatter(textNetvaerk);
     }
 
     public void handleLogout(ActionEvent actionEvent) {
@@ -294,6 +314,8 @@ public class CitizenController implements Initializable {
         if(citizenModel.saveHealthCondition(healthCondition)){
             resetHealthFields();
             healthUnsavedChanges = false;
+            lastLabel.setStyle("-fx-font-weight: normal;");
+            DialogHandler.informationAlert(Messages.SAVE_SUCCESSFUL);
         }
         else
             DialogHandler.informationAlert(Messages.SAVE_UNSUCCESSFUL);
@@ -303,6 +325,7 @@ public class CitizenController implements Initializable {
     @FXML
     private void onHealthSaveAsSelection() {
         healthSaveButton.setDisable(false);
+        healthUnsavedChanges = true;
         int index = cbHealthSaveAs.getSelectionModel().getSelectedIndex();
         switch (index){
             case 0 -> {
@@ -314,6 +337,11 @@ public class CitizenController implements Initializable {
                 healthExtendedBox.setDisable(true);
             }
         }
+    }
+
+    @FXML
+    private void onHealthExpectedChanged(){
+        healthUnsavedChanges = true;
     }
 
     private void resetHealthFields(){

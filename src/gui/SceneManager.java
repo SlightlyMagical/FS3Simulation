@@ -21,6 +21,7 @@ public class SceneManager {
             Parent root = FXMLLoader.load(SceneManager.class.getResource("view/Login.fxml"));
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
+            primaryStage.centerOnScreen();
             root.requestFocus();
 
         } catch (IOException e) {
@@ -32,6 +33,7 @@ public class SceneManager {
         try{
             Parent root = FXMLLoader.load(SceneManager.class.getResource("view/StudentView.fxml"));
             primaryStage.setScene(new Scene(root));
+            primaryStage.centerOnScreen();
             root.requestFocus();
 
         } catch (IOException e) {
@@ -44,6 +46,7 @@ public class SceneManager {
         try{
             Parent root = FXMLLoader.load(SceneManager.class.getResource("view/CitizenOverview.fxml"));
             primaryStage.setScene(new Scene(root));
+            primaryStage.centerOnScreen();
             root.requestFocus();
 
         } catch (IOException e) {
