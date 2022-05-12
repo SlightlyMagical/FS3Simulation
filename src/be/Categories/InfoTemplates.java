@@ -327,6 +327,123 @@ public class InfoTemplates {
         functionalAbilityHashMap.put(functionalAbility1.getName(), functionalAbility1);
         functionalAbilityArrayList.add(functionalAbility1);
 
+        FunctionalAbility functionalAbility2 = new FunctionalAbility(2, 1, "Gå på toilet");
+        functionalAbilityHashMap.put(functionalAbility2.getName(), functionalAbility2);
+        functionalAbilityArrayList.add(functionalAbility2);
+
+        FunctionalAbility functionalAbility3 = new FunctionalAbility(3, 1, "Kropspleje");
+        functionalAbilityHashMap.put(functionalAbility3.getName(), functionalAbility3);
+        functionalAbilityArrayList.add(functionalAbility3);
+
+        FunctionalAbility functionalAbility4 = new FunctionalAbility(4, 1, "Af- og påklædning");
+        functionalAbilityHashMap.put(functionalAbility4.getName(), functionalAbility4);
+        functionalAbilityArrayList.add(functionalAbility4);
+
+        FunctionalAbility functionalAbility5 = new FunctionalAbility(5, 1, "Spise");
+        functionalAbilityHashMap.put(functionalAbility5.getName(), functionalAbility5);
+        functionalAbilityArrayList.add(functionalAbility5);
+
+        FunctionalAbility functionalAbility6 = new FunctionalAbility(6, 1, "Drikke");
+        functionalAbilityHashMap.put(functionalAbility6.getName(), functionalAbility6);
+        functionalAbilityArrayList.add(functionalAbility6);
+
+        FunctionalAbility functionalAbility7 = new FunctionalAbility(7, 1, "Varetage egen sundhed");
+        functionalAbilityHashMap.put(functionalAbility7.getName(), functionalAbility7);
+        functionalAbilityArrayList.add(functionalAbility7);
+
+        FunctionalAbility functionalAbility8 = new FunctionalAbility(8, 1, "Fødeindtagelse");
+        functionalAbilityHashMap.put(functionalAbility8.getName(), functionalAbility8);
+        functionalAbilityArrayList.add(functionalAbility8);
+
+        FunctionalAbility functionalAbility9 = new FunctionalAbility(9, 2, "Udføre daglige rutiner");
+        functionalAbilityHashMap.put(functionalAbility9.getName(), functionalAbility9);
+        functionalAbilityArrayList.add(functionalAbility9);
+
+        FunctionalAbility functionalAbility10 = new FunctionalAbility(10, 2, "Skaffe sig varer og tjenesteydelser");
+        functionalAbilityHashMap.put(functionalAbility10.getName(), functionalAbility10);
+        functionalAbilityArrayList.add(functionalAbility10);
+
+        FunctionalAbility functionalAbility11 = new FunctionalAbility(11, 2, "Lave mad");
+        functionalAbilityHashMap.put(functionalAbility11.getName(), functionalAbility11);
+        functionalAbilityArrayList.add(functionalAbility11);
+
+        FunctionalAbility functionalAbility12 = new FunctionalAbility(12, 2, "Lave husligt arbejde");
+        functionalAbilityHashMap.put(functionalAbility12.getName(), functionalAbility12);
+        functionalAbilityArrayList.add(functionalAbility12);
+
+        FunctionalAbility functionalAbility13 = new FunctionalAbility(13, 3, "Ændre kropsstilling");
+        functionalAbilityHashMap.put(functionalAbility13.getName(), functionalAbility13);
+        functionalAbilityArrayList.add(functionalAbility13);
+
+        FunctionalAbility functionalAbility14 = new FunctionalAbility(14, 3, "Forflytte sig");
+        functionalAbilityHashMap.put(functionalAbility14.getName(), functionalAbility14);
+        functionalAbilityArrayList.add(functionalAbility14);
+
+        FunctionalAbility functionalAbility15 = new FunctionalAbility(15, 3, "Løfte og bære");
+        functionalAbilityHashMap.put(functionalAbility15.getName(), functionalAbility15);
+        functionalAbilityArrayList.add(functionalAbility15);
+
+        FunctionalAbility functionalAbility16 = new FunctionalAbility(16, 3, "Gå");
+        functionalAbilityHashMap.put(functionalAbility16.getName(), functionalAbility16);
+        functionalAbilityArrayList.add(functionalAbility16);
+
+        FunctionalAbility functionalAbility17 = new FunctionalAbility(17, 3, "Bevæge sig omkring");
+        functionalAbilityHashMap.put(functionalAbility17.getName(), functionalAbility17);
+        functionalAbilityArrayList.add(functionalAbility17);
+
+        FunctionalAbility functionalAbility18 = new FunctionalAbility(18, 3, "Færden i forskellige omgivelser");
+        functionalAbilityHashMap.put(functionalAbility18.getName(), functionalAbility18);
+        functionalAbilityArrayList.add(functionalAbility18);
+
+        FunctionalAbility functionalAbility19 = new FunctionalAbility(19, 3, "Bruge transportmidler");
+        functionalAbilityHashMap.put(functionalAbility19.getName(), functionalAbility19);
+        functionalAbilityArrayList.add(functionalAbility19);
+
+        FunctionalAbility functionalAbility20 = new FunctionalAbility(20, 3, "Udholdenhed");
+        functionalAbilityHashMap.put(functionalAbility20.getName(), functionalAbility20);
+        functionalAbilityArrayList.add(functionalAbility20);
+
+        FunctionalAbility functionalAbility21 = new FunctionalAbility(21, 3, "Muskelstyrke");
+        functionalAbilityHashMap.put(functionalAbility21.getName(), functionalAbility21);
+        functionalAbilityArrayList.add(functionalAbility21);
+
+        FunctionalAbility functionalAbility22 = new FunctionalAbility(22, 4, "Tilegne sig færdigheder");
+        functionalAbilityHashMap.put(functionalAbility22.getName(), functionalAbility22);
+        functionalAbilityArrayList.add(functionalAbility22);
+
+        FunctionalAbility functionalAbility23 = new FunctionalAbility(23, 4, "Problemløsning");
+        functionalAbilityHashMap.put(functionalAbility23.getName(), functionalAbility23);
+        functionalAbilityArrayList.add(functionalAbility23);
+
+        FunctionalAbility functionalAbility24 = new FunctionalAbility(24, 4, "Anvende kommunikationsudstyr og-teknikker");
+        functionalAbilityHashMap.put(functionalAbility24.getName(), functionalAbility24);
+        functionalAbilityArrayList.add(functionalAbility24);
+
+        FunctionalAbility functionalAbility25 = new FunctionalAbility(25, 4, "Orienteringsevne");
+        functionalAbilityHashMap.put(functionalAbility25.getName(), functionalAbility25);
+        functionalAbilityArrayList.add(functionalAbility25);
+
+        FunctionalAbility functionalAbility26 = new FunctionalAbility(26, 4, "Energi og handlekraft");
+        functionalAbilityHashMap.put(functionalAbility26.getName(), functionalAbility26);
+        functionalAbilityArrayList.add(functionalAbility26);
+
+        FunctionalAbility functionalAbility27 = new FunctionalAbility(27, 4, "Hukommelse");
+        functionalAbilityHashMap.put(functionalAbility27.getName(), functionalAbility27);
+        functionalAbilityArrayList.add(functionalAbility27);
+
+        FunctionalAbility functionalAbility28 = new FunctionalAbility(28, 4, "Følelsesfunktioner");
+        functionalAbilityHashMap.put(functionalAbility28.getName(), functionalAbility28);
+        functionalAbilityArrayList.add(functionalAbility28);
+
+        FunctionalAbility functionalAbility29 = new FunctionalAbility(29, 4, "Overordnede kognitive funktioner");
+        functionalAbilityHashMap.put(functionalAbility29.getName(), functionalAbility29);
+        functionalAbilityArrayList.add(functionalAbility29);
+
+        FunctionalAbility functionalAbility30 = new FunctionalAbility(30, 5, "Have lønnet beskæftigelse");
+        functionalAbilityHashMap.put(functionalAbility30.getName(), functionalAbility30);
+        functionalAbilityArrayList.add(functionalAbility30);
+
+
     }
 
 }
