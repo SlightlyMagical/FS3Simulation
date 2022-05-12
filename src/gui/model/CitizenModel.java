@@ -1,5 +1,6 @@
 package gui.model;
 
+import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
 import bll.BLLManager;
@@ -42,6 +43,14 @@ public class CitizenModel {
     public boolean saveHealthCondition(HealthCondition healthCondition) {
         if (bllManager.saveHealthCondition(healthCondition, currentCitizen.getId())){
             currentCitizen.addHealthCondition(healthCondition);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean saveFunctionalAbility(FunctionalAbility functionalAbility) {
+        if (bllManager.saveFunctionalAbility(functionalAbility, currentCitizen.getId())){
+            currentCitizen.addFunctionalAbility(functionalAbility);
             return true;
         }
         return false;

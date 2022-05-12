@@ -1,12 +1,10 @@
 package dal.dao;
 
+import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
 
-import be.Usertypes.User;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public interface ICitizenDAO {
 
@@ -21,4 +19,6 @@ public interface ICitizenDAO {
     void updatePatientGeneralInfo(Citizen selectedPatient);
 
     boolean saveHealthCondition(HealthCondition healthCondition, int citizenID);
+
+    boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID);
 }

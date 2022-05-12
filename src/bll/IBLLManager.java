@@ -1,5 +1,6 @@
 package bll;
 
+import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
 import be.Usertypes.User;
@@ -18,4 +19,5 @@ public interface IBLLManager {
 
     boolean saveHealthCondition(HealthCondition healthCondition, int citizenID);
 
+    boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID);
 }

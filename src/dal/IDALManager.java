@@ -1,5 +1,6 @@
 package dal;
 
+import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
 import be.Usertypes.User;
@@ -15,4 +16,6 @@ public interface IDALManager {
     void updatePatientGeneralInfo(Citizen selectedPatient);
 
     boolean saveHealthCondition(HealthCondition healthCondition, int citizenID);
+
+    boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID);
 }

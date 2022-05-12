@@ -1,5 +1,6 @@
 package gui.controller;
 
+import be.Categories.FunctionalAbility;
 import be.Categories.GeneralInfo;
 import be.Categories.HealthCondition;
 import be.Categories.InfoTemplates;
@@ -64,11 +65,25 @@ public class CitizenController implements Initializable {
     public VBox healthCat10;
     public VBox healthCat11;
     public VBox healthCat12;
+    public VBox functionCat1;
+    public VBox functionCat2;
+    public VBox functionCat3;
+    public VBox functionCat4;
+    public VBox functionCat5;
+    public ComboBox cbFunctionNniveau;
+    public ComboBox cbFunctionFniveau;
+    public TextArea txtFunctionNote;
+    public ComboBox<String> cbFunctionExecution;
+    public ComboBox<String> cbFunctionLimitation;
+    public TextArea txtFunctionWishes;
+    public TextArea txtFunctionObservation;
+    public Label lblFunctionCategory;
 
     private Label lastLabel;
 
     private CitizenModel citizenModel;
     private HealthCondition selectedHealthCondition;
+    private FunctionalAbility selectedFunctionalAbility;
 
     private boolean infoUnsavedChanges = false;
     private boolean healthUnsavedChanges = false;
@@ -355,4 +370,16 @@ public class CitizenController implements Initializable {
         txtHealthCurrentAssessment.clear();
     }
 
+    @FXML
+    private void saveFunctionalAbility() {
+        FunctionalAbility functionalAbility = selectedFunctionalAbility;
+        functionalAbility.setStatus(Status.ACTIVE);
+        //insert current level and expected level
+        functionalAbility.setProfessionalNote(txtFunctionNote.getText());
+        functionalAbility.setTaskExecution(cbFunctionExecution.getSelectionModel().getSelectedItem());
+        functionalAbility.setExecutionLimitation(cbFunctionLimitation.getSelectionModel().getSelectedItem());
+        functionalAbility.setCitizenGoal(txtFunctionWishes.getText());
+
+
+    }
 }

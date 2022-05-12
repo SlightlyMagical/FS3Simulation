@@ -1,5 +1,6 @@
 package bll;
 
+import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
 import be.Usertypes.User;
@@ -35,5 +36,10 @@ public class BLLManager implements IBLLManager{
     @Override
     public boolean saveHealthCondition(HealthCondition healthCondition, int citizenID) {
         return dalManager.saveHealthCondition(healthCondition, citizenID);
+    }
+
+    @Override
+    public boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID) {
+        return dalManager.saveFunctionalAbility(functionalAbility, citizenID);
     }
 }

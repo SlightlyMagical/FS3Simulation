@@ -200,4 +200,9 @@ public class CitizenDAO implements ICitizenDAO{
         }
         return false;
     }
+
+    @Override
+    public boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID) {
+        return false;
+    }
 }

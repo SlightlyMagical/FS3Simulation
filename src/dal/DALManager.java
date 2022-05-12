@@ -1,5 +1,6 @@
 package dal;
 
+import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
 import be.Usertypes.User;
@@ -43,5 +44,10 @@ public class DALManager implements IDALManager{
     @Override
     public boolean saveHealthCondition(HealthCondition healthCondition, int citizenID) {
         return citizenDAO.saveHealthCondition(healthCondition, citizenID);
+    }
+
+    @Override
+    public boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID) {
+        return citizenDAO.saveFunctionalAbility(functionalAbility, citizenID);
     }
 }
