@@ -120,6 +120,8 @@ public class CitizenDAO implements ICitizenDAO{
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
+                    int id = rs.getInt("AbilityID");
+                    int catID = rs.getInt("AbilityCatID");
                     String name = rs.getString("AbilityName");
                     int currentLevel = rs.getInt("CurrentLevel");
                     int expectedLevel = rs.getInt("ExpectedLevel");
@@ -127,8 +129,7 @@ public class CitizenDAO implements ICitizenDAO{
                     String citizenExecution = rs.getString("CitizenExecution");
                     boolean citizenLimitation = rs.getBoolean("CitizenLimitation");
                     String citizenGoal = rs.getString("CitizenGoal");
-                    FunctionalAbility functionalAbility = new FunctionalAbility(name, Status.ACTIVE, currentLevel, expectedLevel, abilityNote,
-                            citizenExecution, citizenLimitation, citizenGoal);
+                    FunctionalAbility functionalAbility = new FunctionalAbility(id, catID, name);
                     c.addFunctionalAbility(functionalAbility);
                 }
             }

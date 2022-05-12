@@ -8,6 +8,7 @@ public class InfoTemplates {
     private static HashMap<String, HealthCondition> healthConditionHashMap;
     private static HashMap<String, FunctionalAbility> functionalAbilityHashMap;
     private static ArrayList<HealthCondition> healthConditionArrayList;
+    private static ArrayList<FunctionalAbility> functionalAbilityArrayList;
 
     public static HashMap<String, GeneralInfo> getGeneralInfoHashMap(){
         if (generalInfoHashMap == null)
@@ -320,8 +321,13 @@ public class InfoTemplates {
 
     public static void makeFunctionalAbilityHashMap(){
         functionalAbilityHashMap = new HashMap<>();
-    }
+        functionalAbilityArrayList = new ArrayList<>();
 
+        FunctionalAbility functionalAbility1 = new FunctionalAbility(1, 1, "Vaske sig");
+        functionalAbilityHashMap.put(functionalAbility1.getName(), functionalAbility1);
+        functionalAbilityArrayList.add(functionalAbility1);
+
+    }
 
 }
 

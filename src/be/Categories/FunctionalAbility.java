@@ -3,6 +3,8 @@ package be.Categories;
 import be.enums.Status;
 
 public class FunctionalAbility {
+    private int id;
+    private int catID;
     private final String name;
     private Status status;
     private int currentLevel;
@@ -13,15 +15,10 @@ public class FunctionalAbility {
     private String citizenGoal;
 
 
-    public FunctionalAbility(String name, Status status, int currentLevel, int expectedLevel, String professionalNote, String taskExecution, boolean executionLimitation, String citizenGoal) {
+    public FunctionalAbility(int id, int catID, String name) {
         this.name = name;
-        this.status = status;
-        this.currentLevel = currentLevel;
-        this.expectedLevel = expectedLevel;
-        this.professionalNote = professionalNote;
-        this.taskExecution = taskExecution;
-        this.executionLimitation = executionLimitation;
-        this.citizenGoal = citizenGoal;
+        this.id = id;
+        this.catID = catID;
     }
 
     public String getName() {
