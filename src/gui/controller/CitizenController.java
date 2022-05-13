@@ -81,9 +81,11 @@ public class CitizenController implements Initializable {
     public TextArea txtFunctionObservation;
     public Label lblFunctionCategory;
 
-    private Label lastLabel;
+    private Label lastLabelHealth;
+    private Label lastLabelFunction;
 
     private CitizenModel citizenModel;
+
     private HealthCondition selectedHealthCondition;
     private FunctionalAbility selectedFunctionalAbility;
 
@@ -105,8 +107,6 @@ public class CitizenController implements Initializable {
         setUpGeneralInfo();
         setUpHealthConditions();
         setUpFunctionalAbilities();
-
-
     }
 
     private void setUpHealthConditions() {
@@ -123,10 +123,9 @@ public class CitizenController implements Initializable {
                         if (!DialogHandler.confirmationAlert(Messages.UNSAVED_CHANGES))
                             return;
 
-                    resetHealthFields();
-                    if (lastLabel != null)
-                        lastLabel.setStyle("-fx-font-weight: normal");
-                    lastLabel = label;
+                    if (lastLabelHealth != null)
+                        lastLabelHealth.setStyle("-fx-font-weight: normal");
+                    lastLabelHealth = label;
                     label.setStyle("-fx-font-weight: bold");
                     showConditionDetails(value);
                     healthUnsavedChanges = false;
@@ -164,6 +163,64 @@ public class CitizenController implements Initializable {
         txtHealthProfNote.setText(healthCondition.getProfessionalNote());
         txtHealthCurrentAssessment.setText(healthCondition.getCurrentAssessment());
         cbHealthExpectedLevel.getSelectionModel().select(healthCondition.getExpectedLevel());
+    }
+
+    private void setUpFunctionalAbilities() {
+        cbFunctionNniveau.getItems().addAll("0", "1", "2", "3", "4");
+        cbFunctionNniveau.setCellFactory(listView -> new StringImageCell());
+        cbFunctionNniveau.setButtonCell(new StringImageCell());
+
+        cbFunctionFniveau.getItems().addAll("0", "1", "2", "3", "4");
+        cbFunctionFniveau.setCellFactory(listView -> new StringImageCell());
+        cbFunctionFniveau.setButtonCell(new StringImageCell());
+
+        cbFunctionExecution.getItems().addAll("Udfører selv", "Udfører dele selv", "Udfører ikke selv", "Ikke relevant");
+
+        cbFunctionLimitation.getItems().addAll("Oplever ikke begrænsninger", "Oplever begrænsninger");
+
+        for (FunctionalAbility f : InfoTemplates.getFunctionalAbilityArrayList()){
+            FunctionalAbility value = citizenModel.getCurrentCitizen().getFunctionalAbilities().get(f.getName());
+            if (value.getStatus() != Status.NOT_RELEVANT){
+                Label label = new Label(value.getName());
+                label.setStyle("-fx-wrap-text: true");
+                label.setOnMouseClicked(event -> {
+                    if (healthUnsavedChanges)
+                        if (!DialogHandler.confirmationAlert(Messages.UNSAVED_CHANGES))
+                            return;
+
+                    if (lastLabelFunction != null)
+                        lastLabelFunction.setStyle("-fx-font-weight: normal; -fx-wrap-text: true");
+                    lastLabelFunction = label;
+                    label.setStyle("-fx-font-weight: bold; -fx-wrap-text: true");
+                    showAbilityDetails(value);
+                    abilityUnsavedChanges = false;
+                });
+                switch (value.getCatID()) {
+                    case 1 -> functionCat1.getChildren().add(label);
+                    case 2 -> functionCat2.getChildren().add(label);
+                    case 3 -> functionCat3.getChildren().add(label);
+                    case 4 -> functionCat4.getChildren().add(label);
+                    case 5 -> functionCat5.getChildren().add(label);
+                }
+            }
+        }
+    }
+
+    private void showAbilityDetails(FunctionalAbility functionalAbility) {
+        this.selectedFunctionalAbility = functionalAbility;
+        lblFunctionCategory.setText(functionalAbility.getName());
+        Status status = functionalAbility.getStatus();
+        if (status == null)
+            return;
+
+        cbFunctionNniveau.getSelectionModel().select(functionalAbility.getCurrentLevel());
+        cbFunctionFniveau.getSelectionModel().select(functionalAbility.getExpectedLevel());
+        txtFunctionNote.setText(functionalAbility.getProfessionalNote());
+        cbFunctionExecution.getSelectionModel().select(functionalAbility.getTaskExecution());
+        cbFunctionLimitation.getSelectionModel().select(functionalAbility.getExecutionLimitation());
+        txtFunctionWishes.setText(functionalAbility.getCitizenGoal());
+        txtFunctionObservation.setText(functionalAbility.getObservation());
+
     }
 
     private boolean checkIfSaved() {
@@ -331,9 +388,7 @@ public class CitizenController implements Initializable {
         healthCondition.setCurrentAssessment(txtHealthCurrentAssessment.getText());
         healthCondition.setExpectedLevel(cbHealthExpectedLevel.getSelectionModel().getSelectedItem());
         if (citizenModel.saveHealthCondition(healthCondition)) {
-            resetHealthFields();
             healthUnsavedChanges = false;
-            lastLabel.setStyle("-fx-font-weight: normal;");
             DialogHandler.informationAlert(Messages.SAVE_SUCCESSFUL);
         } else
             DialogHandler.informationAlert(Messages.SAVE_UNSUCCESSFUL);
@@ -362,17 +417,6 @@ public class CitizenController implements Initializable {
         healthUnsavedChanges = true;
     }
 
-    private void resetHealthFields() {
-        cbHealthSaveAs.getSelectionModel().clearSelection();
-        cbHealthExpectedLevel.getSelectionModel().clearSelection();
-        healthSaveButton.setDisable(true);
-        healthPotentialBox.setDisable(true);
-        healthExtendedBox.setDisable(true);
-        lblHealthCategory.setText("");
-        txtHealthProfNote.clear();
-        txtHealthCurrentAssessment.clear();
-    }
-
     @FXML
     private void saveFunctionalAbility() {
         FunctionalAbility functionalAbility = selectedFunctionalAbility;
@@ -383,17 +427,13 @@ public class CitizenController implements Initializable {
         functionalAbility.setTaskExecution(cbFunctionExecution.getSelectionModel().getSelectedItem());
         functionalAbility.setExecutionLimitation(cbFunctionLimitation.getSelectionModel().getSelectedItem());
         functionalAbility.setCitizenGoal(txtFunctionWishes.getText());
+        if (citizenModel.saveFunctionalAbility(functionalAbility)) {
+            abilityUnsavedChanges = false;
+            DialogHandler.informationAlert(Messages.SAVE_SUCCESSFUL);
+        } else
+            DialogHandler.informationAlert(Messages.SAVE_UNSUCCESSFUL);
     }
 
-    private void setUpFunctionalAbilities() {
-        cbFunctionNniveau.getItems().addAll("0", "1", "2", "3", "4");
-        cbFunctionNniveau.setCellFactory(listView -> new StringImageCell());
-        cbFunctionNniveau.setButtonCell(new StringImageCell());
-
-        cbFunctionFniveau.getItems().addAll("0", "1", "2", "3", "4");
-        cbFunctionFniveau.setCellFactory(listView -> new StringImageCell());
-        cbFunctionFniveau.setButtonCell(new StringImageCell());
-    }
 
     static class StringImageCell extends ListCell<String> {
         Label label;

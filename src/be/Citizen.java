@@ -20,7 +20,7 @@ public class Citizen {
         this.firstName = firstName;
         this.lastName = lastName;
         this.healthConditions = InfoTemplates.getHealthConditionHashMap();
-        this.functionalAbilities = new HashMap<>();
+        this.functionalAbilities = InfoTemplates.getFunctionalAbilityHashMap();
     }
 
     public int getId() {

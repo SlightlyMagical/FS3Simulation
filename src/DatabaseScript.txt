@@ -177,3 +177,10 @@ VALUES
 (42, 12, 'Problemer med afføringsinkontinens'),
 (43, 12, 'Problemer med mave og tarm')
 GO
+
+INSERT INTO FunctionalAbility (AbilityID, AbilityCatID, AbilityName)
+VALUES
+(1, 1, 'Vaske sig'),
+(2, 1, 'Gå på toilet'),
+(3, 1, ''),
+GO

@@ -24,7 +24,7 @@ public class InfoTemplates {
 
     public static HashMap<String, FunctionalAbility> getFunctionalAbilityHashMap(){
         if (functionalAbilityHashMap == null)
-            makeFunctionalAbilityHashMap();
+            makeFunctionalAbilityLists();
         return functionalAbilityHashMap;
     }
 
@@ -32,6 +32,12 @@ public class InfoTemplates {
         if (healthConditionArrayList == null)
             makeHealthConditionLists();
         return healthConditionArrayList;
+    }
+
+    public static ArrayList<FunctionalAbility> getFunctionalAbilityArrayList(){
+        if (functionalAbilityArrayList == null )
+            makeFunctionalAbilityLists();
+        return functionalAbilityArrayList;
     }
 
     public static void makeGeneralInfoHashMap(){
@@ -319,7 +325,7 @@ public class InfoTemplates {
         healthConditionArrayList.add(healthCondition43);
     }
 
-    public static void makeFunctionalAbilityHashMap(){
+    public static void makeFunctionalAbilityLists(){
         functionalAbilityHashMap = new HashMap<>();
         functionalAbilityArrayList = new ArrayList<>();
 
