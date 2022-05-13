@@ -209,7 +209,5 @@ VALUES
 (27, 4, 'Hukommelse'),
 (28, 4, 'Følelsesfunktioner'),
 (29, 4, 'Overordnede kognitive funktioner'),
-(30, 5, 'Have lønnet beskæftigelse'),
-
-
+(30, 5, 'Have lønnet beskæftigelse')
 GO
