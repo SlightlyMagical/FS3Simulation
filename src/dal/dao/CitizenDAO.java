@@ -123,13 +123,20 @@ public class CitizenDAO implements ICitizenDAO{
                     int id = rs.getInt("AbilityID");
                     int catID = rs.getInt("AbilityCatID");
                     String name = rs.getString("AbilityName");
-                    int currentLevel = rs.getInt("CurrentLevel");
-                    int expectedLevel = rs.getInt("ExpectedLevel");
-                    String abilityNote = rs.getString("AbilityNote");
-                    String citizenExecution = rs.getString("CitizenExecution");
-                    boolean citizenLimitation = rs.getBoolean("CitizenLimitation");
-                    String citizenGoal = rs.getString("CitizenGoal");
+                    int status = rs.getInt("AbilityStatus");
+
                     FunctionalAbility functionalAbility = new FunctionalAbility(id, catID, name);
+                    switch (status){
+                        case 1 -> functionalAbility.setStatus(Status.ACTIVE);
+                        case 2 -> functionalAbility.setStatus(Status.NOT_RELEVANT);
+                    }
+                    functionalAbility.setCurrentLevel(rs.getInt("CurrentLevel"));
+                    functionalAbility.setExpectedLevel(rs.getInt("ExpectedLevel"));
+                    functionalAbility.setProfessionalNote(rs.getString("AbilityNote"));
+                    functionalAbility.setTaskExecution(rs.getString("CitizenExecution"));
+                    functionalAbility.setExecutionLimitation(rs.getString("CitizenLimitation"));
+                    functionalAbility.setCitizenGoal(rs.getString("CitizenGoal"));
+
                     c.addFunctionalAbility(functionalAbility);
                 }
             }
@@ -174,11 +181,7 @@ public class CitizenDAO implements ICitizenDAO{
             ps.setInt(1, citizenID);
             ps.setInt(2, healthCondition.getId());
             ps.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
 
-        try (Connection connection = dbConnector.getConnection()) {
             String sql2 = "INSERT INTO CitizenCondition (CitizenID, ConditionID, ConditionStatus, ConditionNote, ConditionAssessment, ConditionExpectation) VALUES (?, ?, ?, ?, ?, ?);";
             PreparedStatement ps2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
             ps2.setInt(1, citizenID);

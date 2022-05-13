@@ -18,8 +18,8 @@ CREATE TABLE [Users] (
     Username NVARCHAR(20) NOT NULL,
     [Password] NVARCHAR(100) NOT NULL, -- Check size of hashed password
     UserType int NOT NULL,
-    FirstName NVARCHAR(50) NOT NULL,
-    LastName NVARCHAR(50) NOT NULL,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
     SchoolID int -- FK to school table
 )
 GO
@@ -40,6 +40,7 @@ GO
 
 CREATE TABLE FunctionalAbility (
     AbilityID int PRIMARY KEY,
+    AbilityCatID int NOT NULL,
     AbilityName NVARCHAR(50) NOT NULL
 )
 GO
@@ -67,6 +68,7 @@ CREATE TABLE CitizenCondition (
     ConditionNote NVARCHAR(MAX),
     ConditionAssessment NVARCHAR(MAX),
     ConditionExpectation NVARCHAR(20),
+    ConditionObservation NVARCHAR(MAX),
     CONSTRAINT PK_CitizenCondition PRIMARY KEY (CitizenID, ConditionID)
 )
 GO
@@ -74,12 +76,14 @@ GO
 CREATE TABLE CitizenAbility (
     CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
     AbilityID int FOREIGN KEY REFERENCES FunctionalAbility(AbilityID),
-    CurrentLevel int NOT NULL,
-    ExpectedLevel int NOT NULL,
-    AbilityNote NVARCHAR(MAX) NOT NULL,
-    CitizenExecution int NOT NULL,
-    CitizenLimitation BIT NOT NULL,
-    CitizenGoal NVARCHAR(MAX) NOT NULL,
+    AbilityStatus int NOT NULL,
+    CurrentLevel int,
+    ExpectedLevel int,
+    AbilityNote NVARCHAR(MAX),
+    CitizenExecution NVARCHAR(50),
+    CitizenLimitation NVARCHAR(50),
+    CitizenGoal NVARCHAR(MAX),
+    AbilityObservation NVARCHAR(MAX),
     CONSTRAINT PK_CitizenAbility PRIMARY KEY (CitizenID, AbilityID)
 )
 GO
