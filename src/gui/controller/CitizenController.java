@@ -14,6 +14,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -70,8 +72,8 @@ public class CitizenController implements Initializable {
     public VBox functionCat3;
     public VBox functionCat4;
     public VBox functionCat5;
-    public ComboBox cbFunctionNniveau;
-    public ComboBox cbFunctionFniveau;
+    public ComboBox<String> cbFunctionNniveau;
+    public ComboBox<String> cbFunctionFniveau;
     public TextArea txtFunctionNote;
     public ComboBox<String> cbFunctionExecution;
     public ComboBox<String> cbFunctionLimitation;
@@ -102,17 +104,19 @@ public class CitizenController implements Initializable {
         }
         setUpGeneralInfo();
         setUpHealthConditions();
-        
-        cbHealthSaveAs.getItems().addAll("Aktivt", "Potentielt");
-        cbHealthExpectedLevel.getItems().addAll("Mindskes", "Forbliver uændret", "Forsvinder");
+        setUpFunctionalAbilities();
+
+
     }
 
     private void setUpHealthConditions() {
+        cbHealthSaveAs.getItems().addAll("Aktivt", "Potentielt");
+        cbHealthExpectedLevel.getItems().addAll("Mindskes", "Forbliver uændret", "Forsvinder");
         healthTextFormatter(txtHealthProfNote);
         healthTextFormatter(txtHealthCurrentAssessment);
-         for (HealthCondition h : InfoTemplates.getHealthConditionArrayList()){
-             HealthCondition value = citizenModel.getCurrentCitizen().getHealthConditions().get(h.getName());
-             if (value.getStatus() != Status.NOT_RELEVANT){
+        for (HealthCondition h : InfoTemplates.getHealthConditionArrayList()) {
+            HealthCondition value = citizenModel.getCurrentCitizen().getHealthConditions().get(h.getName());
+            if (value.getStatus() != Status.NOT_RELEVANT) {
                 Label label = new Label(value.getName());
                 label.setOnMouseClicked(event -> {
                     if (healthUnsavedChanges)
@@ -145,13 +149,13 @@ public class CitizenController implements Initializable {
         }
     }
 
-    private void showConditionDetails(HealthCondition healthCondition){
+    private void showConditionDetails(HealthCondition healthCondition) {
         this.selectedHealthCondition = healthCondition;
         lblHealthCategory.setText(healthCondition.getName());
         Status status = healthCondition.getStatus();
         if (status == null)
             return;
-        if(status == Status.ACTIVE)
+        if (status == Status.ACTIVE)
             cbHealthSaveAs.getSelectionModel().select(0);
         else if (status == Status.POTENTIAL)
             cbHealthSaveAs.getSelectionModel().select(1);
@@ -162,24 +166,24 @@ public class CitizenController implements Initializable {
         cbHealthExpectedLevel.getSelectionModel().select(healthCondition.getExpectedLevel());
     }
 
-    private boolean checkIfSaved(){
+    private boolean checkIfSaved() {
         if (infoUnsavedChanges || healthUnsavedChanges || abilityUnsavedChanges)
             return DialogHandler.confirmationAlert(Messages.UNSAVED_CHANGES);
 
         return true;
     }
 
-    private void infoTextFormatter(TextArea textArea){
+    private void infoTextFormatter(TextArea textArea) {
         textArea.setTextFormatter(new TextFormatter<String>(change -> {
             infoUnsavedChanges = true;
-            return change ;
+            return change;
         }));
     }
 
-    private void healthTextFormatter(TextArea textArea){
+    private void healthTextFormatter(TextArea textArea) {
         textArea.setTextFormatter(new TextFormatter<String>(change -> {
             healthUnsavedChanges = true;
-            return change ;
+            return change;
         }));
     }
 
@@ -254,7 +258,7 @@ public class CitizenController implements Initializable {
         DialogHandler.informationAlert(Messages.SAVE_SUCCESSFUL);
     }
 
-    public void setUpGeneralInfo(){
+    public void setUpGeneralInfo() {
         HashMap<String, GeneralInfo> generalInfoHashMap = citizenModel.getCurrentCitizen().getGeneralInfo();
 
         // Mestring
@@ -319,20 +323,19 @@ public class CitizenController implements Initializable {
 
     public void saveHealthCondition(ActionEvent actionEvent) {
         HealthCondition healthCondition = selectedHealthCondition;
-        if(cbHealthSaveAs.getSelectionModel().getSelectedIndex() == 0)
+        if (cbHealthSaveAs.getSelectionModel().getSelectedIndex() == 0)
             healthCondition.setStatus(Status.ACTIVE);
         else
             healthCondition.setStatus(Status.POTENTIAL);
         healthCondition.setProfessionalNote(txtHealthProfNote.getText());
         healthCondition.setCurrentAssessment(txtHealthCurrentAssessment.getText());
         healthCondition.setExpectedLevel(cbHealthExpectedLevel.getSelectionModel().getSelectedItem());
-        if(citizenModel.saveHealthCondition(healthCondition)){
+        if (citizenModel.saveHealthCondition(healthCondition)) {
             resetHealthFields();
             healthUnsavedChanges = false;
             lastLabel.setStyle("-fx-font-weight: normal;");
             DialogHandler.informationAlert(Messages.SAVE_SUCCESSFUL);
-        }
-        else
+        } else
             DialogHandler.informationAlert(Messages.SAVE_UNSUCCESSFUL);
 
     }
@@ -342,7 +345,7 @@ public class CitizenController implements Initializable {
         healthSaveButton.setDisable(false);
         healthUnsavedChanges = true;
         int index = cbHealthSaveAs.getSelectionModel().getSelectedIndex();
-        switch (index){
+        switch (index) {
             case 0 -> {
                 healthPotentialBox.setDisable(false);
                 healthExtendedBox.setDisable(false);
@@ -355,11 +358,11 @@ public class CitizenController implements Initializable {
     }
 
     @FXML
-    private void onHealthExpectedChanged(){
+    private void onHealthExpectedChanged() {
         healthUnsavedChanges = true;
     }
 
-    private void resetHealthFields(){
+    private void resetHealthFields() {
         cbHealthSaveAs.getSelectionModel().clearSelection();
         cbHealthExpectedLevel.getSelectionModel().clearSelection();
         healthSaveButton.setDisable(true);
@@ -374,12 +377,57 @@ public class CitizenController implements Initializable {
     private void saveFunctionalAbility() {
         FunctionalAbility functionalAbility = selectedFunctionalAbility;
         functionalAbility.setStatus(Status.ACTIVE);
-        //insert current level and expected level
+        functionalAbility.setCurrentLevel(cbFunctionNniveau.getSelectionModel().getSelectedIndex());
+        functionalAbility.setExpectedLevel(cbFunctionFniveau.getSelectionModel().getSelectedIndex());
         functionalAbility.setProfessionalNote(txtFunctionNote.getText());
         functionalAbility.setTaskExecution(cbFunctionExecution.getSelectionModel().getSelectedItem());
         functionalAbility.setExecutionLimitation(cbFunctionLimitation.getSelectionModel().getSelectedItem());
         functionalAbility.setCitizenGoal(txtFunctionWishes.getText());
-
-
     }
+
+    private void setUpFunctionalAbilities() {
+        cbFunctionNniveau.getItems().addAll("0", "1", "2", "3", "4");
+        cbFunctionNniveau.setCellFactory(listView -> new StringImageCell());
+        cbFunctionNniveau.setButtonCell(new StringImageCell());
+
+        cbFunctionFniveau.getItems().addAll("0", "1", "2", "3", "4");
+        cbFunctionFniveau.setCellFactory(listView -> new StringImageCell());
+        cbFunctionFniveau.setButtonCell(new StringImageCell());
+    }
+
+    static class StringImageCell extends ListCell<String> {
+        Label label;
+        static HashMap<String, Image> pictures = new HashMap<>();
+
+        @Override
+        protected void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item == null || empty) {
+                setItem(null);
+                setGraphic(null);
+            } else {
+                setText(item);
+                ImageView image = getImageView(item);
+                label = new Label("", image);
+                setGraphic(label);
+            }
+        }
+
+        private static ImageView getImageView(String imageName) {
+            ImageView imageView = null;
+            switch (imageName) {
+                case "0", "1", "2", "3", "4" -> {
+                    if (!pictures.containsKey(imageName)) {
+                        pictures.put(imageName, new Image(imageName + ".png"));
+                    }
+                    imageView = new ImageView(pictures.get(imageName));
+                    imageView.setFitWidth(100);
+                    imageView.setFitHeight(100);
+                }
+                default -> imageName = null;
+            }
+            return imageView;
+        }
+    }
+
 }
