@@ -6,6 +6,7 @@ import be.Categories.HealthCondition;
 import be.Categories.InfoTemplates;
 import be.Citizen;
 import be.enums.Status;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.DBConnector;
 
 import java.io.IOException;
@@ -206,6 +207,36 @@ public class CitizenDAO implements ICitizenDAO{
 
     @Override
     public boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String sql = "DELETE  FROM CitizenAbility WHERE CitizenID = (?) AND AbilityID = (?);";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, citizenID);
+            ps.setInt(2, functionalAbility.getId());
+            ps.executeUpdate();
+
+            String sql2 = "INSERT INTO CitizenAbility (CitizenID, AbilityID, AbilityStatus, CurrentLevel, ExpectedLevel, AbilityNote, CitizenExecution, CitizenLimitation, CitizenGoal, AbilityObservation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement ps2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+            ps2.setInt(1, citizenID);
+            ps2.setInt(2, functionalAbility.getId());
+            switch (functionalAbility.getStatus()){
+                case ACTIVE -> ps2.setInt(3,1);
+                case NOT_RELEVANT -> ps2.setInt(3,2);
+            }
+            ps2.setInt(4, functionalAbility.getCurrentLevel());
+            ps2.setInt(5, functionalAbility.getExpectedLevel());
+            ps2.setString(6, functionalAbility.getProfessionalNote());
+            ps2.setString(7, functionalAbility.getTaskExecution());
+            ps2.setString(8, functionalAbility.getExecutionLimitation());
+            ps2.setString(9, functionalAbility.getCitizenGoal());
+            ps2.setString(10, functionalAbility.getObservation());
+
+            int affectedRows = ps2.executeUpdate();
+            if (affectedRows == 1)
+                return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
         return false;
     }
 }

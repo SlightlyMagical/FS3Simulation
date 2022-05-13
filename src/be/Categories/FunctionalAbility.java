@@ -13,6 +13,7 @@ public class FunctionalAbility {
     private String taskExecution;
     private String executionLimitation;
     private String citizenGoal;
+    private String observation;
 
     public int getId() {
         return id;
@@ -96,5 +97,13 @@ public class FunctionalAbility {
 
     public String getName() {
         return name;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
     }
 }
