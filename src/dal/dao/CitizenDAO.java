@@ -87,21 +87,17 @@ public class CitizenDAO implements ICitizenDAO{
                     String conditionNote = rs.getString("ConditionNote");
                     String conditionAssessment = rs.getString("ConditionAssessment");
                     String conditionExpectation = rs.getString("ConditionExpectation");
+                    String conditionObservation = rs.getString("ConditionObservation");
                     HealthCondition healthCondition = new HealthCondition(id, catID, name);
                     switch (status) {
                         case 1 -> healthCondition.setStatus(Status.ACTIVE);
                         case 2 -> healthCondition.setStatus(Status.POTENTIAL);
                         case 3 -> healthCondition.setStatus(Status.NOT_RELEVANT);
                     }
-                    if (conditionNote != null)
-                        healthCondition.setProfessionalNote(conditionNote);
-
-                    if (conditionAssessment != null)
-                        healthCondition.setCurrentAssessment(conditionAssessment);
-
-                    if (conditionExpectation != null)
-                        healthCondition.setExpectedLevel(conditionExpectation);
-
+                    healthCondition.setProfessionalNote(conditionNote);
+                    healthCondition.setCurrentAssessment(conditionAssessment);
+                    healthCondition.setExpectedLevel(conditionExpectation);
+                    healthCondition.setObservations(conditionObservation);
                     c.addHealthCondition(healthCondition);
                 }
             }
@@ -183,7 +179,7 @@ public class CitizenDAO implements ICitizenDAO{
             ps.setInt(2, healthCondition.getId());
             ps.executeUpdate();
 
-            String sql2 = "INSERT INTO CitizenCondition (CitizenID, ConditionID, ConditionStatus, ConditionNote, ConditionAssessment, ConditionExpectation) VALUES (?, ?, ?, ?, ?, ?);";
+            String sql2 = "INSERT INTO CitizenCondition (CitizenID, ConditionID, ConditionStatus, ConditionNote, ConditionAssessment, ConditionExpectation, ConditionObservation) VALUES (?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement ps2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
             ps2.setInt(1, citizenID);
             ps2.setInt(2, healthCondition.getId());
@@ -195,6 +191,7 @@ public class CitizenDAO implements ICitizenDAO{
             ps2.setString(4, healthCondition.getProfessionalNote());
             ps2.setString(5, healthCondition.getCurrentAssessment());
             ps2.setString(6, healthCondition.getExpectedLevel());
+            ps2.setString(7, healthCondition.getObservations());
 
             int affectedRows = ps2.executeUpdate();
             if (affectedRows == 1)
