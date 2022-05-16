@@ -9,6 +9,7 @@ public class HealthCondition {
     private String professionalNote;
     private String currentAssessment;
     private String expectedLevel;
+    private String observations;
     private Status status;
 
     public HealthCondition(int id, int catID, String name) {
@@ -60,5 +61,13 @@ public class HealthCondition {
 
     public int getCatID() {
         return catID;
+    }
+
+    public String getObservations() {
+        return observations;
+    }
+
+    public void setObservations(String observations) {
+        this.observations = observations;
     }
 }

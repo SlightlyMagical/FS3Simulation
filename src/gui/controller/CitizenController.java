@@ -80,6 +80,7 @@ public class CitizenController implements Initializable {
     public TextArea txtFunctionWishes;
     public TextArea txtFunctionObservation;
     public Label lblFunctionCategory;
+    public TextArea txtHealthObservations;
 
     private Label lastLabelHealth;
     private Label lastLabelFunction;
@@ -114,6 +115,7 @@ public class CitizenController implements Initializable {
         cbHealthExpectedLevel.getItems().addAll("Mindskes", "Forbliver uændret", "Forsvinder");
         healthTextFormatter(txtHealthProfNote);
         healthTextFormatter(txtHealthCurrentAssessment);
+        healthTextFormatter(txtHealthObservations);
         for (HealthCondition h : InfoTemplates.getHealthConditionArrayList()) {
             HealthCondition value = citizenModel.getCurrentCitizen().getHealthConditions().get(h.getName());
             if (value.getStatus() != Status.NOT_RELEVANT) {
@@ -149,6 +151,7 @@ public class CitizenController implements Initializable {
     }
 
     private void showConditionDetails(HealthCondition healthCondition) {
+        clearHealthFields();
         this.selectedHealthCondition = healthCondition;
         lblHealthCategory.setText(healthCondition.getName());
         Status status = healthCondition.getStatus();
@@ -163,6 +166,7 @@ public class CitizenController implements Initializable {
         txtHealthProfNote.setText(healthCondition.getProfessionalNote());
         txtHealthCurrentAssessment.setText(healthCondition.getCurrentAssessment());
         cbHealthExpectedLevel.getSelectionModel().select(healthCondition.getExpectedLevel());
+        txtHealthObservations.setText(healthCondition.getObservations());
     }
 
     private void setUpFunctionalAbilities() {
@@ -207,6 +211,7 @@ public class CitizenController implements Initializable {
     }
 
     private void showAbilityDetails(FunctionalAbility functionalAbility) {
+        clearFunctionFields();
         this.selectedFunctionalAbility = functionalAbility;
         lblFunctionCategory.setText(functionalAbility.getName());
         Status status = functionalAbility.getStatus();
@@ -387,6 +392,7 @@ public class CitizenController implements Initializable {
         healthCondition.setProfessionalNote(txtHealthProfNote.getText());
         healthCondition.setCurrentAssessment(txtHealthCurrentAssessment.getText());
         healthCondition.setExpectedLevel(cbHealthExpectedLevel.getSelectionModel().getSelectedItem());
+        healthCondition.setObservations(txtHealthObservations.getText());
         if (citizenModel.saveHealthCondition(healthCondition)) {
             healthUnsavedChanges = false;
             DialogHandler.informationAlert(Messages.SAVE_SUCCESSFUL);
@@ -468,6 +474,26 @@ public class CitizenController implements Initializable {
             }
             return imageView;
         }
+    }
+
+    private void clearHealthFields(){
+        cbHealthSaveAs.getSelectionModel().clearSelection();
+        txtHealthProfNote.clear();
+        txtHealthCurrentAssessment.clear();
+        cbHealthExpectedLevel.getSelectionModel().clearSelection();
+        healthPotentialBox.setDisable(true);
+        healthExtendedBox.setDisable(true);
+        txtHealthObservations.clear();
+    }
+
+    private void clearFunctionFields(){
+        cbFunctionNniveau.getSelectionModel().clearSelection();
+        cbFunctionFniveau.getSelectionModel().clearSelection();
+        txtFunctionNote.clear();
+        cbFunctionExecution.getSelectionModel().clearSelection();
+        cbFunctionLimitation.getSelectionModel().clearSelection();
+        txtFunctionWishes.clear();
+        txtFunctionObservation.clear();
     }
 
 }
