@@ -81,6 +81,7 @@ public class CitizenController implements Initializable {
     public TextArea txtFunctionObservation;
     public Label lblFunctionCategory;
     public TextArea txtHealthObservations;
+    public Label lblCitizenName;
 
     private Label lastLabelHealth;
     private Label lastLabelFunction;
@@ -108,6 +109,7 @@ public class CitizenController implements Initializable {
         setUpGeneralInfo();
         setUpHealthConditions();
         setUpFunctionalAbilities();
+        lblCitizenName.setText(citizenModel.getCurrentCitizen().getFullName());
     }
 
     private void setUpHealthConditions() {

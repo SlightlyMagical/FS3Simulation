@@ -1,139 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" stylesheets="@../../../out/production/FS3Simulation/gui/css/BaseStyle.css" vbarPolicy="ALWAYS" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17">
-   <content>
-      <VBox>
-         <children>
-            <TitledPane animated="false" collapsible="false" prefHeight="200.0" prefWidth="600.0" stylesheets="@../../../out/production/FS3Simulation/gui/css/BaseStyle.css" text="Generelle oplysninger">
-               <content>
-                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                     <children>
-                        <TitledPane animated="false" collapsible="false" prefHeight="181.0" prefWidth="578.0" text="Mestring">
-                           <content>
-                              <VBox prefHeight="200.0">
-                                 <children>
-                                    <Label text="Label" wrapText="true" />
-                                 </children>
-                              </VBox>
-                           </content>
-                        </TitledPane>
-                     </children>
-                  </VBox>
-               </content>
-            </TitledPane>
-            <TitledPane animated="false" collapsible="false" prefHeight="218.0" prefWidth="1182.0" text="Helbredstilstande">
-               <content>
-                  <VBox prefHeight="200.0" prefWidth="600.0" spacing="20.0">
-                     <children>
-                        <TitledPane animated="false" collapsible="false" text="Problemer med personlig pleje">
-                           <content>
-                              <HBox spacing="20.0">
-                                 <children>
-                                    <VBox prefHeight="200.0" prefWidth="366.0">
-                                       <children>
-                                          <Label text="Fagligt notat" />
-                                          <Label text="Label" />
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="366.0">
-                                       <children>
-                                          <Label text="Nuværende vurdering" />
-                                          <Label text="Label" />
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="200.0" prefWidth="366.0">
-                                       <children>
-                                          <Label text="Forventet niveau" />
-                                          <Label text="Label" />
-                                       </children>
-                                    </VBox>
-                                    <VBox layoutX="788.0" layoutY="23.0" prefHeight="200.0" prefWidth="366.0">
-                                       <children>
-                                          <Label text="Observationer" />
-                                          <Label text="Label" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </HBox>
-                           </content>
-                        </TitledPane>
-                     </children>
-                  </VBox>
-               </content>
-            </TitledPane>
-            <TitledPane animated="false" collapsible="false" text="Funktionsevnetilstande">
-               <content>
-                  <VBox prefHeight="200.0" prefWidth="600.0" spacing="20.0">
-                     <children>
-                        <TitledPane animated="false" collapsible="false" text="Vaske sig">
-                           <content>
-                              <VBox spacing="20.0">
-                                 <children>
-                                    <HBox spacing="20.0">
-                                       <children>
-                                          <VBox prefHeight="200.0" prefWidth="200.0">
-                                             <children>
-                                                <Label text="Nuværende niveau" />
-                                                <Label text="Label" />
-                                             </children>
-                                          </VBox>
-                                          <VBox prefHeight="200.0" prefWidth="200.0">
-                                             <children>
-                                                <Label text="Forventet niveau" />
-                                                <Label text="Label" />
-                                             </children>
-                                          </VBox>
-                                          <VBox prefWidth="600.0">
-                                             <children>
-                                                <Label text="Fagligt notat" />
-                                                <Label text="Label" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                    <HBox spacing="20.0">
-                                       <children>
-                                          <VBox prefHeight="200.0" prefWidth="200.0">
-                                             <children>
-                                                <Label text="Udførelse" />
-                                                <Label text="Label" />
-                                             </children>
-                                          </VBox>
-                                          <VBox prefHeight="200.0" prefWidth="200.0">
-                                             <children>
-                                                <Label text="Betydning af udførelse" wrapText="true" />
-                                                <Label text="Label" />
-                                             </children>
-                                          </VBox>
-                                          <VBox prefWidth="600.0">
-                                             <children>
-                                                <Label text="Borgerens ønsker og mål" wrapText="true" />
-                                                <Label text="Label" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                    <VBox prefWidth="1100.0">
-                                       <children>
-                                          <Label text="Observationer" />
-                                          <Label text="Label" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </VBox>
-                           </content>
-                        </TitledPane>
-                     </children>
-                  </VBox>
-               </content>
-            </TitledPane>
-         </children>
-      </VBox>
-   </content>
-</ScrollPane>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.OverviewController">
+   <children>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="1000.0">
+         <content>
+            <VBox>
+               <children>
+                  <TitledPane animated="false" collapsible="false" styleClass="generalRoot" text="Generelle oplysninger">
+                     <content>
+                        <VBox fx:id="vboxGeneral" spacing="20.0">
+                           <padding>
+                              <Insets bottom="40.0" left="20.0" right="20.0" top="40.0" />
+                           </padding></VBox>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" collapsible="false" styleClass="healthRoot" text="Helbredstilstande">
+                     <content>
+                        <VBox fx:id="vboxHealth" spacing="20.0">
+                           <padding>
+                              <Insets bottom="40.0" left="20.0" right="20.0" top="40.0" />
+                           </padding></VBox>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" collapsible="false" styleClass="functionRoot" text="Funktionsevnetilstande">
+                     <content>
+                        <VBox fx:id="vboxFunction" spacing="20.0">
+                           <padding>
+                              <Insets bottom="40.0" left="20.0" right="20.0" top="40.0" />
+                           </padding></VBox>
+                     </content>
+                  </TitledPane>
+               </children>
+            </VBox>
+         </content>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </ScrollPane>
+   </children>
+</VBox>

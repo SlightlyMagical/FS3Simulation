@@ -18,16 +18,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<BorderPane prefHeight="700.0" prefWidth="1200.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CitizenController">
+<BorderPane prefHeight="700.0" prefWidth="1200.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CitizenController">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab text="Generelle oplysninger">
+            <Tab text="Overblik">
                <content>
-                  <VBox spacing="10.0">
+                  <VBox>
+                     <children>
+                        <AnchorPane />
+                        <fx:include source="DataOverview.fxml" />
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+          <Tab styleClass="generalRoot" text="Generelle oplysninger">
+               <content>
+                  <VBox spacing="10.0" styleClass="generalRoot">
                      <children>
                         <ScrollPane fitToHeight="true" fitToWidth="true">
                            <content>
@@ -339,9 +349,9 @@
                      </children>
                   </VBox>
                </content></Tab>
-          <Tab text="Helbredstilstande">
+          <Tab styleClass="healthRoot" text="Helbredstilstande">
                <content>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="healthRoot">
                      <children>
                         <Accordion minWidth="300.0" prefWidth="400.0">
                           <panes>
@@ -456,6 +466,9 @@
                                              </children>
                                           </VBox>
                                        </children>
+                                       <padding>
+                                          <Insets bottom="20.0" />
+                                       </padding>
                                     </VBox>
                                  </content>
                               </ScrollPane>
@@ -470,9 +483,9 @@
                      </padding>
                   </HBox>
                </content></Tab>
-            <Tab text="Funktionsevnetilstande">
+            <Tab styleClass="functionRoot" text="Funktionsevnetilstande">
                <content>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="functionRoot">
                      <children>
                         <Accordion minWidth="300.0" prefWidth="400.0">
                           <panes>
@@ -623,6 +636,12 @@
          <children>
             <Button mnemonicParsing="false" onAction="#handleLogout" text="Log ud" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <Button layoutY="2.0" mnemonicParsing="false" onAction="#goBack" text="⬅ Tilbage til oversigt" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <HBox layoutX="192.0" spacing="10.0" AnchorPane.topAnchor="5.0">
+               <children>
+                  <Label text="Borger:" />
+                  <Label fx:id="lblCitizenName" text="Navn" />
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
    </top>

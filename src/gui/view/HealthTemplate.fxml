@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<TitledPane fx:id="titledPane" animated="false" collapsible="false" minHeight="100.0" text="Overskrift" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.HealthTemplateController">
+   <content>
+      <HBox minHeight="-Infinity" spacing="20.0">
+         <children>
+            <VBox prefWidth="366.0">
+               <children>
+                  <Label styleClass="SubHeaderText" text="Fagligt notat" />
+                  <Label fx:id="lblNote" />
+               </children>
+            </VBox>
+            <VBox prefWidth="366.0">
+               <children>
+                  <Label styleClass="SubHeaderText" text="Nuværende vurdering" />
+                  <Label fx:id="lblAssessment" />
+               </children>
+            </VBox>
+            <VBox prefWidth="366.0">
+               <children>
+                  <Label styleClass="SubHeaderText" text="Forventet niveau" />
+                  <Label fx:id="lblExpectedLevel" />
+               </children>
+            </VBox>
+            <VBox layoutX="788.0" layoutY="23.0" prefWidth="366.0">
+               <children>
+                  <Label styleClass="SubHeaderText" text="Observationer" />
+                  <Label fx:id="lblObservations" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </content>
+</TitledPane>

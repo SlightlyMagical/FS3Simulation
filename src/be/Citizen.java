@@ -36,7 +36,7 @@ public class Citizen {
     }
 
     public String getFullName() {
-        return firstName + "" + lastName;
+        return firstName + " " + lastName;
     }
 
     public HashMap<String, GeneralInfo> getGeneralInfo() {

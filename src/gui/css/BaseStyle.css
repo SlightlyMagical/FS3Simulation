@@ -1,7 +1,7 @@
 .root{
     -fx-font-size: 12pt;
     -fx-font-family: System;
-    -fx-base: #75abbd;
+    -fx-base: #98c0cd;
     -fx-background: white;
 }
 
@@ -18,3 +18,17 @@
     -fx-font-weight: bold;
 }
 
+.generalRoot{
+    -fx-base: #bfe699;
+    -fx-background: white;
+}
+
+.healthRoot{
+    -fx-base: #99b4e6;
+    -fx-background: white;
+}
+
+.functionRoot{
+    -fx-base: #faf28c;
+    -fx-background: white;
+}

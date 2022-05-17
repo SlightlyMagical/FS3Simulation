@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.VBox?>
+
+<TitledPane fx:id="titledPane" animated="false" collapsible="false" text="Overskrift" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.GeneralInfoTemplateController">
+   <content>
+      <VBox minHeight="-Infinity">
+         <children>
+            <Label fx:id="lblText" wrapText="true" />
+         </children>
+      </VBox>
+   </content>
+</TitledPane>

@@ -7,41 +7,44 @@ public class InfoTemplates {
     private static HashMap<String, GeneralInfo> generalInfoHashMap;
     private static HashMap<String, HealthCondition> healthConditionHashMap;
     private static HashMap<String, FunctionalAbility> functionalAbilityHashMap;
+    private static ArrayList<GeneralInfo> generalInfoArrayList;
     private static ArrayList<HealthCondition> healthConditionArrayList;
     private static ArrayList<FunctionalAbility> functionalAbilityArrayList;
 
+
     public static HashMap<String, GeneralInfo> getGeneralInfoHashMap(){
-        if (generalInfoHashMap == null)
-            makeGeneralInfoHashMap();
+        makeGeneralInfoLists();
         return generalInfoHashMap;
     }
 
     public static HashMap<String, HealthCondition> getHealthConditionHashMap(){
-        if (healthConditionHashMap == null)
-            makeHealthConditionLists();
+        makeHealthConditionLists();
         return healthConditionHashMap;
     }
 
     public static HashMap<String, FunctionalAbility> getFunctionalAbilityHashMap(){
-        if (functionalAbilityHashMap == null)
-            makeFunctionalAbilityLists();
+        makeFunctionalAbilityLists();
         return functionalAbilityHashMap;
     }
 
+    public static ArrayList<GeneralInfo> getGeneralInfoArrayList(){
+        makeGeneralInfoLists();
+        return generalInfoArrayList;
+    }
+
     public static ArrayList<HealthCondition> getHealthConditionArrayList() {
-        if (healthConditionArrayList == null)
-            makeHealthConditionLists();
+        makeHealthConditionLists();
         return healthConditionArrayList;
     }
 
     public static ArrayList<FunctionalAbility> getFunctionalAbilityArrayList(){
-        if (functionalAbilityArrayList == null )
-            makeFunctionalAbilityLists();
+        makeFunctionalAbilityLists();
         return functionalAbilityArrayList;
     }
 
-    public static void makeGeneralInfoHashMap(){
+    public static void makeGeneralInfoLists(){
         generalInfoHashMap = new HashMap<>();
+        generalInfoArrayList = new ArrayList<>();
 
         GeneralInfo mestring = new GeneralInfo(1,"Mestring",
                 """
@@ -49,6 +52,7 @@ public class InfoTemplates {
                         håndtering af livet/sygdommen – både
                         udfordringer og muligheder.""");
         generalInfoHashMap.put(mestring.getName(), mestring);
+        generalInfoArrayList.add(mestring);
 
         GeneralInfo motivation = new GeneralInfo(2, "Motivation",
                 """
@@ -56,6 +60,7 @@ public class InfoTemplates {
                         en bestemt måde eller går i gang
                         med/opretholder en opgave/indsats.""");
         generalInfoHashMap.put(motivation.getName(), motivation);
+        generalInfoArrayList.add(motivation);
 
         GeneralInfo ressourcer = new GeneralInfo(3, "Ressourcer",
                 """
@@ -68,6 +73,7 @@ public class InfoTemplates {
                         herunder tanker og måder at forholde sig
                         til situationer og andre mennesker på.""");
         generalInfoHashMap.put(ressourcer.getName(), ressourcer);
+        generalInfoArrayList.add(ressourcer);
 
         GeneralInfo roller = new GeneralInfo(4, "Roller",
                 """
@@ -75,6 +81,7 @@ public class InfoTemplates {
                         borgeren i forhold til familie, arbejde og
                         samfund.""");
         generalInfoHashMap.put(roller.getName(), roller);
+        generalInfoArrayList.add(roller);
 
         GeneralInfo vaner = new GeneralInfo(5, "Vaner",
                 """
@@ -85,6 +92,7 @@ public class InfoTemplates {
                         tiltalt på, kontakt med medmennesker og
                         relationer, måde at anskue verden på.""");
         generalInfoHashMap.put(vaner.getName(), vaner);
+        generalInfoArrayList.add(vaner);
 
         GeneralInfo job = new GeneralInfo(6, "Uddannelse og job",
                 """
@@ -93,6 +101,7 @@ public class InfoTemplates {
                         Fx folkeskole, erhvervsuddannelse og
                         videregående uddannelse.""");
         generalInfoHashMap.put(job.getName(), job);
+        generalInfoArrayList.add(job);
 
         GeneralInfo livshistorie = new GeneralInfo(7, "Livshistorie",
                 """
@@ -100,6 +109,7 @@ public class InfoTemplates {
                         væsentlige begivenheder, interesser og
                         gøremål igennem livet.""");
         generalInfoHashMap.put(livshistorie.getName(), livshistorie);
+        generalInfoArrayList.add(livshistorie);
 
         GeneralInfo netvaerk = new GeneralInfo(8, "Netværk",
                 """
@@ -114,6 +124,7 @@ public class InfoTemplates {
                         Privat netværk er familie, slægtning,
                         venner og bekendtskaber.""");
         generalInfoHashMap.put(netvaerk.getName(), netvaerk);
+        generalInfoArrayList.add(netvaerk);
 
         GeneralInfo helbred = new GeneralInfo(9, "Helbredsoplysninger",
                 """
@@ -127,6 +138,7 @@ public class InfoTemplates {
                         fx øjenlæge, tandlæge, fodterapeut eller
                         afdeling/ambulatorium.""");
         generalInfoHashMap.put(helbred.getName(), helbred);
+        generalInfoArrayList.add(helbred);
 
         GeneralInfo help = new GeneralInfo(10, "Hjælpemidler",
                 """
@@ -139,6 +151,7 @@ public class InfoTemplates {
                         genstande og hjælpemidler og teknologi
                         til personlig anvendelse).""");
         generalInfoHashMap.put(help.getName(), help);
+        generalInfoArrayList.add(help);
 
         GeneralInfo bolig = new GeneralInfo(11, "Boligens indretning",
                 """
@@ -146,6 +159,7 @@ public class InfoTemplates {
                         og omgivelser, der har betydning for
                         borgerens hverdagsliv og funktionsevne.""");
         generalInfoHashMap.put(bolig.getName(), bolig);
+        generalInfoArrayList.add(bolig);
     }
 
     public static void makeHealthConditionLists(){
