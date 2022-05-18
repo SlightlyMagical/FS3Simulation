@@ -7,4 +7,5 @@ public class Messages {
     public final static String SAVE_SUCCESSFUL = "Ændringerne er gemt";
     public final static String SAVE_UNSUCCESSFUL = "Ændringerne blev ikke gemt";
     public final static String NO_CITIZEN_SELECTED = "Ingen borger valgt";
+    public final static String EMPTY_FIELDS = "Alle felter skal udfyldes!";
 }

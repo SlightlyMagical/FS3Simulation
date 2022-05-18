@@ -65,7 +65,7 @@ public class TeacherController implements Initializable {
     }
 
     public void handleCreate(ActionEvent actionEvent) {
-        
+        SceneManager.showNewCitizenWindow();
     }
 
     public void handleEdit(ActionEvent actionEvent) {

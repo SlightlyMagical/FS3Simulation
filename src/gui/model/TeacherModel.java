@@ -51,7 +51,10 @@ public class TeacherModel {
     }
 
     public void createNewCitizen(Citizen citizen) {
+        citizen.setTeacherID(currentTeacher.getId());
+        citizen.setTemplate(true);
         bllManager.createNewCitizen(citizen, currentTeacher.getSchoolID());
         templateCitizens.add(citizen);
+        System.out.println(citizen.getId());
     }
 }

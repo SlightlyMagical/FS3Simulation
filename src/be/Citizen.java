@@ -21,6 +21,7 @@ public class Citizen {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.generalInfo = InfoTemplates.getGeneralInfoHashMap();
         this.healthConditions = InfoTemplates.getHealthConditionHashMap();
         this.functionalAbilities = InfoTemplates.getFunctionalAbilityHashMap();
     }

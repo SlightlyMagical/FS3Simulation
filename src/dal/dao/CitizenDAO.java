@@ -275,12 +275,14 @@ public class CitizenDAO implements ICitizenDAO{
             ps.setString(3, citizen.getLastName());
             ps.setBoolean(4, citizen.isTemplate());
             ps.setInt(5, citizen.getTeacherID());
-            ResultSet rs = ps.executeQuery();
+            int affectedRows = ps.executeUpdate();
 
-            if (rs.next())
-                citizen.setId(rs.getInt("CitizenID"));
+            if (affectedRows == 1) {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next())
+                    citizen.setId(rs.getInt(1));
 
-
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

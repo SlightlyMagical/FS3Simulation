@@ -3,6 +3,7 @@ package gui;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -79,5 +80,20 @@ public class SceneManager {
             showStudentScene();
         else if (lastScene.equals("Teacher"))
             showTeacherScene();
+    }
+
+    public static void showNewCitizenWindow(){
+        try{
+            Parent root = FXMLLoader.load(SceneManager.class.getResource("view/NewCitizenView.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.initOwner(primaryStage);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+            root.requestFocus();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
