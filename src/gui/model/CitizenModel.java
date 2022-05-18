@@ -11,14 +11,19 @@ import javafx.collections.ObservableList;
 import java.io.IOException;
 
 public class CitizenModel {
-    private ObservableList<Citizen> citizens;
-
     IBLLManager bllManager;
+
+    private ObservableList<Citizen> citizens;
+    private ObservableList<HealthCondition> notRelevantHealth;
+    private ObservableList<FunctionalAbility> notRelevantFunctions;
+
     private Citizen currentCitizen;
 
     public CitizenModel() throws IOException {
-        citizens = FXCollections.observableArrayList();
         bllManager = new BLLManager();
+        citizens = FXCollections.observableArrayList();
+        notRelevantHealth = FXCollections.observableArrayList();
+        notRelevantFunctions = FXCollections.observableArrayList();
     }
 
     public ObservableList<Citizen> getCitizens() {
@@ -37,6 +42,7 @@ public class CitizenModel {
     }
 
     public void getCitizensFromDatabase() throws IOException {
+        citizens.clear();
         citizens.addAll(bllManager.getAllCitizens(ModelManager.getInstance().getUserModel().currentUser.getId()));
     }
 
@@ -55,5 +61,14 @@ public class CitizenModel {
         }
         return false;
     }
+
+    public ObservableList<HealthCondition> getNotRelevantHealth() {
+        return notRelevantHealth;
+    }
+
+    public ObservableList<FunctionalAbility> getNotRelevantFunctions() {
+        return notRelevantFunctions;
+    }
+
 }
 
