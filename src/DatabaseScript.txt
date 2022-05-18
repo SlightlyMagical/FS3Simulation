@@ -51,7 +51,8 @@ CREATE TABLE Citizen (
     SchoolID int NOT NULL,
     FirstName NVARCHAR(50) NOT NULL,
     LastName NVARCHAR(50) NOT NULL,
-    IsTemplate BIT NOT NULL
+    IsTemplate BIT NOT NULL,
+    TeacherID int FOREIGN KEY REFERENCES Users(UserID)
 )
 GO
 

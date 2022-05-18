@@ -47,4 +47,9 @@ public class BLLManager implements IBLLManager{
     public ArrayList<Citizen> getCitizensOfSchool(int schoolID) {
         return dalManager.getCitizensOfSchool(schoolID);
     }
+
+    @Override
+    public void createNewCitizen(Citizen citizen, int schoolID) {
+        dalManager.createNewCitizen(citizen, schoolID);
+    }
 }

@@ -2,8 +2,12 @@ package gui.controller;
 
 import be.Citizen;
 import be.Usertypes.Student;
+import gui.SceneManager;
+import gui.model.CitizenModel;
 import gui.model.ModelManager;
 import gui.model.TeacherModel;
+import gui.model.util.DialogHandler;
+import gui.model.util.Messages;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
@@ -34,11 +38,13 @@ public class TeacherController implements Initializable {
     public PasswordField txtRepeatpassword;
 
     private TeacherModel teacherModel;
+    private CitizenModel citizenModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             this.teacherModel = ModelManager.getInstance().getTeacherModel();
+            this.citizenModel = ModelManager.getInstance().getCitizenModel();
             tcBankFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
             tcBankLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
             tvBank.setItems(teacherModel.getTemplateCitizens());
@@ -55,12 +61,21 @@ public class TeacherController implements Initializable {
     }
 
     public void handleLogout(ActionEvent actionEvent) {
+        SceneManager.logout();
     }
 
     public void handleCreate(ActionEvent actionEvent) {
+        
     }
 
     public void handleEdit(ActionEvent actionEvent) {
+        Citizen selectedCitizen = tvBank.getSelectionModel().getSelectedItem();
+        if (selectedCitizen != null) {
+            citizenModel.setCurrentCitizen(selectedCitizen);
+            SceneManager.showCitizenOverview();
+        }
+        else
+            DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
     public void handleDelete(ActionEvent actionEvent) {
@@ -73,6 +88,13 @@ public class TeacherController implements Initializable {
     }
 
     public void handleAssignedEdit(ActionEvent actionEvent) {
+        Citizen selectedCitizen = tvAssigned.getSelectionModel().getSelectedItem();
+        if (selectedCitizen != null) {
+            citizenModel.setCurrentCitizen(selectedCitizen);
+            SceneManager.showCitizenOverview();
+        }
+        else
+            DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
     public void handleAssignedDelete(ActionEvent actionEvent) {

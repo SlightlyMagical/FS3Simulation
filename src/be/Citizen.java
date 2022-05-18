@@ -8,13 +8,14 @@ import be.Categories.InfoTemplates;
 import java.util.HashMap;
 
 public class Citizen {
-    private final int id;
+    private int id;
     private final String firstName;
     private final String lastName;
     private boolean isTemplate;
     private HashMap<String, GeneralInfo> generalInfo;
     private final HashMap<String, HealthCondition> healthConditions;
     private final HashMap<String, FunctionalAbility> functionalAbilities;
+    private int teacherID;
 
     public Citizen(int id, String firstName, String lastName) {
         this.id = id;
@@ -26,6 +27,10 @@ public class Citizen {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -70,5 +75,13 @@ public class Citizen {
 
     public void setTemplate(boolean template) {
         isTemplate = template;
+    }
+
+    public int getTeacherID() {
+        return teacherID;
+    }
+
+    public void setTeacherID(int teacherID) {
+        this.teacherID = teacherID;
     }
 }

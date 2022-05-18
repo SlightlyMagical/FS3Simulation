@@ -11,6 +11,7 @@ public class SceneManager {
     private static Stage primaryStage;
     private static double height;
     private static double width;
+    private static String lastScene;
 
     public static void setPrimaryStage(Stage stage){
         primaryStage = stage;
@@ -35,6 +36,7 @@ public class SceneManager {
             primaryStage.setScene(new Scene(root));
             primaryStage.centerOnScreen();
             root.requestFocus();
+            lastScene = "Student";
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,6 +49,7 @@ public class SceneManager {
             primaryStage.setScene(new Scene(root));
             primaryStage.centerOnScreen();
             root.requestFocus();
+            lastScene = "Teacher";
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -71,4 +74,10 @@ public class SceneManager {
         //Clear the user data in models
     }
 
+    public static void goBack() {
+        if (lastScene.equals("Student"))
+            showStudentScene();
+        else if (lastScene.equals("Teacher"))
+            showTeacherScene();
+    }
 }

@@ -37,6 +37,7 @@ public class CitizenModel {
     public void setCurrentCitizen(Citizen currentCitizen) {
         this.currentCitizen = currentCitizen;
     }
+
     public void updatePatientGeneralInfo(Citizen selectedPatient) {
         bllManager.updateCitizenGeneralInfo(selectedPatient);
     }

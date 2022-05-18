@@ -20,4 +20,6 @@ public interface IDALManager {
     boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID);
 
     ArrayList<Citizen> getCitizensOfSchool(int schoolID);
+
+    void createNewCitizen(Citizen citizen, int schoolID);
 }

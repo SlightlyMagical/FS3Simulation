@@ -251,8 +251,10 @@ public class CitizenDAO implements ICitizenDAO{
                 String firstName = rs.getString("FirstName");
                 String lastName = rs.getString("LastName");
                 boolean isTemplate = rs.getBoolean("IsTemplate");
+                int teacherID = rs.getInt("TeacherID");
                 Citizen citizen = new Citizen(citizenID, firstName, lastName);
                 citizen.setTemplate(isTemplate);
+                citizen.setTeacherID(teacherID);
                 citizens.add(citizen);
 
             }
@@ -261,5 +263,26 @@ public class CitizenDAO implements ICitizenDAO{
             throwables.printStackTrace();
         }
         return citizens;
+    }
+
+    @Override
+    public void createNewCitizen(Citizen citizen, int schoolID) {
+        try (Connection connection = dbConnector.getConnection()) {
+            String sql = "INSERT INTO Citizen (SchoolID, FirstName, LastName, IsTemplate, TeacherID) VALUES (?, ?, ?, ?, ?);";
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, schoolID);
+            ps.setString(2, citizen.getFirstName());
+            ps.setString(3, citizen.getLastName());
+            ps.setBoolean(4, citizen.isTemplate());
+            ps.setInt(5, citizen.getTeacherID());
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next())
+                citizen.setId(rs.getInt("CitizenID"));
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

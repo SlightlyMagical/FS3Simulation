@@ -3,6 +3,7 @@ package dal.dao;
 import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
+import be.Usertypes.Teacher;
 
 import java.util.ArrayList;
 
@@ -23,4 +24,6 @@ public interface ICitizenDAO {
     boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID);
 
     ArrayList<Citizen> getCitizensOfSchool(int schoolID);
+
+    void createNewCitizen(Citizen citizen, int schoolID);
 }

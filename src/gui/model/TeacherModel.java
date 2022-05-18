@@ -49,4 +49,9 @@ public class TeacherModel {
     public ObservableList<Citizen> getStudentCitizens() {
         return studentCitizens;
     }
+
+    public void createNewCitizen(Citizen citizen) {
+        bllManager.createNewCitizen(citizen, currentTeacher.getSchoolID());
+        templateCitizens.add(citizen);
+    }
 }

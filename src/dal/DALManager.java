@@ -59,4 +59,9 @@ public class DALManager implements IDALManager{
         citizens = citizenDAO.getFunctionalAbilities(citizens);
         return citizens;
     }
+
+    @Override
+    public void createNewCitizen(Citizen citizen, int schoolID) {
+        citizenDAO.createNewCitizen(citizen, schoolID);
+    }
 }

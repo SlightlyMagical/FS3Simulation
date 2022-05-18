@@ -253,7 +253,7 @@ public class CitizenController implements Initializable {
 
     public void goBack(ActionEvent actionEvent) {
         if (checkIfSaved())
-            SceneManager.showStudentScene();
+            SceneManager.goBack();
     }
 
     public void saveGeneralInfo(ActionEvent actionEvent) {
