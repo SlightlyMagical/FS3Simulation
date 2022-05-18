@@ -48,9 +48,12 @@ GO
 -- Create citizen table
 CREATE TABLE Citizen (
     CitizenID int IDENTITY(1,1) PRIMARY KEY,
+    SchoolID int NOT NULL,
     FirstName NVARCHAR(50) NOT NULL,
     LastName NVARCHAR(50) NOT NULL,
+    IsTemplate BIT NOT NULL
 )
+GO
 
 -- Create Citizen to category table
 CREATE TABLE CitizenInfo (
@@ -109,8 +112,9 @@ VALUES ('student', 'pass', 3, 'firstname', 'lastname', 1)
 GO
 
 -- Test Citizen
-INSERT INTO Citizen (FirstName, LastName)
-VALUES ('Peter', 'Hansen')
+INSERT INTO Citizen (SchoolID, FirstName, LastName, IsTemplate)
+VALUES (1, 'Peter', 'Hansen', 0),
+(1, 'Martha', 'Poulsen', 1)
 GO
 INSERT INTO StudentCitizen (UserID, CitizenID)
 VALUES (3, 1)

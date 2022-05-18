@@ -236,4 +236,30 @@ public class CitizenDAO implements ICitizenDAO{
 
         return false;
     }
+
+    @Override
+    public ArrayList<Citizen> getCitizensOfSchool(int schoolID) {
+        ArrayList<Citizen> citizens = new ArrayList<>();
+        try(Connection connection = dbConnector.getConnection()){
+            String sql = "SELECT* FROM Citizen WHERE SchoolID = (?);";
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, schoolID);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int citizenID = rs.getInt("CitizenID");
+                String firstName = rs.getString("FirstName");
+                String lastName = rs.getString("LastName");
+                boolean isTemplate = rs.getBoolean("IsTemplate");
+                Citizen citizen = new Citizen(citizenID, firstName, lastName);
+                citizen.setTemplate(isTemplate);
+                citizens.add(citizen);
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return citizens;
+    }
 }

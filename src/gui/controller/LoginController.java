@@ -1,13 +1,15 @@
 package gui.controller;
 
+import be.Usertypes.Teacher;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.SceneManager;
-import gui.model.DialogHandler;
-import gui.model.Messages;
+import gui.model.util.DialogHandler;
+import gui.model.util.Messages;
 import gui.model.ModelManager;
 import gui.model.UserModel;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -40,7 +42,10 @@ public class LoginController {
             else{
                 switch (user.getUserType()){
                     case 1 -> System.out.println("admin login");
-                    case 2 -> System.out.println("teacher login");
+                    case 2 -> {
+                        ModelManager.getInstance().getTeacherModel().setCurrentTeacher((Teacher) user);
+                        SceneManager.showTeacherScene();
+                    }
                     case 3 -> {
                         ModelManager.getInstance().getCitizenModel().getCitizensFromDatabase();
                         SceneManager.showStudentScene();

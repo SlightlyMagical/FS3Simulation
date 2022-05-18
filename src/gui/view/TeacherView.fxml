@@ -106,7 +106,7 @@
                               </TableView>
                               <HBox alignment="TOP_RIGHT" spacing="10.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#handleAssignedStudenAdd" text="Tilføj elev" />
+                                    <Button mnemonicParsing="false" onAction="#handleAssignedStudentAdd" text="Tilføj elev" />
                                     <Button mnemonicParsing="false" onAction="#handleAssignedStudentRemove" text="Fjern elev" />
                                  </children>
                               </HBox>
@@ -135,7 +135,7 @@
                         <VBox prefWidth="400.0" spacing="10.0">
                            <children>
                               <Label text="Opret nyt elev login" />
-                              <TextField fx:id="txtfUsername" promptText="Brugernavn" />
+                              <TextField fx:id="txtUsername" promptText="Brugernavn" />
                               <PasswordField fx:id="txtPassword" promptText="Kodeord" />
                               <PasswordField fx:id="txtRepeatpassword" promptText="Gentag kodeord" />
                               <Button mnemonicParsing="false" onAction="#handleStudentCreateUser" text="Opret" />

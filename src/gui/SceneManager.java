@@ -41,6 +41,18 @@ public class SceneManager {
         }
     }
 
+    public static void showTeacherScene(){ //Student parameter?
+        try{
+            Parent root = FXMLLoader.load(SceneManager.class.getResource("view/TeacherView.fxml"));
+            primaryStage.setScene(new Scene(root));
+            primaryStage.centerOnScreen();
+            root.requestFocus();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void showCitizenOverview(){
         try{

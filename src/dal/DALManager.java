@@ -50,4 +50,13 @@ public class DALManager implements IDALManager{
     public boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID) {
         return citizenDAO.saveFunctionalAbility(functionalAbility, citizenID);
     }
+
+    @Override
+    public ArrayList<Citizen> getCitizensOfSchool(int schoolID) {
+        ArrayList<Citizen> citizens = citizenDAO.getCitizensOfSchool(schoolID);
+        citizens = citizenDAO.getGeneralInfo(citizens);
+        citizens = citizenDAO.getHealthConditions(citizens);
+        citizens = citizenDAO.getFunctionalAbilities(citizens);
+        return citizens;
+    }
 }

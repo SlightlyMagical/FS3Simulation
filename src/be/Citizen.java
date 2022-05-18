@@ -11,6 +11,7 @@ public class Citizen {
     private final int id;
     private final String firstName;
     private final String lastName;
+    private boolean isTemplate;
     private HashMap<String, GeneralInfo> generalInfo;
     private final HashMap<String, HealthCondition> healthConditions;
     private final HashMap<String, FunctionalAbility> functionalAbilities;
@@ -63,4 +64,11 @@ public class Citizen {
         this.functionalAbilities.put(functionalAbility.getName(), functionalAbility);
     }
 
+    public boolean isTemplate() {
+        return isTemplate;
+    }
+
+    public void setTemplate(boolean template) {
+        isTemplate = template;
+    }
 }

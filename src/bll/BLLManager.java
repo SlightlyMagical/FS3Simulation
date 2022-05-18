@@ -42,4 +42,9 @@ public class BLLManager implements IBLLManager{
     public boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID) {
         return dalManager.saveFunctionalAbility(functionalAbility, citizenID);
     }
+
+    @Override
+    public ArrayList<Citizen> getCitizensOfSchool(int schoolID) {
+        return dalManager.getCitizensOfSchool(schoolID);
+    }
 }

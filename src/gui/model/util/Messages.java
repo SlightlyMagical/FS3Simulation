@@ -1,4 +1,4 @@
-package gui.model;
+package gui.model.util;
 
 public class Messages {
     public final static String INVALID_LOGIN = "Forkert brugernavn eller kodeord";

@@ -18,4 +18,6 @@ public interface IDALManager {
     boolean saveHealthCondition(HealthCondition healthCondition, int citizenID);
 
     boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID);
+
+    ArrayList<Citizen> getCitizensOfSchool(int schoolID);
 }
