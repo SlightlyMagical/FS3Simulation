@@ -75,5 +75,8 @@ public class CitizenModel {
         bllManager.changeCitizenName(citizen);
     }
 
+    public void changeAssignedStudents(){
+        bllManager.changeAssignedStudents(currentCitizen);
+    }
 }
 

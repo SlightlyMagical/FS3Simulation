@@ -4,6 +4,9 @@ import be.Categories.FunctionalAbility;
 import be.Categories.GeneralInfo;
 import be.Categories.HealthCondition;
 import be.Categories.InfoTemplates;
+import be.Usertypes.Student;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.HashMap;
 
@@ -18,6 +21,8 @@ public class Citizen {
     private final HashMap<String, HealthCondition> healthConditions;
     private final HashMap<String, FunctionalAbility> functionalAbilities;
 
+    private final ObservableList<Student> assignedStudents;
+
 
     public Citizen(int id, String firstName, String lastName) {
         this.id = id;
@@ -26,6 +31,7 @@ public class Citizen {
         this.generalInfo = InfoTemplates.getGeneralInfoHashMap();
         this.healthConditions = InfoTemplates.getHealthConditionHashMap();
         this.functionalAbilities = InfoTemplates.getFunctionalAbilityHashMap();
+        this.assignedStudents = FXCollections.observableArrayList();
     }
 
     public int getId() {
@@ -102,5 +108,9 @@ public class Citizen {
 
     public void setSchoolID(int schoolID) {
         this.schoolID = schoolID;
+    }
+
+    public ObservableList<Student> getAssignedStudents() {
+        return assignedStudents;
     }
 }

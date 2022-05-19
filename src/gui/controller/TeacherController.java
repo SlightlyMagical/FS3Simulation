@@ -15,6 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,6 +53,13 @@ public class TeacherController implements Initializable {
             tcAssignedFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
             tcAssignedLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
             tvAssigned.setItems(teacherModel.getStudentCitizens());
+
+            tcStudentUser.setCellValueFactory(new PropertyValueFactory<>("username"));
+            tcStudentPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
+            tvStudentView.setItems(teacherModel.getStudents());
+
+            tcAssignedStudentUser.setCellValueFactory(new PropertyValueFactory<>("username"));
+            tcAssignedStudentPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
 
 
         } catch (IOException e) {
@@ -121,14 +129,19 @@ public class TeacherController implements Initializable {
             DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
-    public void handleAssignedStudentAdd(ActionEvent actionEvent) {
-    }
-
-    public void handleAssignedStudentRemove(ActionEvent actionEvent) {
+    public void handleAssignedStudents(ActionEvent actionEvent) {
+        Citizen selectedCitizen = tvAssigned.getSelectionModel().getSelectedItem();
+        if (selectedCitizen != null) {
+            citizenModel.setCurrentCitizen(selectedCitizen);
+            SceneManager.showAssignStudentsWindow();
+        }
     }
 
     public void handleStudentCreateUser(ActionEvent actionEvent) {
     }
 
 
+    public void showAssignedStudents(MouseEvent mouseEvent) {
+        tvAssignedStudent.setItems(tvAssigned.getSelectionModel().getSelectedItem().getAssignedStudents());
+    }
 }

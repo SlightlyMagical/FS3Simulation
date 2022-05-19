@@ -103,4 +103,20 @@ public class SceneManager {
             e.printStackTrace();
         }
     }
+
+    public static void showAssignStudentsWindow(){
+        try{
+            Parent root = FXMLLoader.load(SceneManager.class.getResource("view/AssignStudentsView.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.initOwner(primaryStage);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+            root.requestFocus();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

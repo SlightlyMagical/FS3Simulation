@@ -5,6 +5,7 @@ import be.Categories.GeneralInfo;
 import be.Categories.HealthCondition;
 import be.Categories.InfoTemplates;
 import be.Citizen;
+import be.Usertypes.Student;
 import be.enums.Status;
 import dal.DBConnector;
 
@@ -240,7 +241,7 @@ public class CitizenDAO implements ICitizenDAO{
     public ArrayList<Citizen> getCitizensOfSchool(int schoolID) {
         ArrayList<Citizen> citizens = new ArrayList<>();
         try(Connection connection = dbConnector.getConnection()){
-            String sql = "SELECT* FROM Citizen WHERE SchoolID = (?);";
+            String sql = "SELECT * FROM Citizen WHERE SchoolID = (?);";
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, schoolID);
             ResultSet rs = ps.executeQuery();
@@ -256,6 +257,28 @@ public class CitizenDAO implements ICitizenDAO{
                 citizen.setTeacherID(teacherID);
                 citizen.setSchoolID(schoolID);
                 citizens.add(citizen);
+            }
+
+            for (Citizen c : citizens) {
+                String sql2 = "SELECT * FROM StudentCitizen LEFT JOIN Users ON StudentCitizen.UserID = Users.UserID WHERE CitizenID = (?);";
+                PreparedStatement ps2 = connection.prepareStatement(sql2);
+                ps2.setInt(1, c.getId());
+
+                ResultSet rs2 = ps2.executeQuery();
+
+                while (rs2.next()){
+                    int id = rs2.getInt("UserID");
+                    String firstName = rs2.getString("FirstName");
+                    String lastName = rs2.getString("LastName");
+                    String username = rs2.getString("Username");
+                    String password = rs2.getString("Password");
+
+                    Student student = new Student(id, firstName, lastName, schoolID, 3);
+                    student.setUsername(username);
+                    student.setPassword(password);
+
+                    c.getAssignedStudents().add(student);
+                }
             }
 
         } catch (SQLException throwables) {
@@ -401,6 +424,27 @@ public class CitizenDAO implements ICitizenDAO{
             ps.setString(2, citizen.getLastName());
             ps.setInt(3, citizen.getId());
             ps.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void changeAssignedStudents(Citizen citizen) {
+        try (Connection connection = dbConnector.getConnection()){
+            String sql = "DELETE FROM StudentCitizen WHERE CitizenID = (?);";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, citizen.getId());
+            ps.executeUpdate();
+
+            for (Student s : citizen.getAssignedStudents()) {
+                String sql2 = "INSERT INTO StudentCitizen (CitizenID, UserID) VALUES (?, ?);";
+                PreparedStatement ps2 = connection.prepareStatement(sql2);
+                ps2.setInt(1, citizen.getId());
+                ps2.setInt(2, s.getId());
+                ps2.executeUpdate();
+            }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

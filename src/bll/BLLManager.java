@@ -3,6 +3,7 @@ package bll;
 import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
+import be.Usertypes.Student;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.DALManager;
@@ -49,6 +50,11 @@ public class BLLManager implements IBLLManager{
     }
 
     @Override
+    public ArrayList<Student> getAllStudents(int schoolID) {
+        return dalManager.getAllStudents(schoolID);
+    }
+
+    @Override
     public void createNewCitizen(Citizen citizen, int schoolID) {
         dalManager.createNewCitizen(citizen, schoolID);
     }
@@ -61,5 +67,10 @@ public class BLLManager implements IBLLManager{
     @Override
     public void changeCitizenName(Citizen citizen) {
         dalManager.changeCitizenName(citizen);
+    }
+
+    @Override
+    public void changeAssignedStudents(Citizen citizen) {
+        dalManager.changeAssignedStudents(citizen);
     }
 }

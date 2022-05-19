@@ -1,6 +1,7 @@
 package gui.model;
 
 import be.Citizen;
+import be.Usertypes.Student;
 import be.Usertypes.Teacher;
 import bll.BLLManager;
 import bll.IBLLManager;
@@ -13,17 +14,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class TeacherModel {
-    private IBLLManager bllManager;
+    private final IBLLManager bllManager;
+
+    private final ObservableList<Citizen> templateCitizens;
+    private final ObservableList<Citizen> studentCitizens;
+
+    private final ObservableList<Student> students;
+
     private Teacher currentTeacher;
-
-    private ObservableList<Citizen> templateCitizens;
-    private ObservableList<Citizen> studentCitizens;
-
 
     public TeacherModel() throws IOException {
         this.bllManager = new BLLManager();
         this.templateCitizens = FXCollections.observableArrayList();
         this.studentCitizens = FXCollections.observableArrayList();
+        this.students = FXCollections.observableArrayList();
+    }
+
+    public void setCurrentTeacher(Teacher currentTeacher) {
+        this.currentTeacher = currentTeacher;
+        getCitizensFromDatabase();
+        getStudentsFromDatabase();
     }
 
     public void getCitizensFromDatabase() {
@@ -38,10 +48,11 @@ public class TeacherModel {
         }
     }
 
-    public void setCurrentTeacher(Teacher currentTeacher) {
-        this.currentTeacher = currentTeacher;
-        getCitizensFromDatabase();
+    public void getStudentsFromDatabase(){
+        students.clear();
+        students.addAll(bllManager.getAllStudents(currentTeacher.getSchoolID()));
     }
+
 
     public ObservableList<Citizen> getTemplateCitizens() {
         return templateCitizens;
@@ -61,7 +72,11 @@ public class TeacherModel {
 
     public void createCitizenCopy(Citizen citizen, boolean isTemplate){
         Citizen newCitizen = bllManager.createCitizenCopy(citizen, isTemplate, currentTeacher.getId());
-
+        try {
+            ModelManager.getInstance().getCitizenModel().setCurrentCitizen(newCitizen);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         if(isTemplate){
             if (DialogHandler.confirmationAlert("Vil du ændre navnet på den kopirede borger?")){
                 SceneManager.showNewCitizenWindow(newCitizen);
@@ -71,9 +86,13 @@ public class TeacherModel {
         else {
             studentCitizens.add(newCitizen);
             if (DialogHandler.confirmationAlert("Vil du tildele borgeren til elever med det samme?")){
-
+                SceneManager.showAssignStudentsWindow();
             }
         }
 
+    }
+
+    public ObservableList<Student> getStudents() {
+        return students;
     }
 }

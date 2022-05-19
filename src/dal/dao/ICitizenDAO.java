@@ -35,4 +35,6 @@ public interface ICitizenDAO {
     void copyFunctionalAbilities(int originalID, int newID);
 
     void changeCitizenName(Citizen citizen);
+
+    void changeAssignedStudents(Citizen citizen);
 }

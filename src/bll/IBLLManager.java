@@ -3,6 +3,7 @@ package bll;
 import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
+import be.Usertypes.Student;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
@@ -12,7 +13,14 @@ public interface IBLLManager {
 
     User login(String username, String password) throws SQLServerException;
 
+
     ArrayList<Citizen> getAllCitizens(int userID);
+
+    ArrayList<Citizen> getCitizensOfSchool(int schoolID);
+
+    ArrayList<Student> getAllStudents(int schoolID);
+
+
 
     void updateCitizenGeneralInfo(Citizen selectedPatient);
 
@@ -20,11 +28,13 @@ public interface IBLLManager {
 
     boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID);
 
-    ArrayList<Citizen> getCitizensOfSchool(int schoolID);
+
 
     void createNewCitizen(Citizen citizen, int schoolID);
 
     Citizen createCitizenCopy(Citizen citizen, boolean isTemplate, int teacherID);
 
     void changeCitizenName(Citizen citizen);
+
+    void changeAssignedStudents(Citizen citizen);
 }

@@ -3,6 +3,7 @@ package dal;
 import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
+import be.Usertypes.Student;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.dao.CitizenDAO;
@@ -61,6 +62,11 @@ public class DALManager implements IDALManager{
     }
 
     @Override
+    public ArrayList<Student> getAllStudents(int schoolID) {
+        return userDAO.getAllStudents(schoolID);
+    }
+
+    @Override
     public void createNewCitizen(Citizen citizen, int schoolID) {
         citizenDAO.createNewCitizen(citizen, schoolID);
     }
@@ -84,5 +90,10 @@ public class DALManager implements IDALManager{
     @Override
     public void changeCitizenName(Citizen citizen) {
         citizenDAO.changeCitizenName(citizen);
+    }
+
+    @Override
+    public void changeAssignedStudents(Citizen citizen) {
+        citizenDAO.changeAssignedStudents(citizen);
     }
 }
