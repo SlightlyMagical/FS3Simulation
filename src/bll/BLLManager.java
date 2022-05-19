@@ -52,4 +52,14 @@ public class BLLManager implements IBLLManager{
     public void createNewCitizen(Citizen citizen, int schoolID) {
         dalManager.createNewCitizen(citizen, schoolID);
     }
+
+    @Override
+    public Citizen createCitizenCopy(Citizen citizen, boolean isTemplate, int teacherID) {
+        return dalManager.createCitizenCopy(citizen, isTemplate, teacherID);
+    }
+
+    @Override
+    public void changeCitizenName(Citizen citizen) {
+        dalManager.changeCitizenName(citizen);
+    }
 }

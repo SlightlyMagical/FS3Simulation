@@ -1,5 +1,7 @@
 package gui;
 
+import be.Citizen;
+import gui.controller.NewCitizenController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -31,7 +33,7 @@ public class SceneManager {
         }
     }
 
-    public static void showStudentScene(){ //Student parameter?
+    public static void showStudentScene(){
         try{
             Parent root = FXMLLoader.load(SceneManager.class.getResource("view/StudentView.fxml"));
             primaryStage.setScene(new Scene(root));
@@ -44,7 +46,7 @@ public class SceneManager {
         }
     }
 
-    public static void showTeacherScene(){ //Student parameter?
+    public static void showTeacherScene(){
         try{
             Parent root = FXMLLoader.load(SceneManager.class.getResource("view/TeacherView.fxml"));
             primaryStage.setScene(new Scene(root));
@@ -72,7 +74,6 @@ public class SceneManager {
 
     public static void logout(){
         showLoginScene();
-        //Clear the user data in models
     }
 
     public static void goBack() {
@@ -82,14 +83,20 @@ public class SceneManager {
             showTeacherScene();
     }
 
-    public static void showNewCitizenWindow(){
+    public static void showNewCitizenWindow(Citizen citizen){
         try{
-            Parent root = FXMLLoader.load(SceneManager.class.getResource("view/NewCitizenView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(SceneManager.class.getResource("view/NewCitizenView.fxml"));
+            Parent root = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.initOwner(primaryStage);
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
+
+            NewCitizenController controller = fxmlLoader.getController();
+            controller.setEdit(citizen);
+
+            stage.showAndWait();
             root.requestFocus();
 
         } catch (IOException e) {

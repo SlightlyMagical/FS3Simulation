@@ -6,7 +6,6 @@ import be.Categories.HealthCondition;
 import be.Categories.InfoTemplates;
 import be.Citizen;
 import be.enums.Status;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.DBConnector;
 
 import java.io.IOException;
@@ -253,10 +252,10 @@ public class CitizenDAO implements ICitizenDAO{
                 boolean isTemplate = rs.getBoolean("IsTemplate");
                 int teacherID = rs.getInt("TeacherID");
                 Citizen citizen = new Citizen(citizenID, firstName, lastName);
-                citizen.setTemplate(isTemplate);
+                citizen.setIsTemplate(isTemplate);
                 citizen.setTeacherID(teacherID);
+                citizen.setSchoolID(schoolID);
                 citizens.add(citizen);
-
             }
 
         } catch (SQLException throwables) {
@@ -287,4 +286,126 @@ public class CitizenDAO implements ICitizenDAO{
             throwables.printStackTrace();
         }
     }
+
+    @Override
+    public Citizen createCitizenCopy(Citizen citizen, boolean isTemplate, int teacherID) {
+        Citizen newCitizen = null;
+        try (Connection connection = dbConnector.getConnection()){
+            String sql = "INSERT INTO Citizen (SchoolID, FirstName, LastName, IsTemplate, TeacherID) VALUES (?, ?, ?, ?, ?);";
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, citizen.getSchoolID());
+            ps.setString(2, citizen.getFirstName());
+            ps.setString(3, citizen.getLastName());
+            ps.setBoolean(4, isTemplate);
+            ps.setInt(5, teacherID);
+
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            newCitizen = new Citizen(rs.getInt(1), citizen.getFirstName(), citizen.getLastName());
+            newCitizen.setSchoolID(citizen.getSchoolID());
+            newCitizen.setTeacherID(teacherID);
+            newCitizen.setIsTemplate(isTemplate);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return newCitizen;
+    }
+
+    @Override
+    public void copyGeneralInfo(int originalID, int newID) {
+        try (Connection connection = dbConnector.getConnection()){
+            String sql1 = "SELECT * FROM CitizenInfo WHERE CitizenID = (?);";
+            PreparedStatement ps1 = connection.prepareStatement(sql1);
+            ps1.setInt(1, originalID);
+            ResultSet rs1 = ps1.executeQuery();
+
+            while (rs1.next()){
+                String sql2 = "INSERT INTO CitizenInfo (CitizenID, InfoID, InfoText) VALUES (?, ?, ?)";
+                PreparedStatement ps2 = connection.prepareStatement(sql2);
+                ps2.setInt(1, newID);
+                ps2.setInt(2, rs1.getInt("InfoID"));
+                ps2.setString(3, rs1.getString("InfoText"));
+                ps2.executeUpdate();
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void copyHealthConditions(int originalID, int newID) {
+        try (Connection connection = dbConnector.getConnection()){
+            String sql1 = "SELECT * FROM CitizenCondition WHERE CitizenID = (?);";
+            PreparedStatement ps1 = connection.prepareStatement(sql1);
+            ps1.setInt(1, originalID);
+            ResultSet rs1 = ps1.executeQuery();
+
+            while (rs1.next()){
+                String sql2 = "INSERT INTO CitizenCondition (CitizenID, ConditionID, ConditionStatus, ConditionNote, ConditionAssessment, ConditionExpectation, ConditionObservation) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement ps2 = connection.prepareStatement(sql2);
+                ps2.setInt(1, newID);
+                ps2.setInt(2, rs1.getInt("ConditionID"));
+                ps2.setInt(3, rs1.getInt("ConditionStatus"));
+                ps2.setString(4, rs1.getString("ConditionNote"));
+                ps2.setString(5, rs1.getString("ConditionAssessment"));
+                ps2.setString(6, rs1.getString("ConditionExpectation"));
+                ps2.setString(7, rs1.getString("ConditionObservation"));
+                ps2.executeUpdate();
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void copyFunctionalAbilities(int originalID, int newID) {
+        try (Connection connection = dbConnector.getConnection()){
+            String sql1 = "SELECT * FROM CitizenAbility WHERE CitizenID = (?);";
+            PreparedStatement ps1 = connection.prepareStatement(sql1);
+            ps1.setInt(1, originalID);
+            ResultSet rs1 = ps1.executeQuery();
+
+            while (rs1.next()){
+                String sql2 = "INSERT INTO CitizenAbility (CitizenID, AbilityID, AbilityStatus, CurrentLevel, ExpectedLevel, AbilityNote, " +
+                        "CitizenExecution, CitizenLimitation, CitizenGoal, AbilityObservation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                PreparedStatement ps2 = connection.prepareStatement(sql2);
+                ps2.setInt(1, newID);
+                ps2.setInt(2, rs1.getInt("AbilityID"));
+                ps2.setInt(3, rs1.getInt("AbilityStatus"));
+                ps2.setInt(4, rs1.getInt("CurrentLevel"));
+                ps2.setInt(5, rs1.getInt("ExpectedLevel"));
+                ps2.setString(6, rs1.getString("AbilityNote"));
+                ps2.setString(7, rs1.getString("CitizenExecution"));
+                ps2.setString(8, rs1.getString("CitizenLimitation"));
+                ps2.setString(9, rs1.getString("CitizenGoal"));
+                ps2.setString(10, rs1.getString("AbilityObservation"));
+                ps2.executeUpdate();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public void changeCitizenName(Citizen citizen) {
+        try (Connection connection = dbConnector.getConnection()){
+            String sql = "UPDATE Citizen SET FirstName = (?), LastName = (?) WHERE CitizenID = (?);";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, citizen.getFirstName());
+            ps.setString(2, citizen.getLastName());
+            ps.setInt(3, citizen.getId());
+            ps.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
 }

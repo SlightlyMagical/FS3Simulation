@@ -9,13 +9,15 @@ import java.util.HashMap;
 
 public class Citizen {
     private int id;
-    private final String firstName;
-    private final String lastName;
+    private String firstName;
+    private String lastName;
     private boolean isTemplate;
+    private int teacherID;
+    private int schoolID;
     private HashMap<String, GeneralInfo> generalInfo;
     private final HashMap<String, HealthCondition> healthConditions;
     private final HashMap<String, FunctionalAbility> functionalAbilities;
-    private int teacherID;
+
 
     public Citizen(int id, String firstName, String lastName) {
         this.id = id;
@@ -38,8 +40,16 @@ public class Citizen {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getLastName() {
         return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getFullName() {
@@ -74,7 +84,7 @@ public class Citizen {
         return isTemplate;
     }
 
-    public void setTemplate(boolean template) {
+    public void setIsTemplate(boolean template) {
         isTemplate = template;
     }
 
@@ -84,5 +94,13 @@ public class Citizen {
 
     public void setTeacherID(int teacherID) {
         this.teacherID = teacherID;
+    }
+
+    public int getSchoolID() {
+        return schoolID;
+    }
+
+    public void setSchoolID(int schoolID) {
+        this.schoolID = schoolID;
     }
 }

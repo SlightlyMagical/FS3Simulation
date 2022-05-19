@@ -22,4 +22,8 @@ public interface IDALManager {
     ArrayList<Citizen> getCitizensOfSchool(int schoolID);
 
     void createNewCitizen(Citizen citizen, int schoolID);
+
+    Citizen createCitizenCopy(Citizen citizen, boolean isTemplate, int teacherID);
+
+    void changeCitizenName(Citizen citizen);
 }

@@ -3,7 +3,6 @@ package dal.dao;
 import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
-import be.Usertypes.Teacher;
 
 import java.util.ArrayList;
 
@@ -26,4 +25,14 @@ public interface ICitizenDAO {
     ArrayList<Citizen> getCitizensOfSchool(int schoolID);
 
     void createNewCitizen(Citizen citizen, int schoolID);
+
+    Citizen createCitizenCopy(Citizen citizen, boolean isTemplate, int teacherID);
+
+    void copyGeneralInfo(int originalID, int newID);
+
+    void copyHealthConditions(int originalID, int newID);
+
+    void copyFunctionalAbilities(int originalID, int newID);
+
+    void changeCitizenName(Citizen citizen);
 }

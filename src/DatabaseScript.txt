@@ -113,9 +113,9 @@ VALUES ('student', 'pass', 3, 'firstname', 'lastname', 1)
 GO
 
 -- Test Citizen
-INSERT INTO Citizen (SchoolID, FirstName, LastName, IsTemplate)
-VALUES (1, 'Peter', 'Hansen', 0),
-(1, 'Martha', 'Poulsen', 1)
+INSERT INTO Citizen (SchoolID, FirstName, LastName, IsTemplate, TeacherID)
+VALUES (1, 'Peter', 'Hansen', 0, 2),
+(1, 'Martha', 'Poulsen', 1, 2)
 GO
 INSERT INTO StudentCitizen (UserID, CitizenID)
 VALUES (3, 1)

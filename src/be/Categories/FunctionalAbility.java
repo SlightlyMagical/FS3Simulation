@@ -15,6 +15,13 @@ public class FunctionalAbility {
     private String citizenGoal;
     private String observation;
 
+
+    public FunctionalAbility(int id, int catID, String name) {
+        this.name = name;
+        this.id = id;
+        this.catID = catID;
+    }
+
     public int getId() {
         return id;
     }
@@ -85,14 +92,6 @@ public class FunctionalAbility {
 
     public void setCitizenGoal(String citizenGoal) {
         this.citizenGoal = citizenGoal;
-    }
-
-
-
-    public FunctionalAbility(int id, int catID, String name) {
-        this.name = name;
-        this.id = id;
-        this.catID = catID;
     }
 
     public String getName() {

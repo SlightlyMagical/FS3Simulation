@@ -29,9 +29,9 @@ public class DALManager implements IDALManager{
     @Override
     public ArrayList<Citizen> getAllCitizens(int userID) {
         ArrayList<Citizen> citizens = citizenDAO.getCitizens(userID);
-        citizens = citizenDAO.getGeneralInfo(citizens);
-        citizens = citizenDAO.getHealthConditions(citizens);
-        citizens = citizenDAO.getFunctionalAbilities(citizens);
+        citizenDAO.getGeneralInfo(citizens);
+        citizenDAO.getHealthConditions(citizens);
+        citizenDAO.getFunctionalAbilities(citizens);
         return citizens;
     }
 
@@ -54,14 +54,35 @@ public class DALManager implements IDALManager{
     @Override
     public ArrayList<Citizen> getCitizensOfSchool(int schoolID) {
         ArrayList<Citizen> citizens = citizenDAO.getCitizensOfSchool(schoolID);
-        citizens = citizenDAO.getGeneralInfo(citizens);
-        citizens = citizenDAO.getHealthConditions(citizens);
-        citizens = citizenDAO.getFunctionalAbilities(citizens);
+        citizenDAO.getGeneralInfo(citizens);
+        citizenDAO.getHealthConditions(citizens);
+        citizenDAO.getFunctionalAbilities(citizens);
         return citizens;
     }
 
     @Override
     public void createNewCitizen(Citizen citizen, int schoolID) {
         citizenDAO.createNewCitizen(citizen, schoolID);
+    }
+
+    @Override
+    public Citizen createCitizenCopy(Citizen citizen, boolean isTemplate, int teacherID) {
+        Citizen newCitizen = citizenDAO.createCitizenCopy(citizen, isTemplate, teacherID);
+        citizenDAO.copyGeneralInfo(citizen.getId(), newCitizen.getId());
+        citizenDAO.copyHealthConditions(citizen.getId(), newCitizen.getId());
+        citizenDAO.copyFunctionalAbilities(citizen.getId(), newCitizen.getId());
+
+        ArrayList<Citizen> citizens = new ArrayList<>();
+        citizens.add(newCitizen);
+        citizenDAO.getGeneralInfo(citizens);
+        citizenDAO.getHealthConditions(citizens);
+        citizenDAO.getFunctionalAbilities(citizens);
+
+        return newCitizen;
+    }
+
+    @Override
+    public void changeCitizenName(Citizen citizen) {
+        citizenDAO.changeCitizenName(citizen);
     }
 }

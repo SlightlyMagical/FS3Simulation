@@ -5,7 +5,6 @@ import be.Categories.HealthCondition;
 import be.Citizen;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
@@ -25,4 +24,7 @@ public interface IBLLManager {
 
     void createNewCitizen(Citizen citizen, int schoolID);
 
+    Citizen createCitizenCopy(Citizen citizen, boolean isTemplate, int teacherID);
+
+    void changeCitizenName(Citizen citizen);
 }

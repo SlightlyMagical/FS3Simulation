@@ -71,5 +71,9 @@ public class CitizenModel {
         return notRelevantFunctions;
     }
 
+    public void changeCitizenName(Citizen citizen){
+        bllManager.changeCitizenName(citizen);
+    }
+
 }
 

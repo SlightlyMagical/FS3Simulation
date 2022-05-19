@@ -65,7 +65,7 @@ public class TeacherController implements Initializable {
     }
 
     public void handleCreate(ActionEvent actionEvent) {
-        SceneManager.showNewCitizenWindow();
+        SceneManager.showNewCitizenWindow(null);
     }
 
     public void handleEdit(ActionEvent actionEvent) {
@@ -82,9 +82,21 @@ public class TeacherController implements Initializable {
     }
 
     public void handleCreateCopy(ActionEvent actionEvent) {
+        Citizen selectedCitizen = tvBank.getSelectionModel().getSelectedItem();
+        if (selectedCitizen != null) {
+            teacherModel.createCitizenCopy(selectedCitizen, true);
+        }
+        else
+            DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
     public void handleAssignToStudent(ActionEvent actionEvent) {
+        Citizen selectedCitizen = tvBank.getSelectionModel().getSelectedItem();
+        if (selectedCitizen != null) {
+            teacherModel.createCitizenCopy(selectedCitizen, false);
+        }
+        else
+            DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
     public void handleAssignedEdit(ActionEvent actionEvent) {
@@ -101,6 +113,12 @@ public class TeacherController implements Initializable {
     }
 
     public void handleAssignedCopy(ActionEvent actionEvent) {
+        Citizen selectedCitizen = tvAssigned.getSelectionModel().getSelectedItem();
+        if (selectedCitizen != null) {
+            teacherModel.createCitizenCopy(selectedCitizen, true);
+        }
+        else
+            DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
     public void handleAssignedStudentAdd(ActionEvent actionEvent) {
