@@ -103,7 +103,8 @@ GO
 INSERT INTO Users (Username, [Password], UserType, SchoolID)
 VALUES ('admin', 'kode', 1, null),
 ('lærer', 'kode', 2, 1),
-('elev', 'kode', 3, 1)
+('elev', 'kode', 3, 1),
+('teach', 'kode', 2, 1)
 GO
 
 -- Test Citizen

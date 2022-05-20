@@ -80,7 +80,10 @@ public class TeacherController implements Initializable {
         Citizen selectedCitizen = tvBank.getSelectionModel().getSelectedItem();
         if (selectedCitizen != null) {
             citizenModel.setCurrentCitizen(selectedCitizen);
-            SceneManager.showCitizenOverview();
+            if (selectedCitizen.getTeacherID() == teacherModel.getCurrentTeacher().getId())
+                SceneManager.showCitizenOverview();
+            else
+                SceneManager.showDataOverview();
         }
         else
             DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
@@ -88,10 +91,16 @@ public class TeacherController implements Initializable {
 
     public void handleDelete(ActionEvent actionEvent) {
         Citizen selectedCitizen = tvBank.getSelectionModel().getSelectedItem();
-        if (DialogHandler.confirmationAlert(Messages.CONFIRM_DELETE)){
-            citizenModel.deleteCitizen(selectedCitizen);
-            teacherModel.getTemplateCitizens().remove(selectedCitizen);
-        }
+        if (selectedCitizen != null) {
+            if (selectedCitizen.getTeacherID() == teacherModel.getCurrentTeacher().getId()) {
+                if (DialogHandler.confirmationAlert(Messages.CONFIRM_DELETE)) {
+                    citizenModel.deleteCitizen(selectedCitizen);
+                    teacherModel.getTemplateCitizens().remove(selectedCitizen);
+                }
+            } else
+                DialogHandler.informationAlert("Du har ikke ret til at slette denne borger");
+        } else
+            DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
     public void handleCreateCopy(ActionEvent actionEvent) {
