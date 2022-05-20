@@ -98,6 +98,11 @@ public class DALManager implements IDALManager{
     }
 
     @Override
+    public void deleteCitizen(Citizen citizen) {
+        citizenDAO.deleteCitizen(citizen);
+    }
+
+    @Override
     public boolean createUser(User user, String password) {
         return userDAO.createUser(user, password);
     }

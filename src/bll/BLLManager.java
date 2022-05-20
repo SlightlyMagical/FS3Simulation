@@ -75,6 +75,11 @@ public class BLLManager implements IBLLManager{
     }
 
     @Override
+    public void deleteCitizen(Citizen citizen) {
+        dalManager.deleteCitizen(citizen);
+    }
+
+    @Override
     public boolean createUser(User user, String password) {
         return dalManager.createUser(user, password);
     }

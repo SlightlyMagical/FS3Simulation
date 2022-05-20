@@ -19,7 +19,6 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class TeacherController implements Initializable {
@@ -88,6 +87,11 @@ public class TeacherController implements Initializable {
     }
 
     public void handleDelete(ActionEvent actionEvent) {
+        Citizen selectedCitizen = tvBank.getSelectionModel().getSelectedItem();
+        if (DialogHandler.confirmationAlert(Messages.CONFIRM_DELETE)){
+            citizenModel.deleteCitizen(selectedCitizen);
+            teacherModel.getTemplateCitizens().remove(selectedCitizen);
+        }
     }
 
     public void handleCreateCopy(ActionEvent actionEvent) {
@@ -119,6 +123,11 @@ public class TeacherController implements Initializable {
     }
 
     public void handleAssignedDelete(ActionEvent actionEvent) {
+        Citizen selectedCitizen = tvAssigned.getSelectionModel().getSelectedItem();
+        if (DialogHandler.confirmationAlert(Messages.CONFIRM_DELETE)){
+            citizenModel.deleteCitizen(selectedCitizen);
+            teacherModel.getStudentCitizens().remove(selectedCitizen);
+        }
     }
 
     public void handleAssignedCopy(ActionEvent actionEvent) {

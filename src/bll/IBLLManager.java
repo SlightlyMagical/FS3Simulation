@@ -38,5 +38,9 @@ public interface IBLLManager {
 
     void changeAssignedStudents(Citizen citizen);
 
+    void deleteCitizen(Citizen citizen);
+
+
+
     boolean createUser(User user, String password);
 }

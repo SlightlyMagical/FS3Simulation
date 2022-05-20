@@ -11,4 +11,5 @@ public class Messages {
     public final static String PASSWORD_NOT_MATCHING = "Kodeordene er ikke ens";
     public final static String USER_CREATION_SUCCESSFUL = "Brugeren er blevet oprettet";
     public final static String USERNAME_TAKEN = "Brugernavnet er allerede i brug";
+    public final static String CONFIRM_DELETE = "Er du sikker på at du vil slette?";
 }

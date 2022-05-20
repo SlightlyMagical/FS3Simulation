@@ -56,7 +56,7 @@ GO
 
 -- Create Citizen to category table
 CREATE TABLE CitizenInfo (
-    CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
+    CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID) ON DELETE CASCADE,
     InfoID int FOREIGN KEY REFERENCES GeneralInfo(InfoID),
     InfoText NVARCHAR(MAX),
     CONSTRAINT PK_CitizenInfo PRIMARY KEY (CitizenID, InfoID)
@@ -65,7 +65,7 @@ GO
 
 CREATE TABLE CitizenCondition (
     CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
-    ConditionID int FOREIGN KEY REFERENCES HealthCondition(ConditionID),
+    ConditionID int FOREIGN KEY REFERENCES HealthCondition(ConditionID) ON DELETE CASCADE,
     ConditionStatus int NOT NULL,
     ConditionNote NVARCHAR(MAX),
     ConditionAssessment NVARCHAR(MAX),
@@ -76,7 +76,7 @@ CREATE TABLE CitizenCondition (
 GO
 
 CREATE TABLE CitizenAbility (
-    CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
+    CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID) ON DELETE CASCADE,
     AbilityID int FOREIGN KEY REFERENCES FunctionalAbility(AbilityID),
     AbilityStatus int NOT NULL,
     CurrentLevel int,
@@ -92,8 +92,8 @@ GO
 
 -- Create Student to citizen table
 CREATE TABLE StudentCitizen(
-    UserID int FOREIGN KEY REFERENCES Users(UserID),
-    CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
+    UserID int FOREIGN KEY REFERENCES Users(UserID) ON DELETE CASCADE,
+    CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID) ON DELETE CASCADE,
     CONSTRAINT PK_StudentCitizen PRIMARY KEY (UserID, CitizenID)
 )
 GO
