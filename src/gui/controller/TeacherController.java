@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class TeacherController implements Initializable {
@@ -138,6 +139,32 @@ public class TeacherController implements Initializable {
     }
 
     public void handleStudentCreateUser(ActionEvent actionEvent) {
+        String username = txtUsername.getText().toLowerCase().trim();
+        String password = txtPassword.getText().trim();
+        String repeatPassword = txtRepeatpassword.getText().trim();
+
+        if (username.isBlank() || password.isBlank() || repeatPassword.isBlank()) {
+            DialogHandler.informationAlert(Messages.EMPTY_FIELDS);
+        }
+        else if (!password.equals(repeatPassword)) {
+            DialogHandler.informationAlert(Messages.PASSWORD_NOT_MATCHING);
+        }
+        else {
+            Student student = new Student(-1, username, teacherModel.getCurrentTeacher().getSchoolID(), 3);
+            student.setPassword(password);
+            try {
+                if (ModelManager.getInstance().getUserModel().createUser(student, password)) {
+                    DialogHandler.informationAlert(Messages.USER_CREATION_SUCCESSFUL);
+                    teacherModel.getStudents().add(student);
+                }
+                else {
+                    DialogHandler.informationAlert(Messages.USERNAME_TAKEN);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
 

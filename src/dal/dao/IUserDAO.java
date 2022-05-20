@@ -10,4 +10,6 @@ public interface IUserDAO {
     User checkLogin(String username, String password) throws SQLServerException;
 
     ArrayList<Student> getAllStudents(int schoolID);
+
+    boolean createUser(User user, String password);
 }

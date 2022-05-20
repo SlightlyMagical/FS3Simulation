@@ -73,4 +73,9 @@ public class BLLManager implements IBLLManager{
     public void changeAssignedStudents(Citizen citizen) {
         dalManager.changeAssignedStudents(citizen);
     }
+
+    @Override
+    public boolean createUser(User user, String password) {
+        return dalManager.createUser(user, password);
+    }
 }

@@ -20,4 +20,8 @@ public class UserModel {
         currentUser = bllManager.login(username, password);
         return currentUser;
     }
+
+    public boolean createUser(User user, String password) {
+       return bllManager.createUser(user, password);
+    }
 }

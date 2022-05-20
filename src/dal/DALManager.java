@@ -96,4 +96,9 @@ public class DALManager implements IDALManager{
     public void changeAssignedStudents(Citizen citizen) {
         citizenDAO.changeAssignedStudents(citizen);
     }
+
+    @Override
+    public boolean createUser(User user, String password) {
+        return userDAO.createUser(user, password);
+    }
 }

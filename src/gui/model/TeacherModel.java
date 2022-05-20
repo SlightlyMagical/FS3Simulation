@@ -36,6 +36,10 @@ public class TeacherModel {
         getStudentsFromDatabase();
     }
 
+    public Teacher getCurrentTeacher() {
+        return currentTeacher;
+    }
+
     public void getCitizensFromDatabase() {
         templateCitizens.clear();
         studentCitizens.clear();

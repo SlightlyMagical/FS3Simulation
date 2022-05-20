@@ -34,4 +34,6 @@ public interface IDALManager {
     void changeCitizenName(Citizen citizen);
 
     void changeAssignedStudents(Citizen citizen);
+
+    boolean createUser(User user, String password);
 }
