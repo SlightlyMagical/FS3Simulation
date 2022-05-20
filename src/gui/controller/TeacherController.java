@@ -165,6 +165,9 @@ public class TeacherController implements Initializable {
                 if (ModelManager.getInstance().getUserModel().createUser(student, password)) {
                     DialogHandler.informationAlert(Messages.USER_CREATION_SUCCESSFUL);
                     teacherModel.getStudents().add(student);
+                    txtUsername.clear();
+                    txtPassword.clear();
+                    txtRepeatpassword.clear();
                 }
                 else {
                     DialogHandler.informationAlert(Messages.USERNAME_TAKEN);
