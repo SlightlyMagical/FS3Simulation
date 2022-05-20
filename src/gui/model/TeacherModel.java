@@ -71,7 +71,6 @@ public class TeacherModel {
         citizen.setIsTemplate(true);
         bllManager.createNewCitizen(citizen, currentTeacher.getSchoolID());
         templateCitizens.add(citizen);
-        System.out.println(citizen.getId());
     }
 
     public void createCitizenCopy(Citizen citizen, boolean isTemplate){

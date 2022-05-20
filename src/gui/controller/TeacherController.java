@@ -19,7 +19,6 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class TeacherController implements Initializable {
@@ -81,13 +80,27 @@ public class TeacherController implements Initializable {
         Citizen selectedCitizen = tvBank.getSelectionModel().getSelectedItem();
         if (selectedCitizen != null) {
             citizenModel.setCurrentCitizen(selectedCitizen);
-            SceneManager.showCitizenOverview();
+            if (selectedCitizen.getTeacherID() == teacherModel.getCurrentTeacher().getId())
+                SceneManager.showCitizenOverview();
+            else
+                SceneManager.showDataOverview();
         }
         else
             DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
     public void handleDelete(ActionEvent actionEvent) {
+        Citizen selectedCitizen = tvBank.getSelectionModel().getSelectedItem();
+        if (selectedCitizen != null) {
+            if (selectedCitizen.getTeacherID() == teacherModel.getCurrentTeacher().getId()) {
+                if (DialogHandler.confirmationAlert(Messages.CONFIRM_DELETE)) {
+                    citizenModel.deleteCitizen(selectedCitizen);
+                    teacherModel.getTemplateCitizens().remove(selectedCitizen);
+                }
+            } else
+                DialogHandler.informationAlert("Du har ikke ret til at slette denne borger");
+        } else
+            DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
     public void handleCreateCopy(ActionEvent actionEvent) {
@@ -119,6 +132,11 @@ public class TeacherController implements Initializable {
     }
 
     public void handleAssignedDelete(ActionEvent actionEvent) {
+        Citizen selectedCitizen = tvAssigned.getSelectionModel().getSelectedItem();
+        if (DialogHandler.confirmationAlert(Messages.CONFIRM_DELETE)){
+            citizenModel.deleteCitizen(selectedCitizen);
+            teacherModel.getStudentCitizens().remove(selectedCitizen);
+        }
     }
 
     public void handleAssignedCopy(ActionEvent actionEvent) {
@@ -156,6 +174,9 @@ public class TeacherController implements Initializable {
                 if (ModelManager.getInstance().getUserModel().createUser(student, password)) {
                     DialogHandler.informationAlert(Messages.USER_CREATION_SUCCESSFUL);
                     teacherModel.getStudents().add(student);
+                    txtUsername.clear();
+                    txtPassword.clear();
+                    txtRepeatpassword.clear();
                 }
                 else {
                     DialogHandler.informationAlert(Messages.USERNAME_TAKEN);

@@ -36,5 +36,7 @@ public interface ICitizenDAO {
 
     void changeCitizenName(Citizen citizen);
 
+    void deleteCitizen(Citizen citizen);
+
     void changeAssignedStudents(Citizen citizen);
 }

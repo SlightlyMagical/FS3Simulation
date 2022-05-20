@@ -78,5 +78,9 @@ public class CitizenModel {
     public void changeAssignedStudents(){
         bllManager.changeAssignedStudents(currentCitizen);
     }
+
+    public void deleteCitizen(Citizen citizen){
+        bllManager.deleteCitizen(citizen);
+    }
 }
 

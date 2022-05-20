@@ -448,5 +448,16 @@ public class CitizenDAO implements ICitizenDAO{
         }
     }
 
+    @Override
+    public void deleteCitizen(Citizen citizen){
+        try (Connection connection = dbConnector.getConnection()){
+            String sql = "DELETE FROM Citizen WHERE CitizenID = (?);";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, citizen.getId());
+            ps.executeUpdate();
 
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
