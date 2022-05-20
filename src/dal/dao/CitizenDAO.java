@@ -268,13 +268,10 @@ public class CitizenDAO implements ICitizenDAO{
 
                 while (rs2.next()){
                     int id = rs2.getInt("UserID");
-                    String firstName = rs2.getString("FirstName");
-                    String lastName = rs2.getString("LastName");
                     String username = rs2.getString("Username");
                     String password = rs2.getString("Password");
 
-                    Student student = new Student(id, firstName, lastName, schoolID, 3);
-                    student.setUsername(username);
+                    Student student = new Student(id, username, schoolID, 3);
                     student.setPassword(password);
 
                     c.getAssignedStudents().add(student);

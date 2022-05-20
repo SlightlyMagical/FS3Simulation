@@ -3,31 +3,24 @@ package be.Usertypes;
 public class User {
     private final int id;
     private final int userType;
-    private final String firstName;
-    private final String lastName;
+    private final String username;
 
 
-    public User(int id, int userType, String firstName, String lastName) {
+    public User(int id, int userType, String username) {
         this.id = id;
         this.userType = userType;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.username = username;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
     public int getUserType() {
         return userType;
     }
 
+    public String getUsername() {
+        return username;
+    }
 }

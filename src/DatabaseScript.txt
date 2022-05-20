@@ -18,8 +18,6 @@ CREATE TABLE [Users] (
     Username NVARCHAR(20) NOT NULL,
     [Password] NVARCHAR(100) NOT NULL, -- Check size of hashed password
     UserType int NOT NULL,
-    FirstName NVARCHAR(50),
-    LastName NVARCHAR(50),
     SchoolID int -- FK to school table
 )
 GO
@@ -102,14 +100,10 @@ GO
 
 
 -- Test Users
-INSERT INTO Users (Username, [Password], UserType, FirstName, LastName, SchoolID)
-VALUES ('admin', 'pass', 1, 'firstname', 'lastname', null)
-GO
-INSERT INTO Users (Username, [Password], UserType, FirstName, LastName, SchoolID)
-VALUES ('teacher', 'pass', 2, 'firstname', 'lastname', 1)
-GO
-INSERT INTO Users (Username, [Password], UserType, FirstName, LastName, SchoolID)
-VALUES ('student', 'pass', 3, 'firstname', 'lastname', 1)
+INSERT INTO Users (Username, [Password], UserType, SchoolID)
+VALUES ('admin', 'kode', 1, null),
+('lærer', 'kode', 2, 1),
+('elev', 'kode', 3, 1)
 GO
 
 -- Test Citizen

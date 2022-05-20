@@ -29,18 +29,16 @@ public class UserDAO implements IUserDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 int id = rs.getInt("UserID");
-                String firstName = rs.getString("FirstName");
-                String lastName = rs.getString("LastName");
                 int schoolID = rs.getInt("SchoolID");
                 int userType = rs.getInt("UserType");
 
                 switch (userType) {
                     case 1 -> //Admin
-                            user = new Admin(id, firstName, lastName, userType);
+                            user = new Admin(id, username, userType);
                     case 2 -> //Teacher
-                            user = new Teacher(id, firstName, lastName, schoolID, userType);
+                            user = new Teacher(id, username, schoolID, userType);
                     case 3 -> //Student
-                            user = new Student(id, firstName, lastName, schoolID, userType);
+                            user = new Student(id, username, schoolID, userType);
                 }
             }
         } catch (SQLException throwables) {
@@ -61,13 +59,10 @@ public class UserDAO implements IUserDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("UserID");
-                String firstName = rs.getString("FirstName");
-                String lastName = rs.getString("LastName");
                 String username = rs.getString("Username");
                 String password = rs.getString("Password");
 
-                Student student = new Student(id, firstName, lastName, schoolID, 3);
-                student.setUsername(username);
+                Student student = new Student(id, username, schoolID, 3);
                 student.setPassword(password);
 
                 students.add(student);

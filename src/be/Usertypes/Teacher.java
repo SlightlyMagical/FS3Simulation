@@ -3,8 +3,8 @@ package be.Usertypes;
 public class Teacher extends User{
     private final int schoolID;
 
-    public Teacher(int id, String firstName, String lastName, int schoolID, int userType) {
-        super(id, userType, firstName, lastName);
+    public Teacher(int id, String username, int schoolID, int userType) {
+        super(id, userType, username);
         this.schoolID = schoolID;
     }
 
