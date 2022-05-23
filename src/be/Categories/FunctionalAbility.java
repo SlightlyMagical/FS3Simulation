@@ -20,6 +20,8 @@ public class FunctionalAbility {
         this.name = name;
         this.id = id;
         this.catID = catID;
+        this.currentLevel = -1;
+        this.expectedLevel = -1;
     }
 
     public int getId() {

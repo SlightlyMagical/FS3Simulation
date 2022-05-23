@@ -22,7 +22,6 @@ public class BLLManager implements IBLLManager{
 
     @Override
     public User login(String username, String password) throws SQLServerException {
-        //Insert password hashing
         return dalManager.login(username, password);
     }
 
@@ -37,13 +36,13 @@ public class BLLManager implements IBLLManager{
     }
 
     @Override
-    public boolean saveHealthCondition(HealthCondition healthCondition, int citizenID) {
-        return dalManager.saveHealthCondition(healthCondition, citizenID);
+    public boolean saveHealthConditions(ArrayList<HealthCondition> healthConditions, int citizenID){
+        return dalManager.saveHealthConditions(healthConditions, citizenID);
     }
 
     @Override
-    public boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID) {
-        return dalManager.saveFunctionalAbility(functionalAbility, citizenID);
+    public boolean saveFunctionalAbilities(ArrayList<FunctionalAbility> functionalAbilities, int citizenID) {
+        return dalManager.saveFunctionalAbilities(functionalAbilities, citizenID);
     }
 
     @Override

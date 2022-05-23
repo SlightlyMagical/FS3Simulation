@@ -18,9 +18,9 @@ public interface ICitizenDAO {
 
     void updatePatientGeneralInfo(Citizen selectedPatient);
 
-    boolean saveHealthCondition(HealthCondition healthCondition, int citizenID);
+    boolean saveHealthConditions(ArrayList<HealthCondition> healthConditions, int citizenID);
 
-    boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID);
+    boolean saveFunctionalAbilities(ArrayList<FunctionalAbility> functionalAbilities, int citizenID);
 
     ArrayList<Citizen> getCitizensOfSchool(int schoolID);
 

@@ -46,13 +46,13 @@ public class DALManager implements IDALManager{
     }
 
     @Override
-    public boolean saveHealthCondition(HealthCondition healthCondition, int citizenID) {
-        return citizenDAO.saveHealthCondition(healthCondition, citizenID);
+    public boolean saveHealthConditions(ArrayList<HealthCondition> healthConditions, int citizenID){
+        return citizenDAO.saveHealthConditions(healthConditions, citizenID);
     }
 
     @Override
-    public boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID) {
-        return citizenDAO.saveFunctionalAbility(functionalAbility, citizenID);
+    public boolean saveFunctionalAbilities(ArrayList<FunctionalAbility> functionalAbilities, int citizenID) {
+        return citizenDAO.saveFunctionalAbilities(functionalAbilities, citizenID);
     }
 
     @Override

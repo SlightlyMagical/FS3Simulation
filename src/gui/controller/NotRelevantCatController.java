@@ -2,6 +2,7 @@ package gui.controller;
 
 import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
+import be.Usertypes.Admin;
 import gui.SceneManager;
 import gui.model.CitizenModel;
 import gui.model.ModelManager;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class NotRelevantCatController implements Initializable {
@@ -36,18 +38,21 @@ public class NotRelevantCatController implements Initializable {
         if(healthCondition != null){
             healthCondition.setStatus(null);
             citizenModel.getNotRelevantHealth().remove(healthCondition);
-            citizenModel.getCurrentCitizen().addHealthCondition(healthCondition);
+            ArrayList<HealthCondition> healthConditions = new ArrayList<>();
+            healthConditions.add(healthCondition);
+            citizenModel.saveHealthConditions(healthConditions);
         }
         else if (functionalAbility != null){
             functionalAbility.setStatus(null);
             citizenModel.getNotRelevantFunctions().remove(functionalAbility);
-            citizenModel.getCurrentCitizen().addFunctionalAbility(functionalAbility);
+            ArrayList<FunctionalAbility> functionalAbilities = new ArrayList<>();
+            functionalAbilities.add(functionalAbility);
+            citizenModel.saveFunctionalAbilities(functionalAbilities);
         }
 
     }
 
     public void handleCancel(ActionEvent actionEvent) {
-        SceneManager.showCitizenOverview();
         ((Stage)(tvHealthCategories.getScene().getWindow())).close();
     }
 

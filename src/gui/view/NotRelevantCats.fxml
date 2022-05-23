@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane prefHeight="500.0" prefWidth="600.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.NotRelevantCatController">
+<BorderPane stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.NotRelevantCatController">
    <center>
       <HBox alignment="TOP_CENTER" spacing="30.0">
          <BorderPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
          </BorderPane.margin>
          <children>
-            <TableView fx:id="tvHealthCategories" onMouseClicked="#handleSelectHealth">
+            <TableView fx:id="tvHealthCategories" onMouseClicked="#handleSelectHealth" prefWidth="300.0">
               <columns>
                 <TableColumn fx:id="tcHealthCategories" editable="false" prefWidth="75.0" text="Helbredstilstande" />
               </columns>
@@ -24,7 +24,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <TableView fx:id="tvFunctionCategories" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleSelectFunction">
+            <TableView fx:id="tvFunctionCategories" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleSelectFunction" prefWidth="300.0">
                <columns>
                   <TableColumn fx:id="tcFunctionCategories" editable="false" prefWidth="75.0" text="Funktionsevnetilstande" />
                </columns>
@@ -42,7 +42,7 @@
             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleConfirm" text="Fjern markeret kategori" />
          </children>
          <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="10.0" left="10.0" right="10.0" />
          </BorderPane.margin>
       </HBox>
    </bottom>

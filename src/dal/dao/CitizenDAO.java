@@ -90,6 +90,7 @@ public class CitizenDAO implements ICitizenDAO{
                     String conditionObservation = rs.getString("ConditionObservation");
                     HealthCondition healthCondition = new HealthCondition(id, catID, name);
                     switch (status) {
+                        case -1 -> healthCondition.setStatus(null);
                         case 1 -> healthCondition.setStatus(Status.ACTIVE);
                         case 2 -> healthCondition.setStatus(Status.POTENTIAL);
                         case 3 -> healthCondition.setStatus(Status.NOT_RELEVANT);
@@ -124,6 +125,7 @@ public class CitizenDAO implements ICitizenDAO{
 
                     FunctionalAbility functionalAbility = new FunctionalAbility(id, catID, name);
                     switch (status){
+                        case -1 -> functionalAbility.setStatus(null);
                         case 1 -> functionalAbility.setStatus(Status.ACTIVE);
                         case 2 -> functionalAbility.setStatus(Status.NOT_RELEVANT);
                     }
@@ -171,31 +173,37 @@ public class CitizenDAO implements ICitizenDAO{
     }
 
     @Override
-    public boolean saveHealthCondition(HealthCondition healthCondition, int citizenID) {
+    public boolean saveHealthConditions(ArrayList<HealthCondition> healthConditions, int citizenID) {
         try (Connection connection = dbConnector.getConnection()) {
-            String sql = "DELETE FROM CitizenCondition WHERE CitizenID = (?) AND ConditionID = (?);";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, citizenID);
-            ps.setInt(2, healthCondition.getId());
-            ps.executeUpdate();
+            for (HealthCondition healthCondition : healthConditions) {
+                String sql = "DELETE FROM CitizenCondition WHERE CitizenID = (?) AND ConditionID = (?);";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1, citizenID);
+                ps.setInt(2, healthCondition.getId());
+                ps.executeUpdate();
 
-            String sql2 = "INSERT INTO CitizenCondition (CitizenID, ConditionID, ConditionStatus, ConditionNote, ConditionAssessment, ConditionExpectation, ConditionObservation) VALUES (?, ?, ?, ?, ?, ?, ?);";
-            PreparedStatement ps2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
-            ps2.setInt(1, citizenID);
-            ps2.setInt(2, healthCondition.getId());
-            switch (healthCondition.getStatus()){
-                case ACTIVE -> ps2.setInt(3, 1);
-                case POTENTIAL -> ps2.setInt(3, 2);
-                case NOT_RELEVANT -> ps2.setInt(3, 3);
+                String sql2 = "INSERT INTO CitizenCondition (CitizenID, ConditionID, ConditionStatus, ConditionNote, ConditionAssessment, ConditionExpectation, ConditionObservation) VALUES (?, ?, ?, ?, ?, ?, ?);";
+                PreparedStatement ps2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+                ps2.setInt(1, citizenID);
+                ps2.setInt(2, healthCondition.getId());
+                if (healthCondition.getStatus() == null)
+                    ps2.setInt(3, -1);
+                else {
+                    switch (healthCondition.getStatus()) {
+                        case ACTIVE -> ps2.setInt(3, 1);
+                        case POTENTIAL -> ps2.setInt(3, 2);
+                        case NOT_RELEVANT -> ps2.setInt(3, 3);
+                    }
+                }
+                ps2.setString(4, healthCondition.getProfessionalNote());
+                ps2.setString(5, healthCondition.getCurrentAssessment());
+                ps2.setString(6, healthCondition.getExpectedLevel());
+                ps2.setString(7, healthCondition.getObservations());
+
+                ps2.executeUpdate();
             }
-            ps2.setString(4, healthCondition.getProfessionalNote());
-            ps2.setString(5, healthCondition.getCurrentAssessment());
-            ps2.setString(6, healthCondition.getExpectedLevel());
-            ps2.setString(7, healthCondition.getObservations());
+            return true;
 
-            int affectedRows = ps2.executeUpdate();
-            if (affectedRows == 1)
-                return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -203,37 +211,42 @@ public class CitizenDAO implements ICitizenDAO{
     }
 
     @Override
-    public boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID) {
+    public boolean saveFunctionalAbilities(ArrayList<FunctionalAbility> functionalAbilities, int citizenID) {
         try (Connection connection = dbConnector.getConnection()) {
-            String sql = "DELETE  FROM CitizenAbility WHERE CitizenID = (?) AND AbilityID = (?);";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, citizenID);
-            ps.setInt(2, functionalAbility.getId());
-            ps.executeUpdate();
+            for (FunctionalAbility functionalAbility : functionalAbilities) {
+                String sql = "DELETE  FROM CitizenAbility WHERE CitizenID = (?) AND AbilityID = (?);";
+                PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setInt(1, citizenID);
+                ps.setInt(2, functionalAbility.getId());
+                ps.executeUpdate();
 
-            String sql2 = "INSERT INTO CitizenAbility (CitizenID, AbilityID, AbilityStatus, CurrentLevel, ExpectedLevel, AbilityNote, CitizenExecution, CitizenLimitation, CitizenGoal, AbilityObservation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-            PreparedStatement ps2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
-            ps2.setInt(1, citizenID);
-            ps2.setInt(2, functionalAbility.getId());
-            switch (functionalAbility.getStatus()){
-                case ACTIVE -> ps2.setInt(3,1);
-                case NOT_RELEVANT -> ps2.setInt(3,2);
+                String sql2 = "INSERT INTO CitizenAbility (CitizenID, AbilityID, AbilityStatus, CurrentLevel, ExpectedLevel, AbilityNote, CitizenExecution, CitizenLimitation, CitizenGoal, AbilityObservation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                PreparedStatement ps2 = connection.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS);
+                ps2.setInt(1, citizenID);
+                ps2.setInt(2, functionalAbility.getId());
+                if (functionalAbility.getStatus() == null)
+                    ps2.setInt(3, -1);
+                else {
+                    switch (functionalAbility.getStatus()) {
+                        case ACTIVE -> ps2.setInt(3, 1);
+                        case NOT_RELEVANT -> ps2.setInt(3, 2);
+                    }
+                }
+                ps2.setInt(4, functionalAbility.getCurrentLevel());
+                ps2.setInt(5, functionalAbility.getExpectedLevel());
+                ps2.setString(6, functionalAbility.getProfessionalNote());
+                ps2.setString(7, functionalAbility.getTaskExecution());
+                ps2.setString(8, functionalAbility.getExecutionLimitation());
+                ps2.setString(9, functionalAbility.getCitizenGoal());
+                ps2.setString(10, functionalAbility.getObservation());
+
+                ps2.executeUpdate();
             }
-            ps2.setInt(4, functionalAbility.getCurrentLevel());
-            ps2.setInt(5, functionalAbility.getExpectedLevel());
-            ps2.setString(6, functionalAbility.getProfessionalNote());
-            ps2.setString(7, functionalAbility.getTaskExecution());
-            ps2.setString(8, functionalAbility.getExecutionLimitation());
-            ps2.setString(9, functionalAbility.getCitizenGoal());
-            ps2.setString(10, functionalAbility.getObservation());
+            return true;
 
-            int affectedRows = ps2.executeUpdate();
-            if (affectedRows == 1)
-                return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return false;
     }
 

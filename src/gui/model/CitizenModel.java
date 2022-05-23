@@ -9,13 +9,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CitizenModel {
     IBLLManager bllManager;
 
-    private ObservableList<Citizen> citizens;
-    private ObservableList<HealthCondition> notRelevantHealth;
-    private ObservableList<FunctionalAbility> notRelevantFunctions;
+    private final ObservableList<Citizen> citizens;
+    private final ObservableList<HealthCondition> notRelevantHealth;
+    private final ObservableList<FunctionalAbility> notRelevantFunctions;
 
     private Citizen currentCitizen;
 
@@ -47,20 +48,12 @@ public class CitizenModel {
         citizens.addAll(bllManager.getAllCitizens(ModelManager.getInstance().getUserModel().currentUser.getId()));
     }
 
-    public boolean saveHealthCondition(HealthCondition healthCondition) {
-        if (bllManager.saveHealthCondition(healthCondition, currentCitizen.getId())){
-            currentCitizen.addHealthCondition(healthCondition);
-            return true;
-        }
-        return false;
+    public boolean saveHealthConditions(ArrayList<HealthCondition> healthConditions){
+        return bllManager.saveHealthConditions(healthConditions, currentCitizen.getId());
     }
 
-    public boolean saveFunctionalAbility(FunctionalAbility functionalAbility) {
-        if (bllManager.saveFunctionalAbility(functionalAbility, currentCitizen.getId())){
-            currentCitizen.addFunctionalAbility(functionalAbility);
-            return true;
-        }
-        return false;
+    public boolean saveFunctionalAbilities(ArrayList<FunctionalAbility> functionalAbilities) {
+        return bllManager.saveFunctionalAbilities(functionalAbilities, currentCitizen.getId());
     }
 
     public ObservableList<HealthCondition> getNotRelevantHealth() {

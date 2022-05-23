@@ -8,6 +8,7 @@ import be.enums.Status;
 import gui.SceneManager;
 import gui.model.CitizenModel;
 import gui.model.ModelManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
@@ -80,4 +81,7 @@ public class OverviewController implements Initializable {
         }
     }
 
+    public void handleUpdatePage(ActionEvent actionEvent) {
+        SceneManager.showCitizenOverview();
+    }
 }

@@ -23,9 +23,9 @@ public interface IDALManager {
 
     void updatePatientGeneralInfo(Citizen selectedPatient);
 
-    boolean saveHealthCondition(HealthCondition healthCondition, int citizenID);
+    boolean saveHealthConditions(ArrayList<HealthCondition> healthConditions, int citizenID);
 
-    boolean saveFunctionalAbility(FunctionalAbility functionalAbility, int citizenID);
+    boolean saveFunctionalAbilities(ArrayList<FunctionalAbility> functionalAbilities, int citizenID);
 
 
 
