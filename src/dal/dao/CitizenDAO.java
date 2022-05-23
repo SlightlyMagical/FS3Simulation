@@ -135,6 +135,7 @@ public class CitizenDAO implements ICitizenDAO{
                     functionalAbility.setTaskExecution(rs.getString("CitizenExecution"));
                     functionalAbility.setExecutionLimitation(rs.getString("CitizenLimitation"));
                     functionalAbility.setCitizenGoal(rs.getString("CitizenGoal"));
+                    functionalAbility.setObservation(rs.getString("AbilityObservation"));
 
                     c.addFunctionalAbility(functionalAbility);
                 }
