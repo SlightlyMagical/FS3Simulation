@@ -33,7 +33,7 @@ public class CreateNewController {
     public void handleCreateNew(ActionEvent actionEvent) {
         String username = txtUsername.getText().toLowerCase().trim();
         String password = txtChoosePassword.getText().trim();
-        String repeatPassword = txtChoosePassword.getText().trim();
+        String repeatPassword = txtConfirmPassword.getText().trim();
 
         if (username.isEmpty() || password.isEmpty() || repeatPassword.isEmpty())
             DialogHandler.informationAlert(Messages.EMPTY_FIELDS);
