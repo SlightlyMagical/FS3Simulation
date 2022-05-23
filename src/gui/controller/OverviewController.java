@@ -80,8 +80,4 @@ public class OverviewController implements Initializable {
             }
         }
     }
-
-    public void handleUpdatePage(ActionEvent actionEvent) {
-        SceneManager.showCitizenOverview();
-    }
 }

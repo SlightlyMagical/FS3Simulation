@@ -125,6 +125,11 @@ public class CitizenController implements Initializable {
         markedHealthConditions = new ArrayList<>();
     }
 
+    public void handleUpdatePage(ActionEvent actionEvent) {
+        if (DialogHandler.confirmationAlert(Messages.UNSAVED_CHANGES))
+            SceneManager.showCitizenOverview();
+    }
+
     private void setUpHealthConditions() {
         citizenModel.getNotRelevantHealth().clear();
         cbHealthSaveAs.getItems().addAll("Aktivt", "Potentielt");

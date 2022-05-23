@@ -71,8 +71,8 @@ CREATE TABLE CitizenInfo (
 GO
 
 CREATE TABLE CitizenCondition (
-    CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID),
-    ConditionID int FOREIGN KEY REFERENCES HealthCondition(ConditionID) ON DELETE CASCADE,
+    CitizenID int FOREIGN KEY REFERENCES Citizen(CitizenID) ON DELETE CASCADE,
+    ConditionID int FOREIGN KEY REFERENCES HealthCondition(ConditionID),
     ConditionStatus int NOT NULL,
     ConditionNote NVARCHAR(MAX),
     ConditionAssessment NVARCHAR(MAX),
