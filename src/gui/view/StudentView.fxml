@@ -12,7 +12,7 @@
    <top>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#handleLogout" styleClass="logoutButton" text="Log ud" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Button mnemonicParsing="false" onAction="#handleLogout" styleClass="logout" text="Log ud" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
          <BorderPane.margin>
             <Insets />
