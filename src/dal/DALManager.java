@@ -3,13 +3,12 @@ package dal;
 import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
+import be.School;
+import be.Usertypes.Admin;
 import be.Usertypes.Student;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import dal.dao.CitizenDAO;
-import dal.dao.ICitizenDAO;
-import dal.dao.IUserDAO;
-import dal.dao.UserDAO;
+import dal.dao.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,9 +16,13 @@ import java.util.ArrayList;
 public class DALManager implements IDALManager{
     IUserDAO userDAO;
     ICitizenDAO citizenDAO;
+    ISchoolDAO schoolDAO;
+
+
     public DALManager() throws IOException {
         userDAO = new UserDAO();
         citizenDAO = new CitizenDAO();
+        schoolDAO = new SchoolDAO();
     }
 
     @Override
@@ -106,4 +109,31 @@ public class DALManager implements IDALManager{
     public boolean createUser(User user, String password) {
         return userDAO.createUser(user, password);
     }
+
+    @Override
+    public void deleteUser(int userID) {
+        userDAO.deleteUser(userID);
+    }
+
+    @Override
+    public ArrayList<Admin> getAdmins() {
+        return userDAO.getAdmins();
+    }
+
+    @Override
+    public boolean createSchool(School school) {
+        return schoolDAO.createSchool(school);
+    }
+
+    @Override
+    public void deleteSchool(int schoolID) {
+        schoolDAO.deleteSchool(schoolID);
+    }
+
+    @Override
+    public ArrayList<School> getSchools() {
+        return schoolDAO.getAllSchools();
+    }
+
+
 }

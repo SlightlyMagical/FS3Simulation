@@ -3,6 +3,8 @@ package dal;
 import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
+import be.School;
+import be.Usertypes.Admin;
 import be.Usertypes.Student;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -40,4 +42,16 @@ public interface IDALManager {
 
 
     boolean createUser(User user, String password);
+
+    void deleteUser(int userID);
+
+    ArrayList<Admin> getAdmins();
+
+
+
+    boolean createSchool(School school);
+
+    void deleteSchool(int schoolID);
+
+    ArrayList<School> getSchools();
 }

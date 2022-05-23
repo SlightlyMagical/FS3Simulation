@@ -1,6 +1,7 @@
 package gui;
 
 import be.Citizen;
+import gui.controller.CreateNewController;
 import gui.controller.NewCitizenController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,8 +13,6 @@ import java.io.IOException;
 
 public class SceneManager {
     private static Stage primaryStage;
-    private static double height;
-    private static double width;
     private static String lastScene;
 
     public static void setPrimaryStage(Stage stage){
@@ -24,6 +23,7 @@ public class SceneManager {
         try{
             Parent root = FXMLLoader.load(SceneManager.class.getResource("view/Login.fxml"));
             primaryStage.setScene(new Scene(root));
+            primaryStage.setTitle("FS3 Simulering");
             primaryStage.show();
             primaryStage.centerOnScreen();
             root.requestFocus();
@@ -96,8 +96,8 @@ public class SceneManager {
             NewCitizenController controller = fxmlLoader.getController();
             controller.setEdit(citizen);
 
-            stage.showAndWait();
             root.requestFocus();
+            stage.showAndWait();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -117,7 +117,6 @@ public class SceneManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void showDataOverview(){
@@ -128,6 +127,40 @@ public class SceneManager {
             stage.initOwner(primaryStage);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
+            root.requestFocus();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void showNewUserWindow(int userType){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(SceneManager.class.getResource("view/CreateNew.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.initOwner(primaryStage);
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            CreateNewController controller = fxmlLoader.getController();
+            controller.setType(userType);
+
+            root.requestFocus();
+            stage.showAndWait();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void showAdminScene(){
+        try{
+            Parent root = FXMLLoader.load(SceneManager.class.getResource("view/AdminView.fxml"));
+            primaryStage.setScene(new Scene(root));
+            primaryStage.centerOnScreen();
             root.requestFocus();
 
         } catch (IOException e) {

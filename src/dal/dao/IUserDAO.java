@@ -1,5 +1,6 @@
 package dal.dao;
 
+import be.Usertypes.Admin;
 import be.Usertypes.Student;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -12,4 +13,8 @@ public interface IUserDAO {
     ArrayList<Student> getAllStudents(int schoolID);
 
     boolean createUser(User user, String password);
+
+    void deleteUser(int userID);
+
+    ArrayList<Admin> getAdmins();
 }

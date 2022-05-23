@@ -3,6 +3,8 @@ package bll;
 import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
 import be.Citizen;
+import be.School;
+import be.Usertypes.Admin;
 import be.Usertypes.Student;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -82,5 +84,30 @@ public class BLLManager implements IBLLManager{
     @Override
     public boolean createUser(User user, String password) {
         return dalManager.createUser(user, password);
+    }
+
+    @Override
+    public void deleteUser(int userID) {
+        dalManager.deleteUser(userID);
+    }
+
+    @Override
+    public ArrayList<Admin> getAdmins() {
+        return dalManager.getAdmins();
+    }
+
+    @Override
+    public boolean createSchool(School school) {
+        return dalManager.createSchool(school);
+    }
+
+    @Override
+    public void deleteSchool(int schoolID) {
+        dalManager.deleteSchool(schoolID);
+    }
+
+    @Override
+    public ArrayList<School> getSchools() {
+        return dalManager.getSchools();
     }
 }

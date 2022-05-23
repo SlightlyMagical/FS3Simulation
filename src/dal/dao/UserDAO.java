@@ -71,8 +71,6 @@ public class UserDAO implements IUserDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-
         return students;
     }
 
@@ -113,5 +111,41 @@ public class UserDAO implements IUserDAO {
         }
 
         return false;
+    }
+
+    @Override
+    public void deleteUser(int userID) {
+        try(Connection connection = dbConnector.getConnection()){
+            String sql = "DELETE FROM Users WHERE UserID = (?);";
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, userID);
+            ps.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    public ArrayList<Admin> getAdmins() {
+        ArrayList<Admin> admins = new ArrayList<>();
+        try(Connection connection = dbConnector.getConnection()){
+            String sql = "SELECT * FROM Users WHERE UserType = 1;";
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("UserID");
+                String username = rs.getString("Username");
+
+                Admin admin = new Admin(id, username, 1);
+
+                admins.add(admin);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return admins;
     }
 }

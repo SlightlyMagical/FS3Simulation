@@ -2,35 +2,43 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateNewController">
-   <children>
-      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" stylesheets="@../css/BaseStyle.css">
+<BorderPane stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.CreateNewController">
+   <center>
+      <VBox alignment="CENTER" prefWidth="250.0" spacing="10.0">
          <children>
-            <VBox alignment="CENTER" spacing="10.0">
-               <children>
-                  <TextField fx:id="txtUsername" promptText="Brugernavn" />
-                  <PasswordField fx:id="txtChoosePassword" promptText="Vælg kodeord" />
-                  <PasswordField fx:id="txtConfirmPassword" promptText="Bekræft kodeord" />
-               </children>
-            </VBox>
-            <ComboBox fx:id="cbUsertypes" prefWidth="200.0" promptText="Vælg brugertype" />
+            <TextField fx:id="txtUsername" promptText="Brugernavn" />
+            <PasswordField fx:id="txtChoosePassword" promptText="Vælg kodeord" />
+            <PasswordField fx:id="txtConfirmPassword" promptText="Bekræft kodeord" />
          </children>
-      </HBox>
-      <HBox alignment="TOP_RIGHT" spacing="10.0">
+         <BorderPane.margin>
+            <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="TOP_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
             <Button mnemonicParsing="false" onAction="#handleCancel" text="Annuller" />
-            <Button mnemonicParsing="false" onAction="#handleCreateNew" text="Opret" />
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#handleCreateNew" text="Opret" />
          </children>
       </HBox>
-   </children>
+   </bottom>
+   <top>
+      <HBox BorderPane.alignment="CENTER_LEFT">
+         <children>
+            <Label styleClass="SubHeaderText" text="Opret ny " />
+            <Label fx:id="lblUserType" layoutX="10.0" layoutY="10.0" styleClass="SubHeaderText" text="bruger" />
+         </children>
+      </HBox>
+   </top>
    <padding>
-      <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
-</VBox>
+</BorderPane>

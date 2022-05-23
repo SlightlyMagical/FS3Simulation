@@ -4,6 +4,7 @@ import be.Usertypes.Teacher;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.SceneManager;
+import gui.model.TeacherModel;
 import gui.model.util.DialogHandler;
 import gui.model.util.Messages;
 import gui.model.ModelManager;
@@ -41,7 +42,10 @@ public class LoginController {
                 DialogHandler.informationAlert(Messages.INVALID_LOGIN);
             else{
                 switch (user.getUserType()){
-                    case 1 -> System.out.println("admin login");
+                    case 1 -> {
+                        ModelManager.getInstance().getAdminModel().getSchoolsFromDatabase();
+                        SceneManager.showAdminScene();
+                    }
                     case 2 -> {
                         ModelManager.getInstance().getTeacherModel().setCurrentTeacher((Teacher) user);
                         SceneManager.showTeacherScene();

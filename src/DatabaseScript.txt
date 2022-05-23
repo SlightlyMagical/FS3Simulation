@@ -12,13 +12,20 @@ GO
 USE FS3SimulationDatabase
 GO
 
+-- Create school table
+CREATE TABLE School (
+    SchoolID int IDENTITY(1, 1) PRIMARY KEY,
+    SchoolName NVARCHAR(50) NOT NULL
+)
+GO
+
 -- Create user table
 CREATE TABLE [Users] (
     UserID int IDENTITY(1,1) PRIMARY KEY,
     Username NVARCHAR(20) NOT NULL,
     [Password] NVARCHAR(100) NOT NULL, -- Check size of hashed password
     UserType int NOT NULL,
-    SchoolID int -- FK to school table
+    SchoolID int FOREIGN KEY REFERENCES School(SchoolID)
 )
 GO
 
@@ -98,6 +105,11 @@ CREATE TABLE StudentCitizen(
 )
 GO
 
+-- Test Schools
+INSERT INTO School (SchoolName)
+VALUES ('SOSU Esbjerg'),
+('SOSU Kolding')
+GO
 
 -- Test Users
 INSERT INTO Users (Username, [Password], UserType, SchoolID)

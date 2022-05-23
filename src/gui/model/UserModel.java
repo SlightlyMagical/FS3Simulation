@@ -24,4 +24,8 @@ public class UserModel {
     public boolean createUser(User user, String password) {
        return bllManager.createUser(user, password);
     }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
 }

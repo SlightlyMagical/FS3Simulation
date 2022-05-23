@@ -7,11 +7,13 @@ public class ModelManager {
     private final UserModel userModel;
     private final CitizenModel citizenModel;
     private final TeacherModel teacherModel;
+    private final AdminModel adminModel;
 
     public ModelManager() throws IOException {
         this.userModel = new UserModel();
         this.citizenModel = new CitizenModel();
         this.teacherModel = new TeacherModel();
+        this.adminModel = new AdminModel();
     }
 
     public static ModelManager getInstance() throws IOException {
@@ -30,5 +32,9 @@ public class ModelManager {
 
     public TeacherModel getTeacherModel() {
         return teacherModel;
+    }
+
+    public AdminModel getAdminModel() {
+        return adminModel;
     }
 }
