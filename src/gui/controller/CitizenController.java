@@ -126,7 +126,7 @@ public class CitizenController implements Initializable {
     }
 
     public void handleUpdatePage(ActionEvent actionEvent) {
-        if (DialogHandler.confirmationAlert(Messages.UNSAVED_CHANGES))
+        if (checkIfSaved())
             SceneManager.showCitizenOverview();
     }
 
@@ -496,6 +496,7 @@ public class CitizenController implements Initializable {
         functionalAbility.setTaskExecution(cbFunctionExecution.getSelectionModel().getSelectedItem());
         functionalAbility.setExecutionLimitation(cbFunctionLimitation.getSelectionModel().getSelectedItem());
         functionalAbility.setCitizenGoal(txtFunctionWishes.getText());
+        functionalAbility.setObservation(txtFunctionObservation.getText());
         ArrayList<FunctionalAbility> functionalAbilities = new ArrayList<>();
         functionalAbilities.add(functionalAbility);
         if (citizenModel.saveFunctionalAbilities(functionalAbilities)) {
