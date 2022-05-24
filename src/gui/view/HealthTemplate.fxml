@@ -5,32 +5,32 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<TitledPane fx:id="titledPane" animated="false" collapsible="false" minHeight="100.0" text="Overskrift" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.HealthTemplateController">
+<TitledPane fx:id="titledPane" animated="false" collapsible="false" minHeight="-Infinity" text="Overskrift" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.HealthTemplateController">
    <content>
       <HBox minHeight="-Infinity" spacing="20.0">
          <children>
-            <VBox prefWidth="366.0">
+            <VBox minHeight="-Infinity" prefWidth="366.0">
                <children>
                   <Label styleClass="SubHeaderText" text="Fagligt notat" />
-                  <Label fx:id="lblNote" />
+                  <Label fx:id="lblNote" minHeight="-Infinity" wrapText="true" />
                </children>
             </VBox>
             <VBox prefWidth="366.0">
                <children>
                   <Label styleClass="SubHeaderText" text="Nuværende vurdering" />
-                  <Label fx:id="lblAssessment" />
+                  <Label fx:id="lblAssessment" wrapText="true" />
                </children>
             </VBox>
             <VBox prefWidth="366.0">
                <children>
                   <Label styleClass="SubHeaderText" text="Forventet niveau" />
-                  <Label fx:id="lblExpectedLevel" />
+                  <Label fx:id="lblExpectedLevel" wrapText="true" />
                </children>
             </VBox>
             <VBox layoutX="788.0" layoutY="23.0" prefWidth="366.0">
                <children>
                   <Label styleClass="SubHeaderText" text="Observationer" />
-                  <Label fx:id="lblObservations" />
+                  <Label fx:id="lblObservations" wrapText="true" />
                </children>
             </VBox>
          </children>
