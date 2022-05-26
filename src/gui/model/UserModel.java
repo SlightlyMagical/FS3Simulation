@@ -16,11 +16,19 @@ public class UserModel {
         bllManager = new BLLManager();
     }
 
+    /**
+     * Passes the login credentials to the logic layer
+     * @return the user
+     */
     public User login(String username, String password) throws SQLServerException {
         currentUser = bllManager.login(username, password);
         return currentUser;
     }
 
+    /**
+     * Passes the new user and password to the logic layer
+     * @return true if user was created successfully, false if the username is already taken
+     */
     public boolean createUser(User user, String password) {
        return bllManager.createUser(user, password);
     }

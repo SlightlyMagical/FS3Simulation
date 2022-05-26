@@ -47,7 +47,7 @@ public class CitizenDAO implements ICitizenDAO{
     }
 
     @Override
-    public ArrayList<Citizen> getGeneralInfo(ArrayList<Citizen> citizens) {
+    public void getGeneralInfo(ArrayList<Citizen> citizens) {
         try (Connection connection = dbConnector.getConnection()) {
             for (Citizen c : citizens) {
                 HashMap<String, GeneralInfo> generalInfo = InfoTemplates.getGeneralInfoHashMap();
@@ -67,11 +67,10 @@ public class CitizenDAO implements ICitizenDAO{
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return citizens;
     }
 
     @Override
-    public ArrayList<Citizen> getHealthConditions(ArrayList<Citizen> citizens) {
+    public void getHealthConditions(ArrayList<Citizen> citizens) {
         try (Connection connection = dbConnector.getConnection()) {
             for (Citizen c : citizens) {
                 String sql = "SELECT * FROM CitizenCondition LEFT JOIN HealthCondition ON CitizenCondition.ConditionID = HealthCondition.ConditionID WHERE CitizenID = (?);";
@@ -105,11 +104,10 @@ public class CitizenDAO implements ICitizenDAO{
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return citizens;
     }
 
     @Override
-    public ArrayList<Citizen> getFunctionalAbilities(ArrayList<Citizen> citizens) {
+    public void getFunctionalAbilities(ArrayList<Citizen> citizens) {
         try (Connection connection = dbConnector.getConnection()) {
             for (Citizen c : citizens) {
                 String sql = "SELECT * FROM CitizenAbility LEFT JOIN FunctionalAbility ON CitizenAbility.AbilityID = FunctionalAbility.AbilityID WHERE CitizenID = (?);";
@@ -143,7 +141,6 @@ public class CitizenDAO implements ICitizenDAO{
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return citizens;
     }
 
     @Override

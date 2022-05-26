@@ -68,27 +68,37 @@ public class TeacherController implements Initializable {
 
     }
 
+    /**
+     * Requests the scene manager to show the login scene
+     */
     public void handleLogout(ActionEvent actionEvent) {
-        SceneManager.logout();
+        SceneManager.showLoginScene();
     }
 
+    /**
+     * Requests the scene manager to show the window for creating new citizen
+     */
     public void handleCreate(ActionEvent actionEvent) {
         SceneManager.showNewCitizenWindow(null);
     }
 
+    /**
+     * Updates the selected citizen in citizen model, then requests the scene manager to show the citizen scene
+     */
     public void handleEdit(ActionEvent actionEvent) {
         Citizen selectedCitizen = tvBank.getSelectionModel().getSelectedItem();
         if (selectedCitizen != null) {
             citizenModel.setCurrentCitizen(selectedCitizen);
-            if (selectedCitizen.getTeacherID() == teacherModel.getCurrentTeacher().getId())
-                SceneManager.showCitizenOverview();
-            else
-                SceneManager.showDataOverview();
+            SceneManager.showCitizenOverview();
         }
         else
             DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
+    /**
+     * Checks if the currently logged in teacher is the one who created the citizen, and prompts for confirmation of
+     * the deletion. Passes the delete request on in the system if yes
+     */
     public void handleDelete(ActionEvent actionEvent) {
         Citizen selectedCitizen = tvBank.getSelectionModel().getSelectedItem();
         if (selectedCitizen != null) {
@@ -103,6 +113,9 @@ public class TeacherController implements Initializable {
             DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
+    /**
+     * Creates a copy of the selected citizen - both in the citizen bank
+     */
     public void handleCreateCopy(ActionEvent actionEvent) {
         Citizen selectedCitizen = tvBank.getSelectionModel().getSelectedItem();
         if (selectedCitizen != null) {
@@ -112,6 +125,9 @@ public class TeacherController implements Initializable {
             DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
+    /**
+     * Creates a copy of the selected citizen - the original in the citizen bank and the copy in "assigned to students"
+     */
     public void handleAssignToStudent(ActionEvent actionEvent) {
         Citizen selectedCitizen = tvBank.getSelectionModel().getSelectedItem();
         if (selectedCitizen != null) {
@@ -121,6 +137,9 @@ public class TeacherController implements Initializable {
             DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
+    /**
+     * Updates the selected citizen in citizen model, then requests the scene manager to show the citizen scene
+     */
     public void handleAssignedEdit(ActionEvent actionEvent) {
         Citizen selectedCitizen = tvAssigned.getSelectionModel().getSelectedItem();
         if (selectedCitizen != null) {
@@ -131,6 +150,9 @@ public class TeacherController implements Initializable {
             DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
+    /**
+     * Prompts for confirmation, then deletes the selected citizen
+     */
     public void handleAssignedDelete(ActionEvent actionEvent) {
         Citizen selectedCitizen = tvAssigned.getSelectionModel().getSelectedItem();
         if (DialogHandler.confirmationAlert(Messages.CONFIRM_DELETE)){
@@ -139,6 +161,9 @@ public class TeacherController implements Initializable {
         }
     }
 
+    /**
+     * Creates a copy of the selected citizen - the original from "assigned to students" and the copy in the citizen bank
+     */
     public void handleAssignedCopy(ActionEvent actionEvent) {
         Citizen selectedCitizen = tvAssigned.getSelectionModel().getSelectedItem();
         if (selectedCitizen != null) {
@@ -148,6 +173,10 @@ public class TeacherController implements Initializable {
             DialogHandler.informationAlert(Messages.NO_CITIZEN_SELECTED);
     }
 
+    /**
+     * Updates the currently selected citizen in citizen model and request the scene manager to show the
+     * "assign to students" window
+     */
     public void handleAssignedStudents(ActionEvent actionEvent) {
         Citizen selectedCitizen = tvAssigned.getSelectionModel().getSelectedItem();
         if (selectedCitizen != null) {
@@ -156,6 +185,12 @@ public class TeacherController implements Initializable {
         }
     }
 
+    /**
+     * Checks if fields are filled out and if passwords matches, warns user if not.
+     * Creates a new student with the input information otherwise and passes it to be created in the database.
+     * Displays a warning to the user if the username is already taken.
+     * Clears the input fields on a successful creation
+     */
     public void handleStudentCreateUser(ActionEvent actionEvent) {
         String username = txtUsername.getText().toLowerCase().trim();
         String password = txtPassword.getText().trim();
@@ -188,7 +223,9 @@ public class TeacherController implements Initializable {
 
     }
 
-
+    /**
+     * Updates the assigned students table when a citizen is selected
+     */
     public void showAssignedStudents(MouseEvent mouseEvent) {
         tvAssignedStudent.setItems(tvAssigned.getSelectionModel().getSelectedItem().getAssignedStudents());
     }

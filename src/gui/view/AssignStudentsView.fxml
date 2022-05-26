@@ -7,14 +7,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox spacing="10.0" stylesheets="@../css/BaseStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.AssignStudentsController">
    <children>
       <HBox spacing="10.0">
          <children>
             <TableView fx:id="tvAllStudents" prefHeight="350.0" prefWidth="200.0">
               <columns>
-                <TableColumn fx:id="tcAllStudents" editable="false" prefWidth="75.0" text="Alle elevkontoer" />
+                <TableColumn fx:id="tcAllStudents" editable="false" prefWidth="75.0" text="Alle elever" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -28,7 +27,7 @@
             </VBox>
             <TableView fx:id="tvAssignedStudents" layoutX="10.0" layoutY="10.0" prefHeight="350.0" prefWidth="200.0">
                <columns>
-                  <TableColumn fx:id="tcAssignedStudents" editable="false" prefWidth="75.0" text="Tildelte elevkontoer" />
+                  <TableColumn fx:id="tcAssignedStudents" editable="false" prefWidth="75.0" text="Tildelte elever" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -39,19 +39,31 @@ public class CitizenModel {
         this.currentCitizen = currentCitizen;
     }
 
+    /**
+     * Passes the citizen whose general info is being updated to the logic layer
+     */
     public void updatePatientGeneralInfo(Citizen selectedPatient) {
         bllManager.updateCitizenGeneralInfo(selectedPatient);
     }
 
+    /**
+     * Requests all citizens of the curren user from the database
+     */
     public void getCitizensFromDatabase() throws IOException {
         citizens.clear();
         citizens.addAll(bllManager.getAllCitizens(ModelManager.getInstance().getUserModel().currentUser.getId()));
     }
 
+    /**
+     * Passes a list of health conditions to be saved and the ID of the citizen to the logic layer
+     */
     public boolean saveHealthConditions(ArrayList<HealthCondition> healthConditions){
         return bllManager.saveHealthConditions(healthConditions, currentCitizen.getId());
     }
 
+    /**
+     * Passes a list of functional abilities to be saved and the ID of the citizen to the logic layer
+     */
     public boolean saveFunctionalAbilities(ArrayList<FunctionalAbility> functionalAbilities) {
         return bllManager.saveFunctionalAbilities(functionalAbilities, currentCitizen.getId());
     }
@@ -64,14 +76,23 @@ public class CitizenModel {
         return notRelevantFunctions;
     }
 
+    /**
+     * Passes the citizen whose name is being updated to the logic layer
+     */
     public void changeCitizenName(Citizen citizen){
         bllManager.changeCitizenName(citizen);
     }
 
+    /**
+     * Passes the citizen whose assigned students is being updated to the logic layer
+     */
     public void changeAssignedStudents(){
         bllManager.changeAssignedStudents(currentCitizen);
     }
 
+    /**
+     * Passes the citizen to be deleted to the logic layer
+     */
     public void deleteCitizen(Citizen citizen){
         bllManager.deleteCitizen(citizen);
     }

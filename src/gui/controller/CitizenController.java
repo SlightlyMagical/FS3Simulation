@@ -7,14 +7,12 @@ import be.Categories.InfoTemplates;
 import be.enums.Status;
 import gui.SceneManager;
 import gui.model.CitizenModel;
+import gui.model.ModelManager;
 import gui.model.util.DialogHandler;
 import gui.model.util.Messages;
-import gui.model.ModelManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.beans.value.WeakChangeListener;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -104,8 +102,6 @@ public class CitizenController implements Initializable {
     private boolean healthUnsavedChanges = false;
     private boolean abilityUnsavedChanges = false;
 
-    private boolean firstLaunch = true;
-
     public CitizenController() {
     }
 
@@ -125,11 +121,18 @@ public class CitizenController implements Initializable {
         markedHealthConditions = new ArrayList<>();
     }
 
+    /**
+     * Checks for unsaved changes, then requests the scene manager to update the current scene
+     */
     public void handleUpdatePage(ActionEvent actionEvent) {
         if (checkIfSaved())
             SceneManager.showCitizenOverview();
     }
 
+    /**
+     * Generates a checkbox and label for each of the citizen's health conditions and puts them in the correct category boxes
+     * Sets up each of the text fields and comboboxes for health conditions
+     */
     private void setUpHealthConditions() {
         citizenModel.getNotRelevantHealth().clear();
         cbHealthSaveAs.getItems().addAll("Aktivt", "Potentielt");
@@ -143,6 +146,7 @@ public class CitizenController implements Initializable {
                 citizenModel.getNotRelevantHealth().add(value);
             }
             else {
+                // Creates a checkbox with a listener that places it on a list when checked and removes it form the list when unchecked
                 CheckBox checkBox = new CheckBox(" ");
                 checkBox.selectedProperty().addListener(new ChangeListener<Boolean>() {
                     @Override
@@ -153,6 +157,7 @@ public class CitizenController implements Initializable {
                             markedHealthConditions.remove(value);
                     }
                 });
+                // Creates a label with an on click event
                 Label label = new Label(value.getName());
                 label.setOnMouseClicked(event -> {
                     if (healthUnsavedChanges)
@@ -186,6 +191,10 @@ public class CitizenController implements Initializable {
         }
     }
 
+    /**
+     * Method to be run when a health condition category is clicked.
+     * Updates the view to show the information associated with the category selected
+     */
     private void showConditionDetails(HealthCondition healthCondition) {
         clearHealthFields();
         this.selectedHealthCondition = healthCondition;
@@ -204,6 +213,10 @@ public class CitizenController implements Initializable {
         txtHealthObservations.setText(healthCondition.getObservations());
     }
 
+    /**
+     * Generates a checkbox and label for each of the citizen's functional abilities and puts them in the correct category boxes
+     * Sets up each of the text fields and comboboxes for functional abilities
+     */
     private void setUpFunctionalAbilities() {
         citizenModel.getNotRelevantFunctions().clear();
         cbFunctionNniveau.getItems().addAll("0", "1", "2", "3", "4");
@@ -265,6 +278,10 @@ public class CitizenController implements Initializable {
         }
     }
 
+    /**
+     * Method to be run when a functional ability category is clicked.
+     * Updates the view to show the information associated with the category selected
+     */
     private void showAbilityDetails(FunctionalAbility functionalAbility) {
         clearFunctionFields();
         this.selectedFunctionalAbility = functionalAbility;
@@ -282,6 +299,11 @@ public class CitizenController implements Initializable {
 
     }
 
+    /**
+     * Checks if any unsaved changes have been registered for any of the areas.
+     * Prompts the user for confirmation to continue anyway if unsaved changes are present.
+     * @return true if there are no unsaved change or if user agrees to continue without saving
+     */
     private boolean checkIfSaved() {
         if (infoUnsavedChanges || healthUnsavedChanges || abilityUnsavedChanges)
             return DialogHandler.confirmationAlert(Messages.UNSAVED_CHANGES);
@@ -289,6 +311,9 @@ public class CitizenController implements Initializable {
         return true;
     }
 
+    /**
+     * Sets up a text formatter on the given text area to register changes for general info
+     */
     private void infoTextFormatter(TextArea textArea) {
         textArea.setTextFormatter(new TextFormatter<String>(change -> {
             infoUnsavedChanges = true;
@@ -296,6 +321,9 @@ public class CitizenController implements Initializable {
         }));
     }
 
+    /**
+     * Sets up a text formatter on the given text area to register changes for health conditions
+     */
     private void healthTextFormatter(TextArea textArea) {
         textArea.setTextFormatter(new TextFormatter<String>(change -> {
             healthUnsavedChanges = true;
@@ -303,6 +331,9 @@ public class CitizenController implements Initializable {
         }));
     }
 
+    /**
+     * Sets up a text formatter on the given text area to register changes for functional abilities
+     */
     private void functionTextFormatter(TextArea textArea) {
         textArea.setTextFormatter(new TextFormatter<String>(change -> {
             abilityUnsavedChanges = true;
@@ -310,11 +341,18 @@ public class CitizenController implements Initializable {
         }));
     }
 
+    /**
+     * Checks for unsaved changes before requesting the scene manager to return to the previous scene
+     */
     public void goBack(ActionEvent actionEvent) {
         if (checkIfSaved())
             SceneManager.goBack();
     }
 
+    /**
+     * Saves the text in each of the general info text fields to the corresponding category and passes it on
+     * in the system to be saved in the database
+     */
     public void saveGeneralInfo(ActionEvent actionEvent) {
         HashMap<String, GeneralInfo> generalInfoHashMap = citizenModel.getCurrentCitizen().getGeneralInfo();
 
@@ -381,6 +419,9 @@ public class CitizenController implements Initializable {
         DialogHandler.informationAlert(Messages.SAVE_SUCCESSFUL);
     }
 
+    /**
+     * Sets up text field and tool tip for each general info category
+     */
     public void setUpGeneralInfo() {
         HashMap<String, GeneralInfo> generalInfoHashMap = citizenModel.getCurrentCitizen().getGeneralInfo();
 
@@ -397,6 +438,7 @@ public class CitizenController implements Initializable {
         // Ressourcer
         tipRessourcer.setText(generalInfoHashMap.get("Ressourcer").getDescription());
         textRessourcer.setText(generalInfoHashMap.get("Ressourcer").getText());
+        infoTextFormatter(textRessourcer);
 
         // Roller
         tipRoller.setText(generalInfoHashMap.get("Roller").getDescription());
@@ -439,11 +481,17 @@ public class CitizenController implements Initializable {
         infoTextFormatter(textNetvaerk);
     }
 
+    /**
+     * Checks for unsaved changes before requesting the scene manager to return to login screen
+     */
     public void handleLogout(ActionEvent actionEvent) {
         if (checkIfSaved())
-            SceneManager.logout();
+            SceneManager.showLoginScene();
     }
 
+    /**
+     * Saves the inputs for the active health condition and passes it to be saved in the database
+     */
     public void saveHealthCondition(ActionEvent actionEvent) {
         HealthCondition healthCondition = selectedHealthCondition;
         if (cbHealthSaveAs.getSelectionModel().getSelectedIndex() == 0)
@@ -464,6 +512,9 @@ public class CitizenController implements Initializable {
             DialogHandler.informationAlert(Messages.SAVE_UNSUCCESSFUL);
     }
 
+    /**
+     * Manages which fields are disabled base on the selection
+     */
     @FXML
     private void onHealthSaveAsSelection() {
         healthSaveButton.setDisable(false);
@@ -481,11 +532,17 @@ public class CitizenController implements Initializable {
         }
     }
 
+    /**
+     * Registers unsaved changes when a change is made on the combobox
+     */
     @FXML
     private void onHealthExpectedChanged() {
         healthUnsavedChanges = true;
     }
 
+    /**
+     * Saves the inputs for the active functional ability and passes it to be saved in the database
+     */
     @FXML
     private void saveFunctionalAbility() {
         FunctionalAbility functionalAbility = selectedFunctionalAbility;
@@ -507,6 +564,10 @@ public class CitizenController implements Initializable {
             DialogHandler.informationAlert(Messages.SAVE_UNSUCCESSFUL);
     }
 
+    /**
+     * Gets the list of health categories with a checkmark and registers them as not relevant.
+     * Request the scene manager to show the current scene again to update
+     */
     public void markNotRelevantHealth(ActionEvent actionEvent) {
         ArrayList<HealthCondition> healthConditions = new ArrayList<>();
         for (HealthCondition h : markedHealthConditions) {
@@ -518,10 +579,17 @@ public class CitizenController implements Initializable {
         SceneManager.showCitizenOverview();
     }
 
+    /**
+     * Requests the scene manager to show the window of not relevant categories
+     */
     public void handleSeeNotRelevant(ActionEvent actionEvent) {
         SceneManager.showNotRelevantWindow();
     }
 
+    /**
+     * Gets the list of functional abilities with a checkmark and registers them as not relevant.
+     * Request the scene manager to show the current scene again to update
+     */
     public void markNotRelevantFunction(ActionEvent actionEvent) {
         ArrayList<FunctionalAbility> functionalAbilities = new ArrayList<>();
         for (FunctionalAbility f : markedFunctionalAbilities) {
@@ -533,7 +601,9 @@ public class CitizenController implements Initializable {
         SceneManager.showCitizenOverview();
     }
 
-
+    /**
+     * Class to show images in the functional ability combo boxes
+     */
     static class StringImageCell extends ListCell<String> {
         Label label;
         static HashMap<String, Image> pictures = new HashMap<>();
@@ -569,6 +639,9 @@ public class CitizenController implements Initializable {
         }
     }
 
+    /**
+     * Clears all text areas and comboboxes for the health condition tab
+     */
     private void clearHealthFields(){
         cbHealthSaveAs.getSelectionModel().clearSelection();
         txtHealthProfNote.clear();
@@ -579,6 +652,9 @@ public class CitizenController implements Initializable {
         txtHealthObservations.clear();
     }
 
+    /**
+     * Clears all text areas and comboboxes for the functional ability tab
+     */
     private void clearFunctionFields(){
         cbFunctionNniveau.getSelectionModel().clearSelection();
         cbFunctionFniveau.getSelectionModel().clearSelection();

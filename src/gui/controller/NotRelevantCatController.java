@@ -2,8 +2,6 @@ package gui.controller;
 
 import be.Categories.FunctionalAbility;
 import be.Categories.HealthCondition;
-import be.Usertypes.Admin;
-import gui.SceneManager;
 import gui.model.CitizenModel;
 import gui.model.ModelManager;
 import javafx.event.ActionEvent;
@@ -32,6 +30,10 @@ public class NotRelevantCatController implements Initializable {
 
     private CitizenModel citizenModel;
 
+    /**
+     * Changes the status of the selected health condition or functional ability from "Not relevant" to null and
+     * passes the change to be saved in the data base
+     */
     public void handleConfirm(ActionEvent actionEvent) {
         HealthCondition healthCondition = tvHealthCategories.getSelectionModel().getSelectedItem();
         FunctionalAbility functionalAbility = tvFunctionCategories.getSelectionModel().getSelectedItem();
@@ -52,6 +54,9 @@ public class NotRelevantCatController implements Initializable {
 
     }
 
+    /**
+     * Closes the current window
+     */
     public void handleCancel(ActionEvent actionEvent) {
         ((Stage)(tvHealthCategories.getScene().getWindow())).close();
     }
@@ -73,10 +78,16 @@ public class NotRelevantCatController implements Initializable {
         }
     }
 
+    /**
+     * Clears selection of other table when a health condition is selected
+     */
     public void handleSelectHealth(MouseEvent mouseEvent) {
         tvFunctionCategories.getSelectionModel().clearSelection();
     }
 
+    /**
+     * Clears selection of other table when a functional ability is selected
+     */
     public void handleSelectFunction(MouseEvent mouseEvent) {
         tvHealthCategories.getSelectionModel().clearSelection();
     }

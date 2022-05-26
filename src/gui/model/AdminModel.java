@@ -34,6 +34,11 @@ public class AdminModel {
         return schools;
     }
 
+
+    /**
+     * Creates a new user of the specified type and passes it to be created in the database
+     * @return true if created successfully, false if the username is already taken
+     */
     public boolean createNewUser(String username, String password, int userType){
         switch (userType){
             case 1 -> {
@@ -62,6 +67,10 @@ public class AdminModel {
         return true;
     }
 
+    /**
+     * Passes the new school to be created to the logic layer
+     * @return true if created successfully, false if the name was already taken
+     */
     public boolean createNewSchool(School school) {
         if (bllManager.createSchool(school)){
             schools.add(school);
@@ -70,10 +79,16 @@ public class AdminModel {
         return false;
     }
 
+    /**
+     * Passes the ID of the user to be deleted to the logic layer
+     */
     public void deleteUser(int userID){
         bllManager.deleteUser(userID);
     }
 
+    /**
+     * Passes the ID of the school to be deleted to the logic layer
+     */
     public void deleteSchool(School school){
         bllManager.deleteSchool(school.getId());
         schools.remove(school);
@@ -87,6 +102,9 @@ public class AdminModel {
         this.currentSchool = currentSchool;
     }
 
+    /**
+     * Requests the list of schools from the database
+     */
     public void getSchoolsFromDatabase(){
         schools.clear();
         schools.addAll(bllManager.getSchools());

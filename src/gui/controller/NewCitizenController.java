@@ -25,10 +25,17 @@ public class NewCitizenController {
 
     private Citizen citizen;
 
+    /**
+     * Closes the current window
+     */
     public void handleCancel(ActionEvent actionEvent) {
         ((Stage) txtFirstName.getScene().getWindow()).close();
     }
 
+    /**
+     * Creates a new citizen with the given name or updates the name of the current citizen if editing.
+     * Then closes the window
+     */
     public void handleConfirm(ActionEvent actionEvent) {
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
@@ -57,6 +64,9 @@ public class NewCitizenController {
         }
     }
 
+    /**
+     * Sets whether a new citizen is being created or an existing one is being edited
+     */
     public void setEdit(Citizen citizen) {
         if (citizen != null) {
             lblTitle.setText("Indtast nyt navn");

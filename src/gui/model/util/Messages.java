@@ -1,6 +1,9 @@
 package gui.model.util;
 
 public class Messages {
+    /**
+     * Class to contain standard warning or information messages to be shown to the user
+     */
     public final static String INVALID_LOGIN = "Forkert brugernavn eller kodeord";
     public final static String UNSAVED_CHANGES = "Du har ændringer der ikke er gemt, ønsker du at fortsætte alligevel?";
     public final static String SAVE_SUCCESSFUL = "Ændringerne er gemt";

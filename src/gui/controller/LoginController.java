@@ -4,13 +4,11 @@ import be.Usertypes.Teacher;
 import be.Usertypes.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import gui.SceneManager;
-import gui.model.TeacherModel;
-import gui.model.util.DialogHandler;
-import gui.model.util.Messages;
 import gui.model.ModelManager;
 import gui.model.UserModel;
+import gui.model.util.DialogHandler;
+import gui.model.util.Messages;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -28,6 +26,10 @@ public class LoginController {
         userModel = ModelManager.getInstance().getUserModel();
     }
 
+    /**
+     * Attempts to log in with the given inputs, request which scene to show next from the scene manager.
+     * Displays a warning to the user if the login credentials are wrong
+     */
     @FXML
     private void handleLogin() {
         String username = txtUsername.getText().trim();
@@ -37,7 +39,7 @@ public class LoginController {
             return;
         }
         try{
-            User user = userModel.login(username, password);
+            User user = userModel.login(username.toLowerCase(), password);
             if (user == null)
                 DialogHandler.informationAlert(Messages.INVALID_LOGIN);
             else{

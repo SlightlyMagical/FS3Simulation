@@ -26,10 +26,19 @@ public class CreateNewController {
         adminModel = ModelManager.getInstance().getAdminModel();
     }
 
+    /**
+     * Closes the current window
+     */
     public void handleCancel(ActionEvent actionEvent) {
         ((Stage)(lblUserType.getScene().getWindow())).close();
     }
 
+    /**
+     * Checks if fields are filled out and if passwords matches, warns user if not.
+     * Creates a new user with the input information otherwise and passes it to be created in the database.
+     * Displays a warning to the user if the username is already taken.
+     * Closes the window on a successful creation
+     */
     public void handleCreateNew(ActionEvent actionEvent) {
         String username = txtUsername.getText().toLowerCase().trim();
         String password = txtChoosePassword.getText().trim();
@@ -47,6 +56,9 @@ public class CreateNewController {
         }
     }
 
+    /**
+     * Sets the type of the user being created
+     */
     public void setType(int userType){
         this.userType = userType;
         switch (userType){

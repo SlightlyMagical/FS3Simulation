@@ -9,6 +9,9 @@ public class ModelManager {
     private final TeacherModel teacherModel;
     private final AdminModel adminModel;
 
+    /**
+     * Singleton containing a single instance of each model
+     */
     public ModelManager() throws IOException {
         this.userModel = new UserModel();
         this.citizenModel = new CitizenModel();

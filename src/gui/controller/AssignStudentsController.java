@@ -64,6 +64,9 @@ public class AssignStudentsController implements Initializable {
         }
     }
 
+    /**
+     * Moves the selected student from list of all students to the list of assigned students
+     */
     public void handleAssign(ActionEvent actionEvent) {
         Student selection = tvAllStudents.getSelectionModel().getSelectedItem();
         if (selection != null){
@@ -72,6 +75,9 @@ public class AssignStudentsController implements Initializable {
         }
     }
 
+    /**
+     * Moves the selected student from list of assigned students to the list of all students
+     */
     public void handleUnassign(ActionEvent actionEvent) {
         Student selection = tvAssignedStudents.getSelectionModel().getSelectedItem();
         if (selection != null){
@@ -80,10 +86,16 @@ public class AssignStudentsController implements Initializable {
         }
     }
 
+    /**
+     * Closes the window without saving any changes
+     */
     public void handleCancel(ActionEvent actionEvent) {
         ((Stage)(tvAllStudents.getScene().getWindow())).close();
     }
 
+    /**
+     * Saves the assigned students to the citizen and closes with window
+     */
     public void handleConfirm(ActionEvent actionEvent) {
         citizenModel.getCurrentCitizen().getAssignedStudents().clear();
         citizenModel.getCurrentCitizen().getAssignedStudents().addAll(assignedStudents);

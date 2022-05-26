@@ -19,7 +19,6 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
@@ -58,10 +57,16 @@ public class AdminController implements Initializable {
         tcTeacher.setCellValueFactory(new PropertyValueFactory<>("username"));
     }
 
+    /**
+     * On button press, requests the scene manager to show the "Create new user" window
+     */
     public void handleAdminCreate(ActionEvent actionEvent) {
         SceneManager.showNewUserWindow(1);
     }
 
+    /**
+     * Prompts the user for confirmation of the deletion before passing the deletion request to the rest of the system
+     */
     public void handleAdminDelete(ActionEvent actionEvent) {
         Admin selected = tvAdminUsername.getSelectionModel().getSelectedItem();
         if (selected != null)
@@ -73,6 +78,9 @@ public class AdminController implements Initializable {
             }
     }
 
+    /**
+     * Prompts the user for input for the name of a new school
+     */
     public void handleSchoolCreate(ActionEvent actionEvent) {
         String name = DialogHandler.inputDialog("Indtast navn for den nye skole:");
         if (!name.isBlank())
@@ -80,6 +88,9 @@ public class AdminController implements Initializable {
                 DialogHandler.informationAlert("Der eksisterer allerede en skole med dette navn");
     }
 
+    /**
+     * Prompts the user for confirmation of the deletion before passing the deletion request to the rest of the system
+     */
     public void handleSchoolDelete(ActionEvent actionEvent) {
         School selected = tvSchoolName.getSelectionModel().getSelectedItem();
         if (selected != null)
@@ -87,6 +98,9 @@ public class AdminController implements Initializable {
                 adminModel.deleteSchool(selected);
     }
 
+    /**
+     * On button press, requests the scene manager to show the "Create new user" window
+     */
     public void handleStudentCreate(ActionEvent actionEvent) {
         if (selectedSchool == null)
             DialogHandler.informationAlert(Messages.SELECT_SCHOOL);
@@ -94,6 +108,9 @@ public class AdminController implements Initializable {
             SceneManager.showNewUserWindow(3);
     }
 
+    /**
+     * Prompts the user for confirmation of the deletion before passing the deletion request to the rest of the system
+     */
     public void handleStudentDelete(ActionEvent actionEvent) {
         Student selected = tvStudentlist.getSelectionModel().getSelectedItem();
         if (selected != null)
@@ -103,6 +120,9 @@ public class AdminController implements Initializable {
             }
     }
 
+    /**
+     * On button press, requests the scene manager to show the "Create new user" window
+     */
     public void handleTeacherCreate(ActionEvent actionEvent) {
         if (selectedSchool == null)
             DialogHandler.informationAlert(Messages.SELECT_SCHOOL);
@@ -110,6 +130,9 @@ public class AdminController implements Initializable {
             SceneManager.showNewUserWindow(2);
     }
 
+    /**
+     * Prompts the user for confirmation of the deletion before passing the deletion request to the rest of the system
+     */
     public void handleTeacherDelete(ActionEvent actionEvent) {
         Teacher selected = tvTeacherUsername.getSelectionModel().getSelectedItem();
         if (selected != null)
@@ -119,10 +142,16 @@ public class AdminController implements Initializable {
             }
     }
 
+    /**
+     * Requests the scene manager to return to login screen
+     */
     public void logout(ActionEvent actionEvent) {
-        SceneManager.logout();
+        SceneManager.showLoginScene();
     }
 
+    /**
+     * Updates the list of teachers and students when a school is selected
+     */
     public void handleSchoolSelect(MouseEvent mouseEvent) {
         selectedSchool = tvSchoolName.getSelectionModel().getSelectedItem();
         tvStudentlist.setItems(selectedSchool.getStudents());

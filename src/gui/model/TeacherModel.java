@@ -40,6 +40,9 @@ public class TeacherModel {
         return currentTeacher;
     }
 
+    /**
+     * Requests all citizens of the school from the database and sorts them into "template" and "assigned"
+     */
     public void getCitizensFromDatabase() {
         templateCitizens.clear();
         studentCitizens.clear();
@@ -52,6 +55,9 @@ public class TeacherModel {
         }
     }
 
+    /**
+     * Requests all students from the database
+     */
     public void getStudentsFromDatabase(){
         students.clear();
         students.addAll(bllManager.getAllStudents(currentTeacher.getSchoolID()));
@@ -66,6 +72,9 @@ public class TeacherModel {
         return studentCitizens;
     }
 
+    /**
+     * Passes the new citizen to be created in the database to the logic layer.
+     */
     public void createNewCitizen(Citizen citizen) {
         citizen.setTeacherID(currentTeacher.getId());
         citizen.setIsTemplate(true);
@@ -73,6 +82,9 @@ public class TeacherModel {
         templateCitizens.add(citizen);
     }
 
+    /**
+     * Handles creation of copies of citizens.
+     */
     public void createCitizenCopy(Citizen citizen, boolean isTemplate){
         Citizen newCitizen = bllManager.createCitizenCopy(citizen, isTemplate, currentTeacher.getId());
         try {

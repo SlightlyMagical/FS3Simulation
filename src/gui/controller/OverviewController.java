@@ -8,7 +8,6 @@ import be.enums.Status;
 import gui.SceneManager;
 import gui.model.CitizenModel;
 import gui.model.ModelManager;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
@@ -39,6 +38,11 @@ public class OverviewController implements Initializable {
         }
 
     }
+
+    /**
+     * Uses the "general info template" to create a pane for each category containing information
+     * and adds it to the pane of general info
+     */
     private void generateGeneralInfo() throws IOException {
         HashMap<String, GeneralInfo> hashMap = citizenModel.getCurrentCitizen().getGeneralInfo();
         for (GeneralInfo g : InfoTemplates.getGeneralInfoArrayList()){
@@ -53,6 +57,10 @@ public class OverviewController implements Initializable {
         }
     }
 
+    /**
+     * Uses the "health condition template" to create a pane for each category with the Active or Potential status
+     * and adds it to the pane of health conditions
+     */
     private void generateHealthConditions() throws IOException {
         HashMap<String, HealthCondition> hashMap = citizenModel.getCurrentCitizen().getHealthConditions();
         for (HealthCondition h : InfoTemplates.getHealthConditionArrayList()){
@@ -67,6 +75,10 @@ public class OverviewController implements Initializable {
         }
     }
 
+    /**
+     * Uses the "functional ability template" to create a pane for each category with the Active status
+     * and adds it to the pane of functional abilities
+     */
     private void generateFunctionalAbilities() throws IOException {
         HashMap<String, FunctionalAbility> hashMap = citizenModel.getCurrentCitizen().getFunctionalAbilities();
         for (FunctionalAbility f : InfoTemplates.getFunctionalAbilityArrayList()){

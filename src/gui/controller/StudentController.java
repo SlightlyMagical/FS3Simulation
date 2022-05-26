@@ -37,16 +37,23 @@ public class StudentController implements Initializable {
 
     }
 
+    /**
+     * Requests the scene manager to show the login scene
+     */
     @FXML
     private void handleLogout() {
-        SceneManager.logout();
+        SceneManager.showLoginScene();
     }
 
+    /**
+     * Updates the selected citizen in citizen model, then requests the scene manager to show the citizen scene
+     */
     @FXML
     private void handleShowDetails() {
-        citizenModel.setCurrentCitizen(tvCitizens.getSelectionModel().getSelectedItem());
-        SceneManager.showCitizenOverview();
+        Citizen selection = tvCitizens.getSelectionModel().getSelectedItem();
+        if (selection != null) {
+            citizenModel.setCurrentCitizen(selection);
+            SceneManager.showCitizenOverview();
+        }
     }
-
-
 }
