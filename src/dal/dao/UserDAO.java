@@ -19,7 +19,7 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public User checkLogin(String username, String password) throws SQLServerException {
+    public User checkLogin(String username, String password) {
         User user = null;
         try(Connection connection = dbConnector.getConnection()){
             String sql = "SELECT * FROM Users WHERE Username = (?) AND Password = (?) COLLATE SQL_Latin1_General_CP1_CS_AS;";

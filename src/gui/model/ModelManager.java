@@ -12,7 +12,7 @@ public class ModelManager {
     /**
      * Singleton containing a single instance of each model
      */
-    public ModelManager() throws IOException {
+    private ModelManager() throws IOException {
         this.userModel = new UserModel();
         this.citizenModel = new CitizenModel();
         this.teacherModel = new TeacherModel();

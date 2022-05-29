@@ -73,7 +73,8 @@ public class CitizenDAO implements ICitizenDAO{
     public void getHealthConditions(ArrayList<Citizen> citizens) {
         try (Connection connection = dbConnector.getConnection()) {
             for (Citizen c : citizens) {
-                String sql = "SELECT * FROM CitizenCondition LEFT JOIN HealthCondition ON CitizenCondition.ConditionID = HealthCondition.ConditionID WHERE CitizenID = (?);";
+                String sql = "SELECT * FROM CitizenCondition LEFT JOIN HealthCondition " +
+                        "ON CitizenCondition.ConditionID = HealthCondition.ConditionID WHERE CitizenID = (?);";
                 PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, c.getId());
                 ResultSet rs = ps.executeQuery();
