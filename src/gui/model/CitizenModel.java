@@ -51,7 +51,7 @@ public class CitizenModel {
      */
     public void getCitizensFromDatabase() throws IOException {
         citizens.clear();
-        citizens.addAll(bllManager.getAllCitizens(ModelManager.getInstance().getUserModel().currentUser.getId()));
+        citizens.addAll(bllManager.getAllCitizens(ModelManager.getInstance().getUserModel().getCurrentUser().getId()));
     }
 
     /**

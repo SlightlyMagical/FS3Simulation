@@ -8,9 +8,9 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 
 public class UserModel {
-    IBLLManager bllManager;
+    private final IBLLManager bllManager;
 
-    User currentUser;
+    private User currentUser;
 
     public UserModel() throws IOException {
         bllManager = new BLLManager();
