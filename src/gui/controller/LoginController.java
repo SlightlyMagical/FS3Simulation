@@ -31,37 +31,31 @@ public class LoginController {
      * Displays a warning to the user if the login credentials are wrong
      */
     @FXML
-    private void handleLogin() {
+    private void handleLogin() throws SQLServerException, IOException {
         String username = txtUsername.getText().trim();
         String password = txtPassword.getText().trim();
-        if(username.isEmpty() || password.isEmpty()) {
+        if (username.isEmpty() || password.isEmpty()) {
             DialogHandler.informationAlert(Messages.INVALID_LOGIN);
             return;
         }
-        try{
-            User user = userModel.login(username.toLowerCase(), password);
-            if (user == null)
-                DialogHandler.informationAlert(Messages.INVALID_LOGIN);
-            else{
-                switch (user.getUserType()){
-                    case 1 -> {
-                        ModelManager.getInstance().getAdminModel().getSchoolsFromDatabase();
-                        SceneManager.showAdminScene();
-                    }
-                    case 2 -> {
-                        ModelManager.getInstance().getTeacherModel().setCurrentTeacher((Teacher) user);
-                        SceneManager.showTeacherScene();
-                    }
-                    case 3 -> {
-                        ModelManager.getInstance().getCitizenModel().getCitizensFromDatabase();
-                        SceneManager.showStudentScene();
-                    }
+        User user = userModel.login(username.toLowerCase(), password);
+        if (user == null)
+            DialogHandler.informationAlert(Messages.INVALID_LOGIN);
+        else {
+            switch (user.getUserType()) {
+                case 1 -> {
+                    ModelManager.getInstance().getAdminModel().getSchoolsFromDatabase();
+                    SceneManager.showAdminScene();
+                }
+                case 2 -> {
+                    ModelManager.getInstance().getTeacherModel().setCurrentTeacher((Teacher) user);
+                    SceneManager.showTeacherScene();
+                }
+                case 3 -> {
+                    ModelManager.getInstance().getCitizenModel().getCitizensFromDatabase();
+                    SceneManager.showStudentScene();
                 }
             }
-        } catch (SQLServerException | IOException ignored) {
         }
-
-
     }
-
 }

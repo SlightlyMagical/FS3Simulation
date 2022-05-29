@@ -23,7 +23,7 @@ GO
 CREATE TABLE [Users] (
     UserID int IDENTITY(1,1) PRIMARY KEY,
     Username NVARCHAR(20) NOT NULL,
-    [Password] NVARCHAR(100) NOT NULL, -- Check size of hashed password
+    [Password] NVARCHAR(100) NOT NULL,
     UserType int NOT NULL,
     SchoolID int FOREIGN KEY REFERENCES School(SchoolID)
 )
